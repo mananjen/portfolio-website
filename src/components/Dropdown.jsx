@@ -9,29 +9,37 @@ const DropdownContainer = styled.div`
 const DropdownToggle = styled.button`
   background-color: #fff;
   border: 1px solid #ccc;
-  font-size: 1.1rem;
-  font-weight: 600;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 4px;
-  color: #333;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-
-  /* Down caret icon */
-  &:after {
-    content: '';
-    display: inline-block;
-    margin-left: 8px;
-    vertical-align: middle;
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #333;
-  }
+  transition: background-color 0.3s ease;
 
   &:hover {
     background-color: #f1f1f1;
+  }
+`;
+
+const HamburgerIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+
+  & span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: ${props => props.theme.colors.text};
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
   }
 `;
 
@@ -39,13 +47,12 @@ const DropdownMenu = styled.div`
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
-  transform: scaleY(${(props) => (props.isOpen ? '1' : '0')});
+  transform: scaleY(${props => (props.isOpen ? '1' : '0')});
   transform-origin: top;
-  opacity: ${(props) => (props.isOpen ? '1' : '0')};
-  pointer-events: ${(props) => (props.isOpen ? 'auto' : 'none')};
+  opacity: ${props => (props.isOpen ? '1' : '0')};
+  pointer-events: ${props => (props.isOpen ? 'auto' : 'none')};
   transition: transform 0.3s ease, opacity 0.3s ease;
   background-color: #fff;
-  /* More pronounced shadow around the dropdown */
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   border-radius: 4px;
@@ -62,34 +69,41 @@ const DropdownItem = styled.li`
     display: block;
     padding: 10px 14px;
     text-decoration: none;
-    color: #333;
+    color: ${props => props.theme.colors.text};
+    transition: color 0.3s ease, background-color 0.3s ease;
+
     &:hover {
+      color: ${props => props.theme.colors.highlight};
       background-color: #f1f1f1;
     }
   }
 `;
 
-const Dropdown = ({ title, items }) => {
+const Dropdown = ({ items }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = event => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
+    return () =>
       document.removeEventListener('mousedown', handleClickOutside);
-    };
   }, []);
 
   return (
     <DropdownContainer ref={dropdownRef}>
       <DropdownToggle onClick={() => setIsOpen(!isOpen)}>
-        {title}
+        <HamburgerIcon>
+          <span />
+          <span />
+          <span />
+        </HamburgerIcon>
       </DropdownToggle>
       <DropdownMenu isOpen={isOpen}>
         <DropdownList>
