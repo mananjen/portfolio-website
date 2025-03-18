@@ -1,9 +1,11 @@
 // src/App.jsx
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MainContent from './components/MainContent';
+import AppRoutes from './routes/AppRoutes';
 import { theme } from './theme';
 
 const GlobalStyle = createGlobalStyle`
@@ -27,14 +29,15 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <div className="App">
-        <Header />
-        <MainContent>
-          <h1>Welcome to My Portfolio</h1>
-          <p>This is the main section where you can introduce yourself or your work.</p>
-        </MainContent>
-        <Footer />
-      </div>
+      <Router>
+        <div className="App">
+          <Header />
+          <MainContent>
+            <AppRoutes />
+          </MainContent>
+          <Footer />
+        </div>
+      </Router>
     </ThemeProvider>
   );
 };
