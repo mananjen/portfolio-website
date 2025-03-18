@@ -1,18 +1,33 @@
 import React from 'react';
-// import './Header.css'; // Optional: add styles specific to Header
+import styled from 'styled-components';
+import Dropdown from './Dropdown';
+
+const StyledHeader = styled.header`
+  background-color: ${props => props.theme.colors.headerBackground};
+  color: #fff;
+  padding: 1rem;
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const Header = () => {
+  const navItems = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/projects", label: "Projects" },
+    { href: "/contact", label: "Contact" },
+  ];
+
   return (
-    <header>
-      <nav>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+    <StyledHeader>
+      <Nav>
+        <Dropdown title="Contents" items={navItems} />
+      </Nav>
+    </StyledHeader>
   );
 };
 

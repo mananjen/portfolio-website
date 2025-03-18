@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-// import './MainContent.css'; // Optional: add styles specific to MainContent
+import React from 'react';
 
 const MainContent = ({ children }) => {
   return (
