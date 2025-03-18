@@ -15,7 +15,6 @@ const DropdownToggle = styled.button`
   padding: 10px 14px;
   border-radius: 4px;
   color: #333;
-  /* Slight shadow around the toggle button */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 
   /* Down caret icon */
