@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import MainContent from './components/MainContent';
 import AppRoutes from './routes/AppRoutes';
 import { theme } from './theme';
+import { device } from './constants/screenSizes';
 
 const GlobalStyle = createGlobalStyle`
   /* Import Montserrat from Google Fonts */
@@ -18,10 +19,17 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.colors.text};
     font-family: ${props => props.theme.fonts.main};
     font-weight: 400;
+    font-size: 20px;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
+  }
+  
+  @media ${device.mobile} {
+    body {
+      font-size: 18px;
+    }
   }
 `;
 

@@ -1,3 +1,4 @@
+// src/components/Header.jsx
 import React from 'react';
 import styled from 'styled-components';
 import { device } from '../constants/screenSizes';
@@ -5,29 +6,30 @@ import Dropdown from './Dropdown';
 import CustomLink from './CustomLink';
 
 const StyledHeader = styled.header`
-  color: #fff;
+  background-color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.text};
   padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  position: relative; /* Needed for absolute positioning of mobile nav */
 `;
 
-const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-// Display navigation links only on desktop screens
-const DesktopNav = styled.div`
+// Desktop navigation: centered links
+const DesktopNav = styled.nav`
   display: none;
   
   @media ${device.desktop} {
     display: flex;
+    justify-content: center;
     gap: 1rem;
   }
 `;
 
-// Display the dropdown only on mobile screens
+// Mobile navigation: hamburger icon in top left corner
 const MobileNav = styled.div`
-  display: block;
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
   
   @media ${device.desktop} {
     display: none;
@@ -43,20 +45,19 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <Nav>
-        {/* Desktop Navigation */}
-        <DesktopNav>
-          {navItems.map((item, index) => (
-            <CustomLink key={index} to={item.href}>
-              {item.label}
-            </CustomLink>
-          ))}
-        </DesktopNav>
-        {/* Mobile Navigation */}
-        <MobileNav>
-          <Dropdown items={navItems} />
-        </MobileNav>
-      </Nav>
+      {/* Mobile Navigation: Hamburger in top left */}
+      <MobileNav>
+        <Dropdown items={navItems} />
+      </MobileNav>
+      
+      {/* Desktop Navigation: Centered links */}
+      <DesktopNav>
+        {navItems.map((item, index) => (
+          <CustomLink key={index} to={item.href}>
+            {item.label}
+          </CustomLink>
+        ))}
+      </DesktopNav>
     </StyledHeader>
   );
 };

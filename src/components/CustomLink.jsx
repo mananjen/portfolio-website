@@ -6,12 +6,15 @@ import styled from 'styled-components';
 const StyledLink = styled(Link)`
   color: ${props => props.theme.colors.text};
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
   transition: color 0.3s ease;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: ${props => props.theme.colors.highlight};
+    outline: none;
   }
 `;
 

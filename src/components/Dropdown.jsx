@@ -1,3 +1,4 @@
+// src/components/Dropdown.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -70,6 +71,8 @@ const DropdownItem = styled.li`
     padding: 10px 14px;
     text-decoration: none;
     color: ${props => props.theme.colors.text};
+    font-size: 1.3rem; /* Increased font size */
+    font-weight: 700;  /* Increased font weight */
     transition: color 0.3s ease, background-color 0.3s ease;
 
     &:hover {
@@ -92,8 +95,7 @@ const Dropdown = ({ items }) => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () =>
-      document.removeEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
