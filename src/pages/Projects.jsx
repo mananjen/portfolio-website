@@ -17,7 +17,10 @@ const Projects = () => {
           description={project.description}
           githubUrl={project.githubUrl}
           imageUrl={project.imageUrl}
-          flip={index % 2 !== 0} // Alternates alignment based on index
+          startDate={project.startDate}
+          endDate={project.endDate}
+          technologies={project.technologies}
+          flip={index % 2 !== 0}
         />
       ))}
     </section>
