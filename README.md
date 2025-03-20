@@ -43,6 +43,10 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 This will auto deploy the current itreation of the website to the gh-pages branch.
 
+### `npm run updateProjects`
+
+This will auto update the firestore database with the new project information.
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).

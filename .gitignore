@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Firestore key file
+scripts/portfolio-website-db-firebase-adminsdk-fbsvc-482803dc19.json

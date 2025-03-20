@@ -34,6 +34,12 @@ const Title = styled.h2`
   }
 `;
 
+const DateRange = styled.p`
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 0.8rem;
+`;
+
 const DescriptionArea = styled.p`
   font-size: 1.1rem;
   line-height: 1.5;
@@ -41,6 +47,22 @@ const DescriptionArea = styled.p`
 
   @media ${device.desktop} {
     font-size: 1.2rem;
+  }
+`;
+
+const TechList = styled.ul`
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+
+  li {
+    background: #f0f0f0;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
   }
 `;
 
@@ -70,23 +92,40 @@ const ImageArea = styled.div`
   }
 `;
 
-const ProjectCard = ({ title, description, githubUrl, imageUrl, flip }) => {
-  return (
-    <CardContainer flip={flip}>
-      <TextArea>
-        <Title>{title}</Title>
-        <DescriptionArea>{description}</DescriptionArea>
-        <LinksArea>
-          {githubUrl && <CustomLink to={githubUrl} target="_blank">GitHub</CustomLink>}
-        </LinksArea>
-      </TextArea>
-      {imageUrl && (
-        <ImageArea>
-          <ImageComponent src={imageUrl} alt={`Project ${title}`} />
-        </ImageArea>
-      )}
-    </CardContainer>
-  );
+const formatDate = (timestamp) => {
+  if (!timestamp) return "Present";
+  const date = timestamp.toDate();
+  return date.toLocaleString('default', { month: 'short', year: 'numeric' });
 };
+
+const ProjectCard = ({ title, description, technologies, githubUrl, imageUrl, projectWebsiteUrl, documentUrl, startDate, endDate, flip }) => (
+  <CardContainer flip={flip}>
+    <TextArea>
+      <Title>{title}</Title>
+      {(startDate || endDate) && (
+        <DateRange>
+          {formatDate(startDate)} - {formatDate(endDate)}
+        </DateRange>
+      )}
+      <DescriptionArea>{description}</DescriptionArea>
+      {technologies && (
+        <TechList>
+          {technologies.map((tech, idx) => <li key={idx}>{tech}</li>)}
+        </TechList>
+      )}
+      <LinksArea>
+        {githubUrl && <CustomLink to={githubUrl} target="_blank">GitHub</CustomLink>}
+        {projectWebsiteUrl && <CustomLink to={projectWebsiteUrl} target="_blank">Live Demo</CustomLink>}
+        {documentUrl && <CustomLink to={documentUrl} target="_blank">Documentation</CustomLink>}
+      </LinksArea>
+    </TextArea>
+
+    {imageUrl && (
+      <ImageArea>
+        <ImageComponent src={imageUrl} alt={`Project ${title}`} />
+      </ImageArea>
+    )}
+  </CardContainer>
+);
 
 export default ProjectCard;

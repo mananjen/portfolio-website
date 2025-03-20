@@ -17,6 +17,8 @@ const Projects = () => {
           description={project.description}
           githubUrl={project.githubUrl}
           imageUrl={project.imageUrl}
+          projectWebsiteUrl={project.projectWebsiteUrl}
+          documentUrl={project.documentUrl}
           startDate={project.startDate}
           endDate={project.endDate}
           technologies={project.technologies}
