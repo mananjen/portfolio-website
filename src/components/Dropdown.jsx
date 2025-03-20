@@ -1,6 +1,7 @@
 // src/components/Dropdown.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const DropdownContainer = styled.div`
   position: relative;
@@ -82,6 +83,21 @@ const DropdownItem = styled.li`
   }
 `;
 
+const StyledLink = styled(Link)`
+  display: block;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: ${props => props.theme.colors.text};
+  font-size: 1.3rem;
+  font-weight: 700;
+  transition: color 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    color: ${props => props.theme.colors.highlight};
+    background-color: #f1f1f1;
+  }
+`;
+
 const Dropdown = ({ items }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -111,7 +127,9 @@ const Dropdown = ({ items }) => {
         <DropdownList>
           {items.map((item, index) => (
             <DropdownItem key={index}>
-              <a href={item.href}>{item.label}</a>
+              <StyledLink to={item.href}>
+                {item.label}
+              </StyledLink>
             </DropdownItem>
           ))}
         </DropdownList>
