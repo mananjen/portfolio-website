@@ -57,6 +57,8 @@ const Header = () => {
         return 'About';
       case '/projects':
         return 'Projects';
+      case '/education-experience':
+        return 'Education & Experience';
       case '/contact':
         return 'Contact Me';
       default:
@@ -67,7 +69,8 @@ const Header = () => {
   const navItems = [
     { href: "/about", label: "About" },
     { href: "/projects", label: "Projects" },
-    { href: "/contact", label: "Contact" },
+    { href: "/education-experience", label: "Education & Experience" },
+    { href: "/contact", label: "Contact" }
   ];
 
   const currentPage = getPageTitle(location.pathname);

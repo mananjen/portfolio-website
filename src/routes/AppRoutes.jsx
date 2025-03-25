@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import About from '../pages/About';
 import Projects from '../pages/Projects';
 import Contact from '../pages/Contact';
+import EducationExperience from '../pages/EducationExperience';
 
 const AppRoutes = () => {
   return (
@@ -12,6 +13,7 @@ const AppRoutes = () => {
       <Route path="/about" element={<About />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/education-experience" element={<EducationExperience />} />
       <Route path="*" element={<About />} />
     </Routes>
   );
