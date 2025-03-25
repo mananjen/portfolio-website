@@ -6,12 +6,14 @@ import Dropdown from './Dropdown';
 import CustomLink from './CustomLink';
 
 const StyledHeader = styled.header`
+  width: 100%;
+  box-sizing: border-box;
   background-color: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.text};
   padding: 1rem;
   font-size: 1.2rem;
   font-weight: 700;
-  position: relative; /* Needed for absolute positioning of mobile nav */
+  position: relative;
 `;
 
 // Desktop navigation: centered links
@@ -30,6 +32,7 @@ const MobileNav = styled.div`
   position: absolute;
   left: 1rem;
   top: 1rem;
+  z-index: 10;
   
   @media ${device.desktop} {
     display: none;

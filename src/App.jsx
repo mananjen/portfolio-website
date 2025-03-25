@@ -8,13 +8,13 @@ import MainContent from './components/MainContent';
 import AppRoutes from './routes/AppRoutes';
 import { theme } from './theme';
 import { device } from './constants/screenSizes';
+import styled from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  /* Import Montserrat from Google Fonts */
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
   body {
     margin: 0;
+    padding: 0;
+    overflow-x: hidden; // prevents horizontal scrolling
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.text};
     font-family: ${props => props.theme.fonts.main};
@@ -24,8 +24,13 @@ const GlobalStyle = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
+    margin: 0;
   }
-  
+
+  *, *::before, *::after {
+    box-sizing: border-box; // critical to avoid horizontal overflow
+  }
+
   @media ${device.mobile} {
     body {
       font-size: 18px;
@@ -33,18 +38,33 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+`;
+
+const ContentWrapper = styled.div`
+  flex: 1;
+  width: 100%;
+  overflow-x: hidden;
+`;
+
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
-        <div className="App">
+        <AppContainer>
           <Header />
-          <MainContent>
-            <AppRoutes />
-          </MainContent>
+          <ContentWrapper>
+            <MainContent>
+              <AppRoutes />
+            </MainContent>
+          </ContentWrapper>
           <Footer />
-        </div>
+        </AppContainer>
       </Router>
     </ThemeProvider>
   );

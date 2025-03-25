@@ -115,7 +115,7 @@ const ProjectCard = ({ title, description, technologies, githubUrl, imageUrl, pr
       )}
       <LinksArea>
         {githubUrl && <CustomLink to={githubUrl} target="_blank">GitHub</CustomLink>}
-        {projectWebsiteUrl && <CustomLink to={projectWebsiteUrl} target="_blank">Live Demo</CustomLink>}
+        {projectWebsiteUrl && <CustomLink to={projectWebsiteUrl} target="_blank">Project Website</CustomLink>}
         {documentUrl && <CustomLink to={documentUrl} target="_blank">Documentation</CustomLink>}
       </LinksArea>
     </TextArea>

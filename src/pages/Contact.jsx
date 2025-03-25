@@ -34,12 +34,27 @@ const ContactList = styled.ul`
 `;
 
 const ContactItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   margin: 1rem 0;
   font-size: 1.1rem;
+  flex-wrap: wrap;
 
   @media ${device.mobile} {
+    flex-direction: column;
+    gap: 0.3rem;
     font-size: 1rem;
   }
+`;
+
+const IconWrapper = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: ${props => props.theme.colors.highlight};
 `;
 
 const Contact = () => {
@@ -51,26 +66,26 @@ const Contact = () => {
       </Description>
       <ContactList>
         <ContactItem>
-            <FaEnvelope />
-            <CustomLink to="mailto:mananjen@gmail.com"> mananjen@gmail.com</CustomLink>
-            &nbsp;or&nbsp;
-            <CustomLink to="mailto:mjain35@uic.edu">mjain35@uic.edu</CustomLink>
+          <IconWrapper><FaEnvelope /></IconWrapper>
+          <CustomLink to="mailto:mananjen@gmail.com">mananjen@gmail.com</CustomLink>
+          <span>or</span>
+          <CustomLink to="mailto:mjain35@uic.edu">mjain35@uic.edu</CustomLink>
         </ContactItem>
         <ContactItem>
-            <FaLinkedin />
-            <CustomLink to="https://www.linkedin.com/in/mananjen007/" target="_blank"> mananjen007</CustomLink>
+          <IconWrapper><FaLinkedin /></IconWrapper>
+          <CustomLink to="https://www.linkedin.com/in/mananjen/" target="_blank">mananjen</CustomLink>
         </ContactItem>
         <ContactItem>
-            <FaGithub />
-            <CustomLink to="https://github.com/mananjen" target="_blank"> mananjen</CustomLink>
+          <IconWrapper><FaGithub /></IconWrapper>
+          <CustomLink to="https://github.com/mananjen" target="_blank">mananjen</CustomLink>
         </ContactItem>
         <ContactItem>
-            <FaPhone />
-            <CustomLink to="tel:+1-872-202-0800"> +1 (872) 202-0800</CustomLink>
+          <IconWrapper><FaPhone /></IconWrapper>
+          <CustomLink to="tel:+1-872-202-0800">+1 (872) 202-0800</CustomLink>
         </ContactItem>
         <ContactItem>
-            <FaWhatsapp />
-            <CustomLink to="https://wa.me/18722020800"> Chat on Whatsapp</CustomLink>
+          <IconWrapper><FaWhatsapp /></IconWrapper>
+          <CustomLink to="https://wa.me/18722020800">Chat on Whatsapp</CustomLink>
         </ContactItem>
       </ContactList>
     </ContactContainer>
