@@ -66,22 +66,7 @@ const DropdownList = styled.ul`
   padding: 0;
 `;
 
-const DropdownItem = styled.li`
-  a {
-    display: block;
-    padding: 10px 14px;
-    text-decoration: none;
-    color: ${props => props.theme.colors.text};
-    font-size: 1.3rem; /* Increased font size */
-    font-weight: 700;  /* Increased font weight */
-    transition: color 0.3s ease, background-color 0.3s ease;
-
-    &:hover {
-      color: ${props => props.theme.colors.highlight};
-      background-color: #f1f1f1;
-    }
-  }
-`;
+const DropdownItem = styled.li``;
 
 const StyledLink = styled(Link)`
   display: block;
@@ -114,6 +99,11 @@ const Dropdown = ({ items }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Close dropdown after clicking a link
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
   return (
     <DropdownContainer ref={dropdownRef}>
       <DropdownToggle onClick={() => setIsOpen(!isOpen)}>
@@ -127,7 +117,7 @@ const Dropdown = ({ items }) => {
         <DropdownList>
           {items.map((item, index) => (
             <DropdownItem key={index}>
-              <StyledLink to={item.href}>
+              <StyledLink to={item.href} onClick={handleLinkClick}>
                 {item.label}
               </StyledLink>
             </DropdownItem>
