@@ -9,6 +9,7 @@ import AppRoutes from './routes/AppRoutes';
 import { theme } from './theme';
 import { device } from './constants/screenSizes';
 import styled from 'styled-components';
+import ScrollToTop from './components/ScrollToTop';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -57,6 +58,7 @@ const App = () => {
       <GlobalStyle />
       <Router>
         <AppContainer>
+          <ScrollToTop />
           <Header />
           <ContentWrapper>
             <MainContent>

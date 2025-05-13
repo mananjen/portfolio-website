@@ -10,7 +10,7 @@ const ImageContainer = styled.div`
 const StyledImage = styled.img`
   max-width: 100%;
   height: auto;
-  border-radius: 50%; /* Makes it circular - remove if not desired */
+  border-radius: 50%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 

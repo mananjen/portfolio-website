@@ -6,23 +6,7 @@ import ImageComponent from '../components/ImageComponent';
 import CustomLink from '../components/CustomLink';
 import profilePic from '../assets/profile_pic.JPG';
 import Description from '../components/Description';
-
-const AboutContainer = styled.section`
-  padding: 2rem 1rem;
-  max-width: 1000px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-
-  @media ${device.desktop} {
-    flex-direction: row;
-    gap: 3rem;
-    align-items: center;
-    padding: 3rem;
-  }
-`;
+import PageContainer from '../components/PageContainer';
 
 const ProfileImage = styled(ImageComponent)`
   width: 200px;
@@ -87,24 +71,24 @@ const LinksContainer = styled.div`
 
 const About = () => {
   return (
-    <AboutContainer>
+    <PageContainer center>
       <TextContent>
         <TitleImageWrapper>
           <Title>Hi, I'm Manan Jain 👋</Title>
           <ProfileImage src={profilePic} alt="Manan Jain Profile" />
         </TitleImageWrapper>
-        <Description lhDesktop="1.8" mbDesktop="2rem">
+        <Description lhDesktop="1.8" mbMobile="0rem" mbDesktop="0rem">
           I am a Software Engineer and AI enthusiast with extensive experience in developing practical and impactful solutions leveraging Deep Learning, Computer Vision, NLP, and Web technologies. My passion for innovation is showcased by diverse projects—from creating multilingual sarcasm detectors and AI-powered video enhancement tools, to immersive VR experiences and intuitive database interfaces. Driven by curiosity and a commitment to quality, I continually explore new technologies, aiming to develop solutions that are user-centric, scalable, and impactful.
+        </Description>
+        <Description lhDesktop="1.8" mbDesktop="2rem" >
+          Outside of coding, I enjoy exploring new tech trends, gaming, painting, and reading fantasy books to discover new inspirations.
         </Description>
         <LinksContainer>
           <CustomLink to="/projects">View My Projects</CustomLink>
           <CustomLink to="/contact">Contact Me</CustomLink>
         </LinksContainer>
-        <Description lhDesktop="1.8" mbDesktop="2rem">
-          Outside of coding, I enjoy exploring new tech trends, gaming, painting, and reading fantasy books to discover new inspirations.
-        </Description>
       </TextContent>
-    </AboutContainer>
+    </PageContainer>
   );
 };
 

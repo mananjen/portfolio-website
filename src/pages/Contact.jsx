@@ -10,13 +10,7 @@ import {
     FaPhone, 
     FaWhatsapp 
 } from 'react-icons/fa';
-
-const ContactContainer = styled.section`
-  padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-`;
+import PageContainer from '../components/PageContainer';
 
 const Title = styled.h1`
   font-size: 2rem;
@@ -54,7 +48,7 @@ const IconWrapper = styled.span`
 
 const Contact = () => {
   return (
-    <ContactContainer>
+    <PageContainer padM="2rem" padD="3rem" center>
       <Title>Feel free to reach out via any of the following methods:</Title>
       <ContactList>
         <ContactItem>
@@ -78,7 +72,7 @@ const Contact = () => {
           <CustomLink to="https://wa.me/18722020800">Chat on Whatsapp</CustomLink>
         </ContactItem>
       </ContactList>
-    </ContactContainer>
+    </PageContainer>
   );
 };
 

@@ -2,17 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CustomLink from '../components/CustomLink';
 import Description from '../components/Description';
-import { device } from '../constants/screenSizes';
-
-const PageContainer = styled.section`
-  padding: 1rem;
-  max-width: 1000px;
-  margin: auto;
-
-  @media ${device.desktop} {
-    padding: 3rem;
-  }
-`;
+import PageContainer from '../components/PageContainer';
 
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
