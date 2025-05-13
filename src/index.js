@@ -4,6 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Remove the static loader div once React is ready
+const removeStaticLoader = () => {
+  const loader = document.getElementById('loader');
+  if (loader) {
+    loader.style.opacity = 0;
+    setTimeout(() => loader.remove(), 300); // fade out effect
+  }
+};
+removeStaticLoader();
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

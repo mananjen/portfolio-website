@@ -2,11 +2,12 @@
 import React from 'react';
 import { useProjects } from '../hooks/useProjects';
 import ProjectCard from '../components/ProjectCard';
+import Loader from '../components/Loader';
 
 const Projects = () => {
   const { projects, loading } = useProjects();
 
-  if (loading) return <p>Loading projects...</p>;
+  if (loading) return <Loader />;
 
   return (
     <section>
