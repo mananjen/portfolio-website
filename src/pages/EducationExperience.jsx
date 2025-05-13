@@ -1,11 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import CustomLink from '../components/CustomLink';
+import Description from '../components/Description';
+import { device } from '../constants/screenSizes';
 
 const PageContainer = styled.section`
-  padding: 3rem;
+  padding: 1rem;
   max-width: 1000px;
   margin: auto;
+
+  @media ${device.desktop} {
+    padding: 3rem;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -44,12 +50,6 @@ const Date = styled.p`
   font-size: 1rem;
   color: #777;
   margin-bottom: 1rem;
-`;
-
-const Description = styled.p`
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: ${({ theme }) => theme.colors.text};
 `;
 
 const BulletList = styled.ul`

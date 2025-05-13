@@ -12,10 +12,21 @@ const StyledHeader = styled.header`
   padding: 1rem;
   font-size: 1.2rem;
   font-weight: 700;
-  position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+
+  @media ${device.desktop} {
+    justify-content: center;
+  }
+`;
+
+const TitleWrapper = styled.div`
+  flex: 1;
+  text-align: center;
+  @media ${device.desktop} {
+    display: none;
+  }
 `;
 
 const DesktopNav = styled.nav`
@@ -24,14 +35,12 @@ const DesktopNav = styled.nav`
 
   @media ${device.desktop} {
     display: flex;
+    align-items: center;
   }
 `;
 
 const MobileNav = styled.div`
-  position: absolute;
-  left: 1rem;
-  top: 1rem;
-
+  flex: 0 0 40px;
   @media ${device.desktop} {
     display: none;
   }
@@ -42,6 +51,13 @@ const PageTitle = styled.div`
   font-weight: bold;
   text-transform: capitalize;
 
+  @media ${device.desktop} {
+    display: none;
+  }
+`;
+
+const Spacer = styled.div`
+  flex:0 0 40px;
   @media ${device.desktop} {
     display: none;
   }
@@ -77,11 +93,16 @@ const Header = () => {
 
   return (
     <StyledHeader>
+
       <MobileNav>
         <Dropdown items={navItems} />
       </MobileNav>
+      
+      <TitleWrapper>
+        <PageTitle>{currentPage}</PageTitle>
+      </TitleWrapper>
 
-      <PageTitle>{currentPage}</PageTitle>
+      <Spacer />
 
       <DesktopNav>
         {navItems.map((item, index) => (

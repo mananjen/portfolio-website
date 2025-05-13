@@ -23,11 +23,6 @@ const Title = styled.h1`
   margin-bottom: 1rem;
 `;
 
-// const Description = styled.p`
-//   font-size: 1.1rem;
-//   margin-bottom: 2rem;
-// `;
-
 const ContactList = styled.ul`
   list-style: none;
   padding: 0;
@@ -60,10 +55,7 @@ const IconWrapper = styled.span`
 const Contact = () => {
   return (
     <ContactContainer>
-      {/* <Title>Contact Me</Title> */}
-      {/* <Description> */}
       <Title>Feel free to reach out via any of the following methods:</Title>
-      {/* </Description> */}
       <ContactList>
         <ContactItem>
           <IconWrapper><FaEnvelope /></IconWrapper>
