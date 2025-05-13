@@ -68,8 +68,6 @@ const Contact = () => {
         <ContactItem>
           <IconWrapper><FaEnvelope /></IconWrapper>
           <CustomLink to="mailto:mananjen@gmail.com">mananjen@gmail.com</CustomLink>
-          <span>or</span>
-          <CustomLink to="mailto:mjain35@uic.edu">mjain35@uic.edu</CustomLink>
         </ContactItem>
         <ContactItem>
           <IconWrapper><FaLinkedin /></IconWrapper>

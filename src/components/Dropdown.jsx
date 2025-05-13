@@ -49,6 +49,8 @@ const DropdownMenu = styled.div`
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
+  width: max-content;
+  min-width: 200px;
   transform: scaleY(${props => (props.isOpen ? '1' : '0')});
   transform-origin: top;
   opacity: ${props => (props.isOpen ? '1' : '0')};
