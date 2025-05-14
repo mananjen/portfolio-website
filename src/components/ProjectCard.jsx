@@ -126,27 +126,22 @@ const ProjectCard = ({
 
   const [open,setOpen] = useState(false);
 
-  /* click‑anywhere expand (only when collapsed) */
   const handleCardClick = useCallback(()=>{
-    if (!open) setOpen(true);
+    setOpen(!open);
   },[open]);
 
-  /* arrow toggles both ways */
   const toggle = e => {
     e.stopPropagation();
     setOpen(prev=>!prev);
   };
 
-  /* link clicks never toggle */
   const stop = e => e.stopPropagation();
 
   return (
     <CardContainer collapsed={!open} onClick={handleCardClick}>
       <HeaderRow>
-        {/* Title always shown */}
         <Title>{title}</Title>
 
-        {/* Desktop: dates + links + arrow in one line */}
         <DateLinksDesk>
           <DateRange>{fmt(startDate)} – {fmt(endDate)}</DateRange>
           
@@ -159,14 +154,12 @@ const ProjectCard = ({
 
       </HeaderRow>
 
-      {/* Mobile‑only links row */}
       <LinksRow>
         {githubUrl && <CustomLink to={githubUrl} target="_blank" onClick={stop}>GitHub</CustomLink>}
         {projectWebsiteUrl && <CustomLink to={projectWebsiteUrl} target="_blank" onClick={stop}>Site</CustomLink>}
         {documentUrl && <CustomLink to={documentUrl} target="_blank" onClick={stop}>Doc</CustomLink>}
       </LinksRow>
 
-      {/* Mobile‑only date + arrow row */}
       <DateArrowRow>
         <DateRange>{fmt(startDate)} – {fmt(endDate)}</DateRange>
         <Arrow onClick={toggle} open={open}>▼</Arrow>
