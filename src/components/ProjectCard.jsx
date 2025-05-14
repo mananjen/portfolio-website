@@ -52,7 +52,6 @@ const DateArrowRow = styled.div`
 
 const TechListRow = styled.div`
   display: flex;
-  // gap: 0.5rem;
   flex-wrap: wrap;
   margin-top: ${p => (p.open ? '0' : '1.2rem')};
   transition: margin-top 0.4s ease;
@@ -87,7 +86,7 @@ const ExpandArea = styled.div`
   overflow: hidden;
   max-height: ${p => (p.open ? '2000px' : '0')};
   opacity: ${p => (p.open ? 1 : 0)};
-  margin-top: ${p => (p.open ? '1.2rem' : '0')};
+  margin-top: ${p => (p.open ? '0.2rem' : '0')};
   transition:
     max-height 0.4s ease,
     opacity    0.4s ease,
