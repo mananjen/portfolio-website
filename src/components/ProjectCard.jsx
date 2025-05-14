@@ -50,6 +50,14 @@ const DateArrowRow = styled.div`
   @media ${device.desktop} { display: none; }   /* hide on desktop */
 `;
 
+const TechListRow = styled.div`
+  display: flex;
+  // gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: ${p => (p.open ? '0' : '1.2rem')};
+  transition: margin-top 0.4s ease;
+`;
+
 const DateLinksDesk = styled.div`
   display: none;
 
@@ -152,27 +160,22 @@ const ProjectCard = ({
 
       </HeaderRow>
 
-        {/* Mobile‑only links row */}
-        <LinksRow>
-          {githubUrl && <CustomLink to={githubUrl} target="_blank" onClick={stop}>GitHub</CustomLink>}
-          {projectWebsiteUrl && <CustomLink to={projectWebsiteUrl} target="_blank" onClick={stop}>Site</CustomLink>}
-          {documentUrl && <CustomLink to={documentUrl} target="_blank" onClick={stop}>Doc</CustomLink>}
-        </LinksRow>
+      {/* Mobile‑only links row */}
+      <LinksRow>
+        {githubUrl && <CustomLink to={githubUrl} target="_blank" onClick={stop}>GitHub</CustomLink>}
+        {projectWebsiteUrl && <CustomLink to={projectWebsiteUrl} target="_blank" onClick={stop}>Site</CustomLink>}
+        {documentUrl && <CustomLink to={documentUrl} target="_blank" onClick={stop}>Doc</CustomLink>}
+      </LinksRow>
 
-        {/* Mobile‑only date + arrow row */}
-        <DateArrowRow>
-          <DateRange>{fmt(startDate)} – {fmt(endDate)}</DateRange>
-          <Arrow onClick={toggle} open={open}>▼</Arrow>
-        </DateArrowRow>
+      {/* Mobile‑only date + arrow row */}
+      <DateArrowRow>
+        <DateRange>{fmt(startDate)} – {fmt(endDate)}</DateRange>
+        <Arrow onClick={toggle} open={open}>▼</Arrow>
+      </DateArrowRow>
 
       <ExpandArea open={open} flip={flip}>
         <TextBlock>
           <Description>{description}</Description>
-          {technologies?.length>0 && (
-            <TechList>
-              {technologies.map((t,i)=><li key={i}>{t}</li>)}
-            </TechList>
-          )}
         </TextBlock>
 
         {imageUrl && (
@@ -181,6 +184,14 @@ const ProjectCard = ({
           </ImageWrap>
         )}
       </ExpandArea>
+
+      {technologies?.length>0 && (
+        <TechListRow open={open}>
+          <TechList>
+            {technologies.map((t,i)=><li key={i}>{t}</li>)}
+          </TechList>
+        </TechListRow>
+      )}
     </CardContainer>
   );
 };
