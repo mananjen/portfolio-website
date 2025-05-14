@@ -20,7 +20,7 @@ const HeaderRow = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size:1.8rem;
+  font-size:1.6rem;
   margin:0;
   color:${p=>p.theme.colors.text};
 
