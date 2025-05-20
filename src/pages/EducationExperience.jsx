@@ -58,7 +58,7 @@ const EducationExperience = () => {
       <Card>
         <Title>University of Illinois at Chicago</Title>
         <SubTitle>Master of Science in Computer Science</SubTitle>
-        <Date>Aug 2023 – Present</Date>
+        <Date>Aug 2023 – May 2025</Date>
         <Description>
           Specializing in Artificial Intelligence, Machine Learning, and Natural Language Processing. Developed multiple projects applying advanced NLP and deep learning techniques. Also learnt about VR and C# using Unity.
         </Description>
