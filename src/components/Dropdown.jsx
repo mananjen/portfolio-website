@@ -1,7 +1,7 @@
 // src/components/Dropdown.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import CustomLink from './CustomLink';
 
 const DropdownContainer = styled.div`
   position: relative;
@@ -70,13 +70,13 @@ const DropdownList = styled.ul`
 
 const DropdownItem = styled.li``;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(CustomLink)`
   display: block;
   padding: 10px 14px;
-  text-decoration: none;
   color: ${props => props.theme.colors.text};
   font-size: 1.3rem;
   font-weight: 700;
+  text-decoration: none;
   transition: color 0.3s ease, background-color 0.3s ease;
 
   &:hover {

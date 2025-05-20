@@ -20,10 +20,6 @@ const Card = styled.div`
   }
 `;
 
-const ExperienceLinks = styled(CustomLink)`
-  font-size: 1.1rem;
-`;
-
 const Title = styled.h3`
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
@@ -33,7 +29,7 @@ const Title = styled.h3`
 const SubTitle = styled.h4`
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
-  color: ${({ theme }) => theme.colors.highlight};
+  color: ${({ theme }) => theme.colors.edExpHighlight};
 `;
 
 const Date = styled.p`
@@ -91,7 +87,7 @@ const EducationExperience = () => {
             <strong>Web Authoring (NPC Pages):</strong> Streamlined web content management using an internal Content-as-a-Service (CAAS) application, accelerating content delivery and improving operational efficiency.
           </BulletItem>
           <BulletItem>
-            <strong>Non-Product Content (NPC) Project:</strong> Revamped and enhanced the NPC web application UI, increasing customer engagement by 20% and substantially improving user experience. <ExperienceLinks to="https://www.lowes.com/diy-projects-and-ideas" target="_blank">View Project Homepage</ExperienceLinks>
+            <strong>Non-Product Content (NPC) Project:</strong> Revamped and enhanced the NPC web application UI, increasing customer engagement by 20% and substantially improving user experience. <CustomLink to="https://www.lowes.com/diy-projects-and-ideas" target="_blank" fontSize="1rem">View Project Homepage</CustomLink>
           </BulletItem>
           <BulletItem>
             <strong>Web Tagging Optimization:</strong> Recognized by the Director of DACI for improving code clarity and reusability by 50%, removing redundancies, and optimizing analytics tagging across the Lowe’s website. Led the migration from Adobe DTM to Adobe Launch within two months.

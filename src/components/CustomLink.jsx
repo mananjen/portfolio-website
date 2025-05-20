@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledLink = styled(Link)`
-  color: ${props => props.theme.colors.text};
+  color: ${props => props.theme.colors.highlight};
   text-decoration: none;
   font-size: 1.3rem;
   font-weight: 700;
@@ -13,7 +13,6 @@ const StyledLink = styled(Link)`
 
   &:hover,
   &:focus {
-    color: ${props => props.theme.colors.highlight};
     outline: none;
   }
 `;
