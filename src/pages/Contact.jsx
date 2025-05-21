@@ -43,7 +43,6 @@ const IconWrapper = styled.span`
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: ${props => props.theme.colors.highlight};
 `;
 
 const Contact = () => {

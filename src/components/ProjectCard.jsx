@@ -5,11 +5,13 @@ import { device } from '../constants/screenSizes';
 import ImageComponent from './ImageComponent';
 import Description from './Description';
 import CustomLink from './CustomLink';
+import ExpandableSection from './ExpandableSection';
+import TechPillList from './TechPillList';
 
 const CardContainer = styled.div`
   border-bottom: 1px solid #ddd;
   padding: 1.5rem 0;
-  cursor: ${p => (p.collapsed ? 'pointer' : 'default')};   /* click anywhere when collapsed */
+  cursor: ${p => (p.collapsed ? 'pointer' : 'default')};
 `;
 
 const HeaderRow = styled.div`
@@ -36,7 +38,7 @@ const LinksRow = styled.div`
 
   a { font-weight: 600; }
 
-  @media ${device.desktop} { display: none; }   /* hide on desktop */
+  @media ${device.desktop} { display: none; }
 `;
 
 const DateArrowRow = styled.div`
@@ -47,14 +49,7 @@ const DateArrowRow = styled.div`
   margin-top: 0.3rem;
   font-size: 0.9rem;
 
-  @media ${device.desktop} { display: none; }   /* hide on desktop */
-`;
-
-const TechListRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: ${p => (p.open ? '0' : '1.2rem')};
-  transition: margin-top 0.4s ease;
+  @media ${device.desktop} { display: none; }
 `;
 
 const DateLinksDesk = styled.div`
@@ -82,37 +77,19 @@ const Arrow = styled.span`
   cursor:pointer;
 `;
 
-const ExpandArea = styled.div`
-  overflow: hidden;
-  max-height: ${p => (p.open ? '2000px' : '0')};
-  opacity: ${p => (p.open ? 1 : 0)};
-  margin-top: ${p => (p.open ? '0.2rem' : '0')};
-  transition:
-    max-height 0.4s ease,
-    opacity    0.4s ease,
-    margin-top 0.4s ease;
-
-  @media ${device.desktop} {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
-    flex-direction: ${p => (p.flip ? 'row-reverse' : 'row')};
-  }
-`;
-
 const TextBlock = styled.div` flex:1; `;
-
-const TechList = styled.ul`
-  margin:0; padding:0; display:flex; flex-wrap:wrap; gap:0.5rem; list-style:none;
-  li{
-    background:#f0f0f0; padding:0.4rem 0.8rem; border-radius:4px; font-size:0.9rem;
-  }
-`;
 
 const ImageWrap = styled.div`
   margin-top:1.5rem;
   img{ max-width:100%; border-radius:8px; box-shadow:0 6px 12px rgba(0,0,0,0.1); }
   @media ${device.desktop}{ flex:0 0 40%; margin-top:0; }
+`;
+
+const PillRow = styled.div`
+  margin-top: 1rem;
+  @media ${device.desktop} {
+    margin-top: 1.2rem;
+  }
 `;
 
 const fmt = ts =>
@@ -165,7 +142,7 @@ const ProjectCard = ({
         <Arrow onClick={toggle} open={open}>▼</Arrow>
       </DateArrowRow>
 
-      <ExpandArea open={open} flip={flip}>
+      <ExpandableSection open={open} flip={flip}>
         <TextBlock>
           <Description>{description}</Description>
         </TextBlock>
@@ -175,14 +152,12 @@ const ProjectCard = ({
             <ImageComponent src={imageUrl} alt={`Project ${title}`} />
           </ImageWrap>
         )}
-      </ExpandArea>
+      </ExpandableSection>
 
-      {technologies?.length>0 && (
-        <TechListRow open={open}>
-          <TechList>
-            {technologies.map((t,i)=><li key={i}>{t}</li>)}
-          </TechList>
-        </TechListRow>
+      {technologies?.length > 0 && (
+        <PillRow>
+          <TechPillList items={technologies} />
+        </PillRow>
       )}
     </CardContainer>
   );
