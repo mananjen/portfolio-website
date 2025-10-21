@@ -18,7 +18,7 @@ const projects = [
     projectWebsiteUrl: null,
     documentUrl: null,
     startDate: admin.firestore.Timestamp.fromDate(new Date(2025, 0, 15)),
-    endDate: null,
+    endDate: admin.firestore.Timestamp.fromDate(new Date(2025, 10, 15)),
   },
   {
     title: "Video Enhancement",
@@ -29,7 +29,7 @@ const projects = [
     projectWebsiteUrl: null,
     documentUrl: null,
     startDate: admin.firestore.Timestamp.fromDate(new Date(2025, 0, 15)),
-    endDate: null,
+    endDate: admin.firestore.Timestamp.fromDate(new Date(2025, 5, 15)),
   },
   {
     title: "Sentiment Analyzing Chatbot",
