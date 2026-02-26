@@ -10,6 +10,17 @@ const db = admin.firestore();
 
 const projects = [
   {
+    title: "Multilingual Image–Text Retrieval Without End-to-End Training",
+    description: "Designing a compute-efficient, training-free alternative to end-to-end multimodal learning for multilingual image–text retrieval. This work proposes a non-parametric framework that converts pretrained unimodal embeddings into anchor-relative sparse representations, enabling effective cross-lingual retrieval without expensive multimodal fine-tuning. The core idea leverages pretrained vision and multilingual text encoders alongside a large external anchor set (CC12M) to construct relative representations that align modalities in a shared retrieval space. Using Qwen3-Embedding-8B for multilingual text and c-radio-v4-h for image embeddings—selected through systematic empirical sweeps—the system achieves ~30% Recall@1 on XM3600 without any end-to-end multimodal training. To ensure scalability and reproducibility, I built a full evaluation and orchestration pipeline featuring: Automated hyperparameter sweeps (k, p) for anchor selection and sparsification Per-language Recall@K evaluation across XM3600 Embedding caching to eliminate redundant computation Modular experimentation framework for encoder pairing comparisons This research demonstrates that competitive multilingual retrieval performance can be achieved under limited compute and data constraints by leveraging strong pretrained models and non-parametric alignment strategies. Manuscript and open-source release currently in preparation for ACL Rolling Review.",
+    technologies: ["Python", "Non-Parametric Models", "Vision Encoders", "Text Encoders", "Cross-Modal Retrieval"],
+    // githubUrl: "https://github.com/mananjen/cs521",
+    imageUrl: null,
+    projectWebsiteUrl: null,
+    documentUrl: null,
+    startDate: admin.firestore.Timestamp.fromDate(new Date(2025, 10, 15)),
+    // endDate: admin.firestore.Timestamp.fromDate(new Date(2025, 10, 15)),
+  },
+  {
     title: "Hindi-English Code-mixed Sarcasm Detection",
     description: "Developing an advanced deep learning model to accurately detect sarcasm in Hindi-English code-mixed online texts. Leveraging cutting-edge research from 2023–2024 in multilingual and code-mixed NLP, this project expands upon existing frameworks to enhance detection accuracy and adaptability. Additionally, contributing to the research initiative by curating and refining a comprehensive, high-quality dataset specifically designed for Hindi-English code-mixed linguistic patterns, thereby laying a strong foundation for robust experimentation and analysis.",
     technologies: ["Python", "LLMs", "Pytorch", "Transformers"],
