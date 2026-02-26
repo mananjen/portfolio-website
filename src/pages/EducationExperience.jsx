@@ -76,6 +76,20 @@ const EducationExperience = () => {
       <SectionTitle>Work Experience</SectionTitle>
 
       <Card>
+        <Title>Researcher (Graduate Research Assistant)</Title>
+        <SubTitle>UIC NLP Lab</SubTitle>
+        <Date>May 2025 – Present</Date>
+        <BulletList>
+          <BulletItem>
+            Delivered a <strong>training-free / non-parametric multilingual image-text retrieval</strong> pipeline that achieves usable retrieval performance <strong>(30% R@1)</strong> without end-to-end model training, leveraging pretrained unimodal vision + multilingual text encoders and an external anchor set (CC12M); <strong>manuscript in preparation for ACL Rolling Review</strong>.
+          </BulletItem>
+          <BulletItem>
+            Led <strong>Hinglish Sarcasm Detection</strong>: built end-to-end pipeline, ran ablations/error analysis; <strong>manuscript submitted to ACL Rolling Review—under review</strong>.
+          </BulletItem>
+        </BulletList>
+      </Card>
+
+      <Card>
         <Title>Software Engineer</Title>
         <SubTitle>Lowe's India, Bangalore, India</SubTitle>
         <Date>July 2019 – August 2023</Date>
