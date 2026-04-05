@@ -1,7 +1,8 @@
-import { HashRouter, Navigate, Route, Routes } from "react-router-dom"
+import { HashRouter, Route, Routes } from "react-router-dom"
 import { motion } from "framer-motion"
 import { SiteHeader } from "@/components/layout/site-header"
 import { SiteFooter } from "@/components/layout/site-footer"
+import { HomePage } from "@/pages/home"
 import { AboutPage } from "@/pages/about"
 import { ProjectsPage } from "@/pages/projects"
 import { ExperiencePage } from "@/pages/experience"
@@ -22,7 +23,7 @@ export default function App() {
             transition={{ duration: 0.35, ease: "easeOut" }}
           >
             <Routes>
-              <Route path="/" element={<Navigate to="/about" replace />} />
+              <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/experience" element={<ExperiencePage />} />

@@ -8,8 +8,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { siteConfig } from "@/content/site"
 
 const navItems = [
+  { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/projects", label: "Projects" },
   { to: "/experience", label: "Experience" },
@@ -29,15 +31,15 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/75 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
         <Link
-          to="/about"
+          to="/"
           className="text-sm font-semibold tracking-[0.16em] text-foreground uppercase"
         >
-          Manan Jain
+          {siteConfig.name}
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
-            <NavLink key={item.to} to={item.to} className={navLinkClass}>
+            <NavLink key={item.to} to={item.to} className={navLinkClass} end={item.to === "/"}>
               {item.label}
             </NavLink>
           ))}
@@ -45,7 +47,9 @@ export function SiteHeader() {
 
         <div className="hidden md:block">
           <Button asChild>
-            <Link to="/contact">Let’s Connect</Link>
+            <a href={siteConfig.github} target="_blank" rel="noreferrer">
+              GitHub
+            </a>
           </Button>
         </div>
 
@@ -56,6 +60,7 @@ export function SiteHeader() {
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>
+
             <SheetContent side="right" className="w-[280px]">
               <SheetHeader>
                 <SheetTitle>Navigate</SheetTitle>
@@ -66,6 +71,7 @@ export function SiteHeader() {
                   <NavLink
                     key={item.to}
                     to={item.to}
+                    end={item.to === "/"}
                     className={({ isActive }) =>
                       [
                         "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
@@ -80,7 +86,9 @@ export function SiteHeader() {
                 ))}
 
                 <Button asChild className="mt-3">
-                  <Link to="/contact">Let’s Connect</Link>
+                  <a href={siteConfig.github} target="_blank" rel="noreferrer">
+                    GitHub
+                  </a>
                 </Button>
               </div>
             </SheetContent>
