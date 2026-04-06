@@ -1,3 +1,5 @@
+import { featuredProjects } from "@/content/projects"
+
 export const siteConfig = {
   name: "Manan Jain",
   title: "Software Engineer building practical AI systems",
@@ -28,20 +30,22 @@ export const heroContent = {
   ],
 }
 
+export const homeFeaturedProjects = featuredProjects.slice(0, 3)
+
 export const experienceHighlights = [
   {
     title: "Graduate Research Assistant",
     org: "UIC NLP Lab",
     period: "2025 – Present",
     description:
-      "Working on multilingual retrieval and sarcasm detection with a focus on stronger experimentation and technical depth.",
+      "Working on multilingual retrieval and sarcasm detection with a focus on experimentation, evaluation, and practical system design.",
   },
   {
     title: "Software Engineer",
     org: "Lowe’s India",
     period: "2019 – 2023",
     description:
-      "Built and improved frontend and internal platform experiences with an emphasis on usability and maintainable code.",
+      "Built and improved frontend and internal platform experiences with an emphasis on usability, maintainability, and business impact.",
   },
 ]
 

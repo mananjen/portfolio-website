@@ -1,22 +1,23 @@
-import { ArrowRight, Mail } from "lucide-react"
+import { ArrowRight, Mail, ExternalLink } from "lucide-react"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
 import profilePic from "@/assets/temp.jpg"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { SectionHeading } from "@/components/layout/section-heading"
 import {
   contactLinks,
   experienceHighlights,
   heroContent,
+  homeFeaturedProjects,
   siteConfig,
 } from "@/content/site"
-import { featuredProjects as homeFeaturedProjects } from "@/content/projects"
+import { getProjectLinks } from "@/content/projects"
 
 export function HomePage() {
   return (
-    <div className="space-y-20 md:space-y-28">
-      <section className="grid items-center gap-10 pt-4 lg:grid-cols-[1.2fr_0.8fr]">
+    <div className="space-y-18 md:space-y-24">
+      <section className="grid items-center gap-10 pt-4 lg:grid-cols-[1.15fr_0.85fr]">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -86,54 +87,84 @@ export function HomePage() {
         <SectionHeading
           eyebrow="Featured Work"
           title="A few projects that best represent how I like to build."
-          description="The strongest portfolio projects are the ones that combine technical depth, practical constraints, and clear product thinking."
+          description="Three recent projects that combine technical depth, practical constraints, and clear product thinking."
         />
 
         <div className="grid gap-6 lg:grid-cols-3">
-          {homeFeaturedProjects.map((project) => (
-            <Card
-              key={project.slug}
-              className="border-border/70 bg-card/80 transition-transform duration-200 hover:-translate-y-1"
-            >
-              <CardHeader className="space-y-3">
-                <p className="text-sm font-medium text-primary">
-                  {project.tagline}
-                </p>
+          {homeFeaturedProjects.map((project) => {
+            const primaryLink = getProjectLinks(project)[0]
 
-                <CardTitle className="text-xl leading-7">
-                  {project.title}
-                </CardTitle>
+            return (
+              <Card
+                key={project.slug}
+                className="overflow-hidden border-border/70 bg-card/80 transition-transform duration-200 hover:-translate-y-1"
+              >
+                {project.imageUrl ? (
+                  <div className="aspect-[16/9] overflow-hidden border-b border-border/60 bg-muted">
+                    <img
+                      src={project.imageUrl}
+                      alt={project.title}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="border-b border-border/60 bg-gradient-to-br from-primary/10 via-transparent to-sky-400/10 px-6 py-5">
+                    <p className="text-sm font-medium text-primary">
+                      {project.category}
+                    </p>
+                  </div>
+                )}
 
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.slice(0, 4).map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </CardHeader>
+                <CardContent className="space-y-4 p-6">
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium text-primary">
+                      {project.tagline}
+                    </p>
 
-              <CardContent className="space-y-4">
-                <p className="text-sm leading-6 text-muted-foreground">
-                  {project.summary}
-                </p>
+                    <h3 className="text-xl font-semibold leading-7">
+                      {project.title}
+                    </h3>
+                  </div>
 
-                <p className="text-sm leading-6 text-foreground/90">
-                  {project.impact}
-                </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.slice(0, 4).map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
 
-                <Button asChild variant="ghost" className="px-0">
-                  <Link to="/projects">
-                    View details
-                    <ArrowRight className="ml-2 size-4" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+                  <p className="text-sm leading-6 text-muted-foreground">
+                    {project.summary}
+                  </p>
+
+                  <div className="flex items-center justify-between pt-1">
+                    <Button asChild variant="ghost" className="px-0">
+                      <Link to="/projects">
+                        View details
+                        <ArrowRight className="ml-2 size-4" />
+                      </Link>
+                    </Button>
+
+                    {primaryLink ? (
+                      <a
+                        href={primaryLink.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {primaryLink.label}
+                        <ExternalLink className="ml-1 size-4" />
+                      </a>
+                    ) : null}
+                  </div>
+                </CardContent>
+              </Card>
+            )
+          })}
         </div>
       </section>
 

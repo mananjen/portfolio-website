@@ -1,13 +1,63 @@
-import { ArrowRight, ExternalLink } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState } from "react"
+import { ProjectCompactCard } from "@/components/projects/project-compact-card"
+import { ProjectDetailCard } from "@/components/projects/project-detail-card"
 import {
   additionalProjects,
   featuredProjects,
-  getProjectLinks,
+  type Project,
 } from "@/content/projects"
 
+function renderCompactGrid(
+  projects: Project[],
+  onExpand: (slug: string) => void
+) {
+  if (projects.length === 0) return null
+
+  return (
+    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {projects.map((project) => (
+        <ProjectCompactCard
+          key={project.slug}
+          project={project}
+          onLearnMore={() => onExpand(project.slug)}
+        />
+      ))}
+    </div>
+  )
+}
+
 export function ProjectsPage() {
+  const [expandedProjectSlug, setExpandedProjectSlug] = useState<string | null>(null)
+
+  const toggleProject = (slug: string) => {
+    setExpandedProjectSlug((current) => (current === slug ? null : slug))
+  }
+
+  const orderedAdditionalProjects = [...additionalProjects].sort((a, b) => {
+    if (a.slug === "real-or-ai-generated") return -1
+    if (b.slug === "real-or-ai-generated") return 1
+    return 0
+  })
+
+  const expandedAdditionalIndex = orderedAdditionalProjects.findIndex(
+    (project) => project.slug === expandedProjectSlug
+  )
+
+  const additionalBefore =
+    expandedAdditionalIndex === -1
+      ? orderedAdditionalProjects
+      : orderedAdditionalProjects.slice(0, expandedAdditionalIndex)
+
+  const expandedAdditionalProject =
+    expandedAdditionalIndex === -1
+      ? null
+      : orderedAdditionalProjects[expandedAdditionalIndex]
+
+  const additionalAfter =
+    expandedAdditionalIndex === -1
+      ? []
+      : orderedAdditionalProjects.slice(expandedAdditionalIndex + 1)
+
   return (
     <div className="space-y-14 md:space-y-20">
       <section className="space-y-4">
@@ -16,100 +66,34 @@ export function ProjectsPage() {
         </p>
 
         <h1 className="max-w-4xl text-4xl font-semibold tracking-tight md:text-5xl">
-          Selected work across AI research, NLP, computer vision, web systems,
-          VR, and applied machine learning.
+          Selected work across AI research, NLP, computer vision, VR, web systems,
+          and applied machine learning.
         </h1>
 
         <p className="max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
-          This page is meant to make the strongest work easy to scan. The
-          featured projects show the clearest mix of technical depth, practical
-          implementation, and product-oriented thinking.
+          A glance at some of my favorite projects. Each project is a self-contained story with its own challenges, learnings, and impact. Click through to see the full story behind each one.
         </p>
       </section>
 
       <section className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm font-medium tracking-[0.18em] text-muted-foreground uppercase">
-            Featured Case Studies
+            Featured Projects
           </p>
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            The projects I’d most want someone to remember.
+            The projects I'm most proud of, with the most depth and polish in their case studies. Feel free to expand any that catch your eye.
           </h2>
         </div>
 
         <div className="space-y-6">
-          {featuredProjects.map((project) => {
-            const links = getProjectLinks(project)
-
-            return (
-              <Card
-                key={project.slug}
-                className="overflow-hidden border-border/70 bg-card/80"
-              >
-                <CardHeader className="space-y-4 p-6 md:p-8">
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium text-primary">
-                      {project.tagline}
-                    </p>
-                    <CardTitle className="text-2xl md:text-3xl">
-                      {project.title}
-                    </CardTitle>
-                    <p className="text-sm text-muted-foreground">
-                      {project.category} • {project.timeframe}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </CardHeader>
-
-                <CardContent className="grid gap-8 p-6 pt-0 md:grid-cols-2 md:p-8 md:pt-0">
-                  <div className="space-y-5">
-                    <div className="space-y-2">
-                      <h3 className="text-sm font-semibold tracking-wide uppercase">
-                        Overview
-                      </h3>
-                      <p className="text-sm leading-6 text-muted-foreground md:text-base">
-                        {project.summary}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-5">
-                    <div className="space-y-2">
-                      <h3 className="text-sm font-semibold tracking-wide uppercase">
-                        Why it matters
-                      </h3>
-                      <p className="text-sm leading-6 text-foreground/90 md:text-base">
-                        {project.impact}
-                      </p>
-                    </div>
-
-                    {links.length > 0 ? (
-                      <div className="flex flex-wrap gap-3 pt-2">
-                        {links.map((link) => (
-                          <Button key={link.label} asChild variant="outline">
-                            <a href={link.href} target="_blank" rel="noreferrer">
-                              {link.label}
-                              <ExternalLink className="ml-2 size-4" />
-                            </a>
-                          </Button>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
-                </CardContent>
-              </Card>
-            )
-          })}
+          {featuredProjects.map((project) => (
+            <ProjectDetailCard
+              key={project.slug}
+              project={project}
+              expanded={expandedProjectSlug === project.slug}
+              onToggle={() => toggleProject(project.slug)}
+            />
+          ))}
         </div>
       </section>
 
@@ -119,63 +103,22 @@ export function ProjectsPage() {
             Additional Projects
           </p>
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            More work that adds range to the portfolio.
+            More of my work across a variety of domains. These projects may have shorter case studies, but each one has something I'm proud of and happy to talk about.
           </h2>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {additionalProjects.map((project) => {
-            const links = getProjectLinks(project)
+        <div className="space-y-6">
+          {renderCompactGrid(additionalBefore, toggleProject)}
 
-            return (
-              <Card
-                key={project.slug}
-                className="border-border/70 bg-card/80 transition-transform duration-200 hover:-translate-y-1"
-              >
-                <CardHeader className="space-y-3">
-                  <p className="text-sm font-medium text-primary">
-                    {project.category}
-                  </p>
-                  <CardTitle className="text-xl leading-7">
-                    {project.title}
-                  </CardTitle>
-                  <p className="text-sm text-muted-foreground">
-                    {project.timeframe}
-                  </p>
-                </CardHeader>
+          {expandedAdditionalProject ? (
+            <ProjectDetailCard
+              project={expandedAdditionalProject}
+              expanded={true}
+              onToggle={() => toggleProject(expandedAdditionalProject.slug)}
+            />
+          ) : null}
 
-                <CardContent className="space-y-4">
-                  <p className="text-sm leading-6 text-muted-foreground">
-                    {project.summary}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.slice(0, 5).map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {links.length > 0 ? (
-                    <div className="flex flex-wrap gap-3 pt-2">
-                      {links.map((link) => (
-                        <Button key={link.label} asChild variant="ghost" className="px-0">
-                          <a href={link.href} target="_blank" rel="noreferrer">
-                            {link.label}
-                            <ArrowRight className="ml-2 size-4" />
-                          </a>
-                        </Button>
-                      ))}
-                    </div>
-                  ) : null}
-                </CardContent>
-              </Card>
-            )
-          })}
+          {renderCompactGrid(additionalAfter, toggleProject)}
         </div>
       </section>
     </div>
