@@ -174,7 +174,7 @@ export function HomePage() {
             <SectionHeading
               eyebrow="Experience Snapshot"
               title="A mix of research, engineering, and product-facing work."
-              description="The portfolio is strongest when it shows the combination: deep technical work, practical implementation, and clean communication."
+              description="My diverse work experience has given me a broad perspective on how to build impactful products, and I'm always eager to learn more."
             />
 
             <div className="mt-8 space-y-6">
@@ -208,7 +208,7 @@ export function HomePage() {
               <SectionHeading
                 eyebrow="Contact"
                 title="Easy ways to reach me."
-                description="If something here is interesting, the next step should feel low-friction."
+                description="Feel free to ask about my work, chat about potential opportunities, or just say hi. I’m always open to connecting with new people."
               />
 
               <div className="space-y-4 pt-2">
