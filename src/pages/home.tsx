@@ -220,24 +220,28 @@ export function HomePage() {
 
         <Card className="border-border/70 bg-card/80">
           <CardContent className="flex h-full flex-col justify-between p-6 md:p-8">
-            <div className="space-y-4">
-              <SectionHeading
-                eyebrow="Contact"
-                title="Easy ways to reach me."
-                description="Feel free to ask about my work, chat about potential opportunities, or just say hi. I’m always open to connecting with new people."
-              />
+            <div className="space-y-4 pt-2">
+              {contactLinks.map((item) => {
+                const isExternal = item.kind === "external"
 
-              <div className="space-y-4 pt-2">
-                {contactLinks.map((item) => (
+                return (
                   <div
                     key={item.label}
                     className="rounded-2xl border border-border bg-background/70 p-4"
                   >
                     <p className="text-sm text-muted-foreground">{item.label}</p>
-                    <p className="mt-1 font-medium">{item.value}</p>
+
+                    <a
+                      href={item.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noreferrer" : undefined}
+                      className="mt-1 block font-medium transition-colors hover:text-primary"
+                    >
+                      {item.value}
+                    </a>
                   </div>
-                ))}
-              </div>
+                )
+              })}
             </div>
 
             <div className="pt-6">

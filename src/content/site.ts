@@ -1,6 +1,13 @@
 import { featuredProjects } from "@/content/projects"
 import { homeExperienceHighlights } from "@/content/experience"
 
+export type ContactLink = {
+  label: string
+  value: string
+  href: string
+  kind: "email" | "phone" | "external"
+}
+
 export const siteConfig = {
   name: "Manan Jain",
   title: "Software Engineer building practical AI systems",
@@ -8,6 +15,8 @@ export const siteConfig = {
   github: "https://github.com/mananjen",
   linkedin: "https://www.linkedin.com/in/mananjen",
   location: "Chicago, IL",
+  phoneDisplay: "+1 (872) 202-0800",
+  phoneHref: "tel:+18722020800",
 }
 
 export const heroContent = {
@@ -27,7 +36,7 @@ export const heroContent = {
     "MS CS at UIC",
     "UIC NLP Lab",
     "Lowe’s India",
-    "AI + Full-Stack Systems",
+    "AI + Web Systems",
   ],
 }
 
@@ -35,20 +44,29 @@ export const homeFeaturedProjects = featuredProjects.slice(0, 3)
 
 export { homeExperienceHighlights as experienceHighlights }
 
-export const contactLinks = [
+export const contactLinks: ContactLink[] = [
   {
     label: "Email",
-    value: "mananjen@gmail.com",
-    href: "mailto:mananjen@gmail.com",
+    value: siteConfig.email,
+    href: `mailto:${siteConfig.email}?subject=Portfolio%20Inquiry%20for%20Manan%20Jain`,
+    kind: "email",
+  },
+  {
+    label: "Phone",
+    value: siteConfig.phoneDisplay,
+    href: siteConfig.phoneHref,
+    kind: "phone",
   },
   {
     label: "GitHub",
     value: "github.com/mananjen",
-    href: "https://github.com/mananjen",
+    href: siteConfig.github,
+    kind: "external",
   },
   {
     label: "LinkedIn",
     value: "linkedin.com/in/mananjen",
-    href: "https://www.linkedin.com/in/mananjen",
+    href: siteConfig.linkedin,
+    kind: "external",
   },
 ]

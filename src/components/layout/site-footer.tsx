@@ -18,8 +18,8 @@ export function SiteFooter() {
             <a
               key={item.label}
               href={item.href}
-              target={item.href.startsWith("http") ? "_blank" : undefined}
-              rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+              target={item.kind === "external" ? "_blank" : undefined}
+              rel={item.kind === "external" ? "noreferrer" : undefined}
               className="transition-colors hover:text-foreground"
             >
               {item.label}
