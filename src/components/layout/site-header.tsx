@@ -1,6 +1,7 @@
 import { Menu } from "lucide-react"
 import { Link, NavLink } from "react-router-dom"
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/layout/theme-toggle"
 import {
   Sheet,
   SheetContent,
@@ -45,7 +46,8 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-2 md:flex">
+          <ThemeToggle />
           <Button asChild>
             <a href={siteConfig.github} target="_blank" rel="noreferrer">
               GitHub
@@ -84,6 +86,10 @@ export function SiteHeader() {
                     {item.label}
                   </NavLink>
                 ))}
+
+                <div className="mt-2">
+                  <ThemeToggle className="w-full rounded-xl" />
+                </div>
 
                 <Button asChild className="mt-3">
                   <a href={siteConfig.github} target="_blank" rel="noreferrer">
