@@ -1,15 +1,8 @@
-import { Mail, FolderGit2, UserRound, Phone } from "lucide-react"
+import { useState } from "react"
+import { Mail, FolderGit2, UserRound, Phone, Copy, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { contactLinks, type ContactLink } from "@/content/site"
-
-const iconMap: Record<ContactLink["kind"] | "github" | "linkedin", React.ComponentType<{ className?: string }>> = {
-  email: Mail,
-  phone: Phone,
-  external: UserRound,
-  github: FolderGit2,
-  linkedin: UserRound,
-}
 
 function getIcon(item: ContactLink) {
   if (item.label === "GitHub") return FolderGit2
@@ -19,7 +12,36 @@ function getIcon(item: ContactLink) {
   return UserRound
 }
 
+async function copyToClipboard(text: string) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text)
+    return
+  }
+
+  const textArea = document.createElement("textarea")
+  textArea.value = text
+  textArea.setAttribute("readonly", "")
+  textArea.style.position = "absolute"
+  textArea.style.left = "-9999px"
+  document.body.appendChild(textArea)
+  textArea.select()
+  document.execCommand("copy")
+  document.body.removeChild(textArea)
+}
+
 export function ContactPage() {
+  const [copiedEmail, setCopiedEmail] = useState(false)
+
+  const handleCopyEmail = async (email: string) => {
+    try {
+      await copyToClipboard(email)
+      setCopiedEmail(true)
+      window.setTimeout(() => setCopiedEmail(false), 2000)
+    } catch (error) {
+      console.error("Failed to copy email:", error)
+    }
+  }
+
   return (
     <section className="space-y-8">
       <div className="space-y-3">
@@ -39,6 +61,7 @@ export function ContactPage() {
         {contactLinks.map((item) => {
           const Icon = getIcon(item)
           const isExternal = item.kind === "external"
+          const isEmail = item.kind === "email"
 
           return (
             <Card key={item.label} className="border-border/70 bg-card/80">
@@ -62,19 +85,41 @@ export function ContactPage() {
                   </div>
                 </div>
 
-                <Button asChild variant="outline">
-                  <a
-                    href={item.href}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noreferrer" : undefined}
-                  >
-                    {item.kind === "email"
-                      ? "Compose Email"
-                      : item.kind === "phone"
-                        ? "Call"
-                        : "Open"}
-                  </a>
-                </Button>
+                {isEmail ? (
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button asChild variant="outline">
+                      <a href={item.href}>Compose</a>
+                    </Button>
+
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      onClick={() => handleCopyEmail(item.value)}
+                    >
+                      {copiedEmail ? (
+                        <>
+                          <Check className="mr-2 size-4" />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="mr-2 size-4" />
+                          Copy
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                ) : (
+                  <Button asChild variant="outline">
+                    <a
+                      href={item.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noreferrer" : undefined}
+                    >
+                      {item.kind === "phone" ? "Call" : "Open"}
+                    </a>
+                  </Button>
+                )}
               </CardContent>
             </Card>
           )
