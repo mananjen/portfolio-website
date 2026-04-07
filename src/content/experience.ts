@@ -4,6 +4,7 @@ export type ExperienceEntry = {
   location?: string
   period: string
   summary: string
+  technologies: string[]
   bullets: string[]
   homeHighlights?: string[]
 }
@@ -13,6 +14,7 @@ export type EducationEntry = {
   degree: string
   period: string
   summary: string
+  technologies: string[]
   bullets: string[]
 }
 
@@ -24,6 +26,14 @@ export const workExperience: ExperienceEntry[] = [
     period: "May 2025 – Present",
     summary:
       "Research spanning multilingual retrieval and sarcasm detection with a focus on experimentation, evaluation, and practical system design.",
+    technologies: [
+      "Python",
+      "PyTorch",
+      "Transformers",
+      "Multilingual NLP",
+      "Cross-Modal Retrieval",
+      "Experimentation",
+    ],
     bullets: [
       "Built a training-free / non-parametric multilingual image-text retrieval pipeline using pretrained unimodal vision and multilingual text encoders with an external anchor set.",
       "Reached usable multilingual retrieval performance around 30% R@1 without end-to-end multimodal training; manuscript in preparation for ACL Rolling Review.",
@@ -40,6 +50,14 @@ export const workExperience: ExperienceEntry[] = [
     period: "July 2019 – August 2023",
     summary:
       "Frontend and internal platform work centered on usability, maintainability, analytics quality, and business-facing product improvements.",
+    technologies: [
+      "Frontend Development",
+      "UI/UX",
+      "Analytics Tagging",
+      "Adobe Launch",
+      "Content Platforms",
+      "Web Applications",
+    ],
     bullets: [
       "Improved in-store application usability by 10% through optimized UI development for store associates.",
       "Revamped the Non-Product Content web application UI, increasing customer engagement by 20% and improving user experience.",
@@ -58,6 +76,10 @@ export const workExperience: ExperienceEntry[] = [
     period: "May 2018 – July 2018",
     summary:
       "Early systems-oriented work focused on network simulation and infrastructure modeling.",
+    technologies: [
+      "Network Simulation",
+      "CPT",
+    ],
     bullets: [
       "Trained in simulating complex networks using CPT.",
       "Modeled large-scale network infrastructures as part of network management training.",
@@ -72,6 +94,14 @@ export const education: EducationEntry[] = [
     period: "Aug 2023 – May 2025",
     summary:
       "Specialized in Artificial Intelligence, Machine Learning, and Natural Language Processing.",
+    technologies: [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "NLP",
+      "Deep Learning",
+      "C#",
+      "Unity",
+    ],
     bullets: [
       "Developed multiple projects applying advanced NLP and deep learning techniques.",
       "Also studied VR development and C# with Unity.",
@@ -83,6 +113,16 @@ export const education: EducationEntry[] = [
     period: "Aug 2015 – May 2019",
     summary:
       "Built a strong foundation in software engineering and core computer science.",
+    technologies: [
+      "Algorithms",
+      "C++",
+      "Java",
+      "Data Structures",
+      "Databases",
+      "Operating Systems",
+      "Web Development",
+      "Computer Engineering",
+    ],
     bullets: [
       "Core coursework included software development, algorithms, data structures, and database systems.",
       "Completed hands-on projects involving IoT, web development, and early NLP techniques.",

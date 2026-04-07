@@ -52,8 +52,7 @@ export function ContactPage() {
           Easy ways to reach me.
         </h1>
         <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
-          The easiest way to reach me is by email or LinkedIn. Phone is here as
-          a direct option if needed.
+          The easiest way to reach me is by email or LinkedIn. I typically respond within a day or two, but it may take longer during busy periods. I look forward to connecting with you!
         </p>
       </div>
 

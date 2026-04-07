@@ -9,7 +9,7 @@ export function ExperiencePage() {
       <section className="space-y-4">
         <SectionHeading
           eyebrow="Experience"
-          title="Work, research, and education with clearer structure and more detail."
+          title="Work, research, and education with detail."
           description="This page focuses on the experiences that shaped how I work: production engineering, applied research, and a strong academic foundation in AI, NLP, and systems."
         />
       </section>
@@ -44,6 +44,17 @@ export function ExperiencePage() {
                   <p className="max-w-3xl text-sm leading-6 text-muted-foreground md:text-base">
                     {item.summary}
                   </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {item.technologies.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
 
                   <ul className="space-y-3 pl-5 text-sm leading-6 text-muted-foreground md:text-base">
                     {item.bullets.map((bullet) => (
@@ -88,6 +99,17 @@ export function ExperiencePage() {
                   <p className="max-w-3xl text-sm leading-6 text-muted-foreground md:text-base">
                     {item.summary}
                   </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {item.technologies.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
 
                   <ul className="space-y-3 pl-5 text-sm leading-6 text-muted-foreground md:text-base">
                     {item.bullets.map((bullet) => (
