@@ -63,12 +63,15 @@ export function SiteHeader() {
               </Button>
             </SheetTrigger>
 
-            <SheetContent side="right" className="w-[280px]">
-              <SheetHeader>
+            <SheetContent
+              side="right"
+              className="w-[min(92vw,320px)] px-4 sm:px-5"
+            >
+              <SheetHeader className="px-1">
                 <SheetTitle>Navigate</SheetTitle>
               </SheetHeader>
 
-              <div className="mt-8 flex flex-col gap-4">
+              <div className="mt-8 flex min-w-0 flex-col gap-4">
                 {navItems.map((item) => (
                   <NavLink
                     key={item.to}
@@ -76,7 +79,8 @@ export function SiteHeader() {
                     end={item.to === "/"}
                     className={({ isActive }) =>
                       [
-                        "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                        "block w-full max-w-full rounded-2xl px-4 py-3 text-sm font-medium transition-colors",
+                        "box-border",
                         isActive
                           ? "bg-accent text-accent-foreground"
                           : "text-muted-foreground hover:bg-accent hover:text-foreground",
@@ -87,11 +91,11 @@ export function SiteHeader() {
                   </NavLink>
                 ))}
 
-                <div className="mt-2">
-                  <ThemeToggle className="w-full rounded-xl" />
+                <div className="pt-1">
+                  <ThemeToggle className="w-full max-w-full rounded-2xl" />
                 </div>
 
-                <Button asChild className="mt-3">
+                <Button asChild className="mt-2 w-full max-w-full rounded-2xl">
                   <a href={siteConfig.github} target="_blank" rel="noreferrer">
                     GitHub
                   </a>
