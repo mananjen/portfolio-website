@@ -143,7 +143,13 @@ export function HomePage() {
 
                   <div className="flex items-center justify-between pt-1">
                     <Button asChild variant="ghost" className="px-0">
-                      <Link to="/projects">
+                      <Link
+                        to="/projects"
+                        state={{
+                          expandProject: project.slug,
+                          preserveScroll: true,
+                        }}
+                      >
                         View details
                         <ArrowRight className="ml-2 size-4" />
                       </Link>
@@ -170,34 +176,44 @@ export function HomePage() {
 
       <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <Card className="border-border/70 bg-card/80">
-          <CardContent className="p-6 md:p-8">
+          <CardContent className="flex h-full flex-col p-6 md:p-8">
             <SectionHeading
               eyebrow="Experience Snapshot"
-              title="A mix of research, engineering, and product-facing work."
-              description="My diverse work experience has given me a broad perspective on how to build impactful products, and I'm always eager to learn more."
+              title="Research and engineering work with measurable outcomes."
+              description="A quick view of the two experiences that best represent the mix of applied research and production engineering behind the portfolio."
             />
 
-            <div className="mt-8 space-y-6">
+            <div className="mt-8 flex-1 space-y-7">
               {experienceHighlights.map((item) => (
-                <div key={`${item.title}-${item.org}`} className="space-y-2">
-                  <div className="flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
+                <div key={`${item.title}-${item.org}`} className="space-y-3">
+                  <div className="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
                     <div>
                       <h3 className="text-lg font-semibold">{item.title}</h3>
-                      <p className="text-sm font-medium text-primary">
-                        {item.org}
-                      </p>
+                      <p className="text-sm font-medium text-primary">{item.org}</p>
                     </div>
 
-                    <p className="text-sm text-muted-foreground">
-                      {item.period}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{item.period}</p>
                   </div>
 
                   <p className="text-sm leading-6 text-muted-foreground md:text-base">
                     {item.description}
                   </p>
+
+                  <ul className="space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
+                    {item.highlights.map((highlight) => (
+                      <li key={highlight} className="list-disc">
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
+            </div>
+
+            <div className="pt-6">
+              <Button asChild size="lg" className="w-full sm:w-auto">
+                <Link to="/experience">View Full Experience</Link>
+              </Button>
             </div>
           </CardContent>
         </Card>

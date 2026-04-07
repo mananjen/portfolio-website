@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 import { ProjectCompactCard } from "@/components/projects/project-compact-card"
 import { ProjectDetailCard } from "@/components/projects/project-detail-card"
 import {
@@ -6,6 +7,11 @@ import {
   featuredProjects,
   type Project,
 } from "@/content/projects"
+
+type ProjectsLocationState = {
+  expandProject?: string
+  preserveScroll?: boolean
+}
 
 function renderCompactGrid(
   projects: Project[],
@@ -27,11 +33,33 @@ function renderCompactGrid(
 }
 
 export function ProjectsPage() {
+  const location = useLocation()
+  const routeState = (location.state as ProjectsLocationState | null) ?? null
+
   const [expandedProjectSlug, setExpandedProjectSlug] = useState<string | null>(null)
 
   const toggleProject = (slug: string) => {
     setExpandedProjectSlug((current) => (current === slug ? null : slug))
   }
+
+  useEffect(() => {
+    if (!routeState?.expandProject) return
+    setExpandedProjectSlug(routeState.expandProject)
+  }, [routeState?.expandProject])
+
+  useEffect(() => {
+    if (!expandedProjectSlug) return
+
+    const el = document.getElementById(`project-${expandedProjectSlug}`)
+    if (!el) return
+
+    requestAnimationFrame(() => {
+      el.scrollIntoView({
+        block: "start",
+        behavior: "smooth",
+      })
+    })
+  }, [expandedProjectSlug])
 
   const orderedAdditionalProjects = [...additionalProjects].sort((a, b) => {
     if (a.slug === "real-or-ai-generated") return -1
@@ -71,7 +99,7 @@ export function ProjectsPage() {
         </h1>
 
         <p className="max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
-          A glance at some of my favorite projects. Each project is a self-contained story with its own challenges, learnings, and impact. Click through to see the full story behind each one.
+          Every project can expand into a more detailed case-study view, to give a deeper look at the motivation, process, and impact of the work. Click on any project card to explore!
         </p>
       </section>
 
@@ -81,7 +109,7 @@ export function ProjectsPage() {
             Featured Projects
           </p>
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            The projects I'm most proud of, with the most depth and polish in their case studies. Feel free to expand any that catch your eye.
+            The three projects I’d want someone to remember first.
           </h2>
         </div>
 
@@ -103,7 +131,7 @@ export function ProjectsPage() {
             Additional Projects
           </p>
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            More of my work across a variety of domains. These projects may have shorter case studies, but each one has something I'm proud of and happy to talk about.
+            Some more projects that I'm proud of, feel free to explore!
           </h2>
         </div>
 

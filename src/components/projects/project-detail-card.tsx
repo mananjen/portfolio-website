@@ -27,7 +27,10 @@ export function ProjectDetailCard({
   const results = project.details?.results ?? [project.impact]
 
   return (
-    <Card className="overflow-hidden border-border/70 bg-card/80">
+    <Card
+        id={`project-${project.slug}`}
+        className="overflow-hidden border-border/70 bg-card/80"
+    >
       {project.imageUrl ? (
         <div className="aspect-[16/8] overflow-hidden border-b border-border/60 bg-muted">
           <img

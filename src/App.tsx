@@ -7,10 +7,12 @@ import { AboutPage } from "@/pages/about"
 import { ProjectsPage } from "@/pages/projects"
 import { ExperiencePage } from "@/pages/experience"
 import { ContactPage } from "@/pages/contact"
+import { ScrollToTop } from "@/components/layout/scroll-to-top"
 
 export default function App() {
   return (
     <HashRouter>
+      <ScrollToTop />
       <div className="min-h-screen bg-background text-foreground antialiased">
         <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.12),_transparent_35%),radial-gradient(circle_at_80%_20%,_rgba(14,165,233,0.10),_transparent_25%)]" />
 
