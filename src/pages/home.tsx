@@ -97,8 +97,18 @@ export function HomePage() {
             return (
               <Card
                 key={project.slug}
-                className="overflow-hidden border-border/70 bg-card/80 transition-transform duration-200 hover:-translate-y-1"
+                className="relative overflow-hidden border-border/70 bg-card/80 transition-transform duration-200 hover:-translate-y-1 cursor-pointer"
               >
+                <Link
+                  to="/projects"
+                  state={{
+                    expandProject: project.slug,
+                    preserveScroll: true,
+                  }}
+                  aria-label={`View details for ${project.title}`}
+                  className="absolute inset-0 z-10 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                />
+
                 {project.imageUrl ? (
                   <div className="aspect-[16/9] overflow-hidden border-b border-border/60 bg-muted">
                     <img
@@ -142,7 +152,7 @@ export function HomePage() {
                   </p>
 
                   <div className="flex items-center justify-between pt-1">
-                    <Button asChild variant="ghost" className="px-0">
+                    <Button asChild variant="ghost" className="relative z-20 px-0">
                       <Link
                         to="/projects"
                         state={{
@@ -160,7 +170,7 @@ export function HomePage() {
                         href={primaryLink.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                        className="relative z-20 inline-flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
                       >
                         {primaryLink.label}
                         <ExternalLink className="ml-1 size-4" />

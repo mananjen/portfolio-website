@@ -10,6 +10,7 @@ export type ProjectDetails = {
 }
 
 import HingPic from "@/assets/hinglish_sarcasm_infographic.svg"
+import ResearchInfographic from "@/assets/training_free_cross_modal_alignment.JPG"
 
 export type Project = {
   title: string
@@ -59,8 +60,7 @@ export const projects: Project[] = [
       "Cross-Modal Retrieval",
     ],
     githubUrl: null,
-    imageUrl:
-      "https://res.cloudinary.com/dry8udott/image/upload/v1772150883/0b30ad1afeba9bca_gmpfok.jpg",
+    imageUrl: ResearchInfographic,
     projectWebsiteUrl: null,
     documentUrl: null,
     featured: true,

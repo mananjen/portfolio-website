@@ -28,8 +28,8 @@ export const aboutContent = {
   rightNow: [
     "Thinking a lot about where modern AI is genuinely useful and where it is being overused.",
     "Interested in language models and the practical side of deploying them well.",
-    "Reading Wind and Truth.",
-    "Spending more time making art in Procreate.",
+    "Reading Fourth Wing by Rebecca Yarros.",
+    "Exploring Chicago before leaving the USA.",
   ],
 
   gallery: [
