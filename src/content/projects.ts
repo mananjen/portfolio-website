@@ -10,7 +10,7 @@ export type ProjectDetails = {
 }
 
 import HingPic from "@/assets/hinglish_sarcasm_infographic.svg"
-import ResearchInfographic from "@/assets/training_free_cross_modal_alignment.JPG"
+import ResearchInfographic from "@/assets/training_free_cross_modal_alignment.jpg"
 
 export type Project = {
   title: string
