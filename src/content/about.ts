@@ -28,7 +28,7 @@ export const aboutContent = {
   rightNow: [
     "Thinking a lot about where modern AI is genuinely useful and where it is being overused.",
     "Interested in language models and the practical side of deploying them well.",
-    "Reading Fourth Wing by Rebecca Yarros.",
+    "Reading The First Law series by Joe Abercrombie.",
     "Playing Divinity Original Sin 2.",
   ],
 

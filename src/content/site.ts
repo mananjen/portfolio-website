@@ -35,7 +35,7 @@ export const heroContent = {
   proofPoints: [
     "MS CS at UIC",
     "UIC NLP Lab",
-    "Lowe’s India",
+    "Velocitor Solutions",
     "AI + Web Systems",
   ],
 }
