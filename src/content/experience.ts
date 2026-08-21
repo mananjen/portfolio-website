@@ -1,7 +1,7 @@
 export type ExperienceEntry = {
   title: string
   organization: string
-  location?: string
+  jobLocation?: string
   period: string
   summary: string
   technologies: string[]
@@ -16,14 +16,40 @@ export type EducationEntry = {
   summary: string
   technologies: string[]
   bullets: string[]
+  homeLabel?: string
 }
 
 export const workExperience: ExperienceEntry[] = [
   {
+    title: "ML Engineer",
+    organization: "Velocitor Solutions",
+    jobLocation: "Hyderabad, Telangana",
+    period: "July 2026 – Present",
+    summary:
+      "Ramping up on a real-time data lakehouse built on streamed vehicle-fleet telemetry, while building a LangChain-based AI agent over its data.",
+    technologies: [
+      "Python",
+      "LangChain",
+      "Apache Spark",
+      "Apache Iceberg",
+      "Kafka",
+      "Kubernetes",
+      "AIOps",
+    ],
+    bullets: [
+      "Ramping up on a production Spark and Apache Iceberg lakehouse (bronze/silver/gold medallion architecture) built on real-time vehicle-fleet telemetry streamed through Kafka, running on Kubernetes.",
+      "Building a LangChain-based AI agent to query and surface insights from the platform's processed fleet data.",
+      "Gaining hands-on exposure to an AI-driven incident-triage pipeline that pairs a Kubernetes operator with LLM-based root-cause analysis for on-call alerting.",
+    ],
+    homeHighlights: [
+      "Ramping up on a Spark/Iceberg lakehouse built on streamed vehicle-fleet telemetry, while building a LangChain-based AI agent over that data.",
+    ],
+  },
+  {
     title: "Graduate Research Assistant",
     organization: "UIC NLP Lab",
-    location: "Chicago, IL",
-    period: "May 2025 – Present",
+    jobLocation: "Chicago, IL",
+    period: "May 2025 – July 2026",
     summary:
       "Research spanning multilingual retrieval and sarcasm detection with a focus on experimentation, evaluation, and practical system design.",
     technologies: [
@@ -46,7 +72,7 @@ export const workExperience: ExperienceEntry[] = [
   {
     title: "Software Engineer",
     organization: "Lowe’s India",
-    location: "Bangalore, India",
+    jobLocation: "Bangalore, India",
     period: "July 2019 – August 2023",
     summary:
       "Frontend and internal platform work centered on usability, maintainability, analytics quality, and business-facing product improvements.",
@@ -65,14 +91,11 @@ export const workExperience: ExperienceEntry[] = [
       "Completed migration of CAAS data from Adobe Experience Manager to an in-house application in five months, improving internal data control and operational reliability.",
       "Streamlined web content management using an internal Content-as-a-Service application, accelerating delivery and improving operational efficiency.",
     ],
-    homeHighlights: [
-      "Worked on various frontend and internal platform projects, improving usability, maintainability, and analytics quality across the Lowe’s website.",
-    ],
   },
   {
     title: "Intern",
     organization: "I.O.C.L.",
-    location: "Haldia, India",
+    jobLocation: "Haldia, India",
     period: "May 2018 – July 2018",
     summary:
       "Early systems-oriented work focused on network simulation and infrastructure modeling.",
@@ -92,6 +115,7 @@ export const education: EducationEntry[] = [
     school: "University of Illinois Chicago",
     degree: "Master of Science in Computer Science",
     period: "Aug 2023 – May 2025",
+    homeLabel: "MS CS at UIC",
     summary:
       "Specialized in Artificial Intelligence, Machine Learning, and Natural Language Processing.",
     technologies: [

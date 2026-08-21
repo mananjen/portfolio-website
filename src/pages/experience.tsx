@@ -34,7 +34,7 @@ export function ExperiencePage() {
                       <h3 className="text-xl font-semibold">{item.title}</h3>
                       <p className="text-sm font-medium text-primary">
                         {item.organization}
-                        {item.location ? ` • ${item.location}` : ""}
+                        {item.jobLocation ? ` • ${item.jobLocation}` : ""}
                       </p>
                     </div>
 

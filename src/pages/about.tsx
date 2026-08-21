@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { SectionHeading } from "@/components/layout/section-heading"
 import { aboutContent } from "@/content/about"
+import { siteConfig } from "@/content/site"
 
 export function AboutPage() {
   return (
@@ -28,7 +29,7 @@ export function AboutPage() {
             <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-primary/20 via-transparent to-sky-400/20 blur-3xl" />
             <img
               src={profilePic}
-              alt="Manan Jain"
+              alt={siteConfig.name}
               className="relative h-[320px] w-[280px] rounded-[2rem] border border-border/70 object-cover shadow-2xl md:h-[420px] md:w-[340px]"
             />
           </div>
