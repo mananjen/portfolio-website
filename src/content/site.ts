@@ -15,8 +15,8 @@ export const siteConfig = {
   github: "https://github.com/mananjen",
   linkedin: "https://www.linkedin.com/in/mananjen",
   location: "Chicago, IL",
-  phoneDisplay: "+1 (872) 202-0800",
-  phoneHref: "tel:+18722020800",
+  phoneDisplay: "+91 82950 53791",
+  phoneHref: "tel:+918295053791",
 }
 
 export const heroContent = {
