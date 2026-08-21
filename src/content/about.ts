@@ -29,7 +29,7 @@ export const aboutContent = {
     "Thinking a lot about where modern AI is genuinely useful and where it is being overused.",
     "Interested in language models and the practical side of deploying them well.",
     "Reading Fourth Wing by Rebecca Yarros.",
-    "Exploring Chicago before leaving the USA.",
+    "Playing Divinity Original Sin 2.",
   ],
 
   gallery: [
