@@ -1,12 +1,13 @@
 import { useState } from "react"
 import { Mail, FolderGit2, UserRound, Phone, Copy, Check } from "lucide-react"
+import { TbBrandLinkedin } from "react-icons/tb"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { contactLinks, type ContactLink } from "@/content/site"
 
 function getIcon(item: ContactLink) {
   if (item.label === "GitHub") return FolderGit2
-  if (item.label === "LinkedIn") return UserRound
+  if (item.label === "LinkedIn") return TbBrandLinkedin
   if (item.kind === "phone") return Phone
   if (item.kind === "email") return Mail
   return UserRound
