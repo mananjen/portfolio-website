@@ -40,7 +40,7 @@ Feedback on round one:
 - Technical content can be detailed. Personal content should sound more casual.
 - Typography and italics are still open; no final font decision has been made.
 
-Round two is the default on opening the prototype without a variant:
+Round two explores:
 
 - `?variant=D`: Editorial blue — compact conversational introduction, a split
   research spread, two supporting stories, and a casual personal glimpse.
@@ -49,12 +49,30 @@ Round two is the default on opening the prototype without a variant:
 - `?variant=F`: Personal imprint — asymmetric research composition with a narrow
   crop from Manan's watercolor and a distinct personal section.
 
-The arrows cycle within each round. Use the round button to revisit A–C.
+The arrows cycle within each round. Use the round selector to revisit A–C.
 The viewport selector offers fluid desktop, 390px mobile, 768px tablet, and
 1280px laptop previews. Fixed-width previews shrink to fit narrower windows.
 Research images are capped at 440px wide and link to full-size versions.
 Round two was checked at actual browser widths of 390, 768, 1280, and 1920px.
 No direction has been selected.
+
+### Round three: more dramatic alternatives
+
+Manan strongly prefers F (Personal imprint) so far, but wants to explore more
+dramatic options before selecting a direction. Preserve all earlier concepts.
+
+- `?variant=G`: Two currents — a sticky personal introduction beside a separate
+  engineering column on desktop; stacked reading order on smaller screens.
+- `?variant=H`: Name in lights — oversized identity typography, a poster-like
+  research spread, and a compact two-project strip.
+- `?variant=I`: Cobalt cut — a saturated cobalt introduction, dark technical
+  spread, and an artwork-led personal close.
+
+Round three opens by default without a variant. The round selector preserves
+access to all nine concepts; F remains unchanged in round two. These alternatives
+explore structure and emphasis, not final typefaces or publication-ready copy.
+All retain restrained motion and blue palettes. Checked at browser widths of
+390, 768, 1280, and 1920px, with research images capped at 440px wide.
 
 Use the floating arrows or keyboard left/right arrows to switch concepts.
 The viewport selector constrains the design to the selected width; narrowing
