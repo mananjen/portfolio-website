@@ -7,8 +7,9 @@ Updated: 23 October 2026. These are planning notes, not implemented website chan
 - Prioritize engineers and hiring managers evaluating Manan's AI engineering work.
 - Improve project storytelling first, beginning with multilingual image–text
   retrieval without end-to-end training as the flagship story.
-- Follow the storytelling work with a dedicated, extensive web design session.
-  Typography, composition, color, imagery, motion, and mobile behavior remain open.
+- Initial design exploration has selected I (Cobalt cut) as the working direction.
+  Defer visual fine-tuning while moving on to the next planning decisions.
+  Typography, spacing, image treatment, and responsive details remain open.
 - Include a brief personal glimpse near the end of the homepage and evolve About
   into a dedicated personal page for art, books, gaming, and other interests.
   Its final name and appearance remain open.
@@ -18,6 +19,24 @@ Updated: 23 October 2026. These are planning notes, not implemented website chan
   and three different homepage compositions before choosing a direction.
 - Detailed research storytelling is paused until after this initial exploration;
   prototype wording is provisional.
+
+## Site structure discussion
+
+Agreed: the homepage gives a glimpse into Manan's life and work, with details
+kept on separate pages. Retain Projects as a listing, Experience as its own page,
+and About as the personal/outside-work page. Renaming About remains open.
+
+Contact: Manan is open to sunsetting the separate page and placing LinkedIn,
+GitHub, and email in the footer. Recommendation: do this, retain a direct email
+action near the top, and preserve old contact links with a route that leads to
+the contact section. This is a recommendation, not yet an implemented change.
+The current contact page also includes a phone link and copy-email behavior;
+decide what to retain when implementing the replacement.
+
+Project reading flow still needs one distinction resolved: retain the Projects
+listing either way, but decide whether substantial projects open dedicated detail
+pages within it or continue expanding inline. Recommendation: dedicated,
+shareable detail pages for substantial stories; short entries for smaller work.
 
 ## Local homepage design exploration
 
@@ -54,12 +73,12 @@ The viewport selector offers fluid desktop, 390px mobile, 768px tablet, and
 1280px laptop previews. Fixed-width previews shrink to fit narrower windows.
 Research images are capped at 440px wide and link to full-size versions.
 Round two was checked at actual browser widths of 390, 768, 1280, and 1920px.
-No direction has been selected.
+At the end of round two, no direction had been selected.
 
 ### Round three: more dramatic alternatives
 
-Manan strongly prefers F (Personal imprint) so far, but wants to explore more
-dramatic options before selecting a direction. Preserve all earlier concepts.
+Manan initially preferred F (Personal imprint) and requested more dramatic
+options before selecting a direction. Preserve all earlier concepts.
 
 - `?variant=G`: Two currents — a sticky personal introduction beside a separate
   engineering column on desktop; stacked reading order on smaller screens.
@@ -82,7 +101,19 @@ or the supplied OpenReview record; new project detail pages are not implemented.
 
 The prototype files are `src/pages/portfolio-prototype.{html,tsx,css}`.
 They use existing assets and no new project dependencies. The separate HTML entry
-is not included in the default production build. No design has been selected.
+is not included in the default production build.
+
+### Working selection and next discussion
+
+Manan selected I (Cobalt cut) as the working direction after round three.
+Keep A–I available; selection does not authorize discarding earlier explorations.
+Pause visual fine-tuning and additional visual variants for now.
+
+Suggested next discussion: site structure and the project reading flow, followed
+by content depth and the flagship research story. This sequence is a proposal,
+not an agreed implementation plan. Decide which content belongs on the homepage,
+how project details become shareable destinations, and how experience and personal
+content fit together before refining the selected visual direction.
 
 ## Flagship project: research publication update
 
