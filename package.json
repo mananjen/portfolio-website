@@ -22,7 +22,8 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "inject-meta": "tsx scripts/inject-meta.ts",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "prototype": "vite --open /src/pages/portfolio-prototype.html"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",
