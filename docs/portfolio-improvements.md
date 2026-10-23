@@ -25,11 +25,39 @@ Run `npm run prototype`. This opens the separate, development-only HTML entry
 at `/src/pages/portfolio-prototype.html`; the current homepage is untouched.
 
 - `?variant=A`: Personal publication — serif introduction and editorial spreads.
-- `?variant=B`: Research notebook — margin navigation and question-led entries.
+- `?variant=B`: Research notebook — rejected; retained for comparison only.
 - `?variant=C`: Quiet gallery — asymmetric introduction and image-led work.
 
+### Round two: dark blue and tighter composition
+
+Feedback on round one:
+
+- Keep A's conversational introduction; explore C's image-led composition with
+  more deliberate image sizing on laptop and desktop screens.
+- Reject the research notebook direction. A and C's pale backgrounds and overall
+  feel were not right; they also had too much whitespace.
+- Start with dark mode and a bluish palette; light mode can be explored later.
+- Technical content can be detailed. Personal content should sound more casual.
+- Typography and italics are still open; no final font decision has been made.
+
+Round two is the default on opening the prototype without a variant:
+
+- `?variant=D`: Editorial blue — compact conversational introduction, a split
+  research spread, two supporting stories, and a casual personal glimpse.
+- `?variant=E`: Understated modern — smaller sans-serif introduction, denser
+  technical information, and compact project rows.
+- `?variant=F`: Personal imprint — asymmetric research composition with a narrow
+  crop from Manan's watercolor and a distinct personal section.
+
+The arrows cycle within each round. Use the round button to revisit A–C.
+The viewport selector offers fluid desktop, 390px mobile, 768px tablet, and
+1280px laptop previews. Fixed-width previews shrink to fit narrower windows.
+Research images are capped at 440px wide and link to full-size versions.
+Round two was checked at actual browser widths of 390, 768, 1280, and 1920px.
+No direction has been selected.
+
 Use the floating arrows or keyboard left/right arrows to switch concepts.
-The viewport button constrains the design to a 390px mobile preview; narrowing
+The viewport selector constrains the design to the selected width; narrowing
 the browser also exercises the responsive layout. Variant and viewport choices
 are preserved in the URL. Links lead to existing site pages, project repositories,
 or the supplied OpenReview record; new project detail pages are not implemented.
