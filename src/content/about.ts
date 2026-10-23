@@ -28,7 +28,7 @@ export const aboutContent = {
   rightNow: [
     "Thinking a lot about where modern AI is genuinely useful and where it is being overused.",
     "Interested in language models and the practical side of deploying them well.",
-    "Reading The First Law series by Joe Abercrombie.",
+    "Reading The Licanius Trilogy by James Islington.",
     "Playing Divinity Original Sin 2.",
   ],
 
