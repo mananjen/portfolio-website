@@ -26,6 +26,29 @@ Agreed: the homepage gives a glimpse into Manan's life and work, with details
 kept on separate pages. Retain Projects as a listing, Experience as its own page,
 and About as the personal/outside-work page. Renaming About remains open.
 
+### Experience and Projects: scope
+
+Agreed: Experience remains reverse chronological, showing role context,
+responsibilities, and concrete contributions.
+
+Manan clarified the existing content split:
+
+- Industry work done as an employee is described in Experience, including the
+  projects undertaken in those roles. Do not move it into Projects by default.
+- Projects contains independently pursued work and projects undertaken during
+  bachelor's/master's study, as well as the research work.
+- Research overlaps intentionally: Experience explains the research role and
+  responsibilities; Projects explains the specific research work, implementation,
+  and results. Link these where useful rather than repeating full narratives.
+
+Keep this distinction. Projects is not meant to be an exhaustive catalog of
+everything Manan has done professionally. The same rigor applies to industry,
+research, academic, and personal work; context describes where work happened,
+not its quality. Small context labels can clarify entries without splitting
+the listing into additional pages. Such labels remain a presentation proposal.
+
+### Contact and project reading flow
+
 Contact: Manan is open to sunsetting the separate page and placing LinkedIn,
 GitHub, and email in the footer. Recommendation: do this, retain a direct email
 action near the top, and preserve old contact links with a route that leads to
@@ -33,10 +56,35 @@ the contact section. This is a recommendation, not yet an implemented change.
 The current contact page also includes a phone link and copy-email behavior;
 decide what to retain when implementing the replacement.
 
-Project reading flow still needs one distinction resolved: retain the Projects
-listing either way, but decide whether substantial projects open dedicated detail
-pages within it or continue expanding inline. Recommendation: dedicated,
-shareable detail pages for substantial stories; short entries for smaller work.
+Project reading flow is undecided: explore both inline expansion and dedicated
+detail pages using identical content, retaining the Projects listing either way.
+Manan wants enough substance to establish credibility and invite interview
+questions, without exhaustive accounts of the work. Current content may not
+justify separate pages; inline expansion is the provisional recommendation.
+
+Agreed: every project has a preview and a full brief. Featured projects appear
+on Home and Projects; the remaining projects appear on Projects. Use one
+consistent opening behavior across all projects, chosen after comparing inline
+expansion with dedicated pages. Brief length may vary without changing behavior.
+
+Agreed Projects listing order: three curated featured projects first, followed by
+the remaining projects in reverse chronological order, without duplicating the
+featured entries in that list. Featured order reflects editorial emphasis rather
+than recency. Within the remaining list, use project dates rather than the date
+a portfolio entry was edited. Exact same-year ties can retain editorial order;
+do not invent month-level precision where only years are known. Detailed date
+handling remains an implementation decision.
+
+Preserve useful detail in older work; age alone does not justify reducing it.
+Featured status determines prominence, not a project's entitlement to detail.
+Aim for roughly 30–60 seconds of reading, guided by available substance rather
+than a fixed age-based limit, with paper/code links for deeper exploration.
+Cover the problem,
+Manan's contribution, one meaningful decision or challenge, and the outcome with
+available evidence. Remove repetition and generic claims without discarding
+substantive information. Do not invent details or pad a story to fill a page. Full
+experiment histories and implementation walkthroughs are unnecessary. Compare
+the two reading formats later; neither has been selected or implemented.
 
 ## Local homepage design exploration
 
