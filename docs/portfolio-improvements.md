@@ -157,11 +157,19 @@ Manan selected I (Cobalt cut) as the working direction after round three.
 Keep A–I available; selection does not authorize discarding earlier explorations.
 Pause visual fine-tuning and additional visual variants for now.
 
-Suggested next discussion: site structure and the project reading flow, followed
-by content depth and the flagship research story. This sequence is a proposal,
-not an agreed implementation plan. Decide which content belongs on the homepage,
-how project details become shareable destinations, and how experience and personal
-content fit together before refining the selected visual direction.
+Agreed next deliverable: develop and review one credible flagship research brief,
+then compare inline expansion and a dedicated detail page using that identical
+content. Keep visual refinement paused while establishing the brief and reading
+flow. Neither reading format has been selected.
+
+Agreed: every full project brief must have a URL that opens it directly, including
+after refresh, whichever reading format wins. The URL mechanism remains an
+implementation decision; navigation state alone does not satisfy this requirement.
+
+After selecting the reading format, the recommended implementation sequence is
+one complete Cobalt cut journey from homepage preview to project brief and onward
+to paper/code/contact, followed by extending the pattern across the site. This
+implementation sequence remains a proposal, not authorization to build it yet.
 
 ## Flagship project: research publication update
 
@@ -185,22 +193,157 @@ be described separately in the eventual website copy.
 
 As described by Manan on 23 October 2026:
 
-- **Manan Jain:** owned the complete end-to-end implementation of the project.
+- **Manan Jain:** conducted the initial literature review after the research idea
+  was proposed, identified relevant related work and comparisons, investigated
+  candidate datasets and models, and wrote the entire research codebase (using
+  coding-assistant help for some functions). Produced experimental results and
+  participated in discussions of research direction. These contributions are
+  Manan's account, clarified on 23 October 2026.
 - **Usman Shahid:** a PhD student at UIC at the time; originated the research idea
   and directed the research decisions.
 - **Dr. Natalie Parde:** an NLP professor at UIC and the team's research advisor.
 
-Suggested portfolio wording, pending Manan's review:
+The supplied paper marks Usman Shahid and Manan Jain as equal contributors.
+Manan clarified that final research decisions were not solely his, but an
+implementation-only framing understates his research participation. Describe
+his actual research contributions and code ownership without making decision
+hierarchy the focus of the public brief. Do not infer paper-writing ownership.
 
-> I owned the project's end-to-end implementation, working with Usman Shahid,
-> who originated the research idea and led the research direction, under the
-> supervision of Dr. Natalie Parde at UIC.
+Approved ownership wording (23 October 2026):
 
-Keep implementation ownership distinct from research leadership. Specific
-implementation responsibilities, engineering decisions, and challenges still
-need to be elicited before expanding this into the flagship story. Do not infer
-paper-writing responsibilities or individual experiment ownership from this
-summary.
+> As an equal-contributing coauthor, I conducted the initial literature review,
+> investigated candidate datasets and models, and built the complete research
+> codebase. I produced experimental results and helped shape the research through
+> discussions with Usman Shahid and our advisor, Dr. Natalie Parde.
+
+### Sparse matching story and timing recollection
+
+Agreed: feature sparse matching as the main engineering challenge, with
+anchor-bank subsampling as a separate research finding.
+
+Manan explained that the large number of combinations made storing relative
+representations for fast matching a practical problem. He recalls a standard
+run for a model pair taking approximately 1.5 days before the change and less
+than a day afterward. This is an approximate firsthand recollection, not a
+controlled benchmark supported by saved logs. On 24 October 2026 he tentatively
+confirmed retrieval with cached embeddings as the scope and recalled retrieval
+across all nine encoder pairs taking approximately 2.5-3 days. This does not
+establish matched before/after conditions or the exact k/p configurations covered.
+Do not extrapolate the earlier per-pair estimate into a total sweep speedup.
+
+Proposed engineering paragraph, pending review:
+
+> Matching relative representations efficiently was a practical bottleneck
+> across the encoder and hyperparameter combinations. I stored the sparse image
+> representations in an inverted index, so caption-to-image matching accumulated
+> scores only over shared retained anchors, rather than comparing full
+> anchor-dimensional vectors.
+
+Keep approximate timing in background notes rather than the first public draft.
+Do not attribute reduced anchor-construction TFLOP estimates to this index.
+
+### First flagship brief draft
+
+On 24 October 2026, Manan approved this structure: research question, personal
+contribution, sparse matching challenge, main result, and a short supporting
+anchor-size finding. The following copy is proposed for review, not approved
+website content. Use identical copy for the later reading-format comparison.
+
+**Training-free multilingual image retrieval**
+
+Can frozen text and vision encoders retrieve images across languages without
+training a new multimodal model? We adapted ASIF to compare captions and images
+through their similarities to a shared bank of 1.6 million paired anchors,
+evaluating retrieval across 36 languages on XM3600.
+
+As an equal-contributing coauthor, I conducted the initial literature review,
+investigated candidate datasets and models, and built the complete research
+codebase. I produced experimental results and helped shape the research through
+discussions with Usman Shahid and our advisor, Dr. Natalie Parde.
+
+Efficient matching was a practical challenge across nine encoder pairings and
+multiple hyperparameter settings. I stored sparse image relative representations
+in an inverted index, allowing caption queries to accumulate matching scores
+only over shared retained anchors. Cached embeddings separated expensive encoder
+inference from repeated retrieval experiments.
+
+Our strongest configuration reached 57.5% Recall@10: the correct image appeared
+among the top ten results for 57.5% of evaluated captions. It remained below
+strong multimodal and translation-based baselines, while demonstrating
+multilingual transfer without training a new alignment model.
+
+An anchor-size ablation exposed a useful trade-off: 10% of the anchor bank
+achieved 52.56% Recall@10, versus 57.49% with the full bank, using one-tenth of
+the estimated anchor-relative construction compute and stored anchor embeddings.
+
+The draft intentionally omits recalled timings and publication status. The latter
+can be presented separately with paper/code links once public destinations are
+checked. The result and ablation numbers above come from different reported
+experiments; retain their respective precision and scope.
+
+### Local project reading prototype
+
+On 24 October 2026, Manan accepted the brief as a basis for exploration, while
+questioning whether it is too long for the portfolio. He authorized prototyping
+both reading formats before deciding. The copy remains provisional.
+
+Run `npm run prototype:reading` to open
+`/src/pages/project-reading-prototype.html`:
+
+- `?variant=inline`: brief expands within the Projects listing.
+- `?variant=page`: brief opens as a dedicated detail view.
+- Add `&project=multilingual-image-text-retrieval` to open the brief directly.
+- Add `&viewport=mobile` for a 390px layout constrained to the available width.
+
+Both formats use identical full copy, a shorter listing preview, and the Cobalt
+cut palette. The floating controls switch format while preserving open/closed
+state, display reading length, and copy a direct brief URL. Browser history and
+refresh restore the URL-selected view. Supporting project links lead to existing
+repositories; their detail flows are outside this comparison. A link returns to
+the preserved A-I homepage studies.
+
+The three `src/pages/project-reading-prototype.*` files are a separate local-only
+entry excluded from the default production build. No new dependencies were added.
+Validation: `npx tsc -b`, `npm run build`, and `git diff --check` passed; HTML,
+transformed React module, and research image returned HTTP 200 from Vite.
+No browser was connected for visual or interaction verification in this session.
+
+### Paper and implementation review
+
+Read the supplied `ASIF_PAPER (5).pdf` and the local research repository
+`D:/Random/npa-multilingual` on 23 October 2026. These establish the technical
+details below; they do not independently establish individual decision ownership.
+
+- Exact paper title: **Training free Cross-Modal Alignment for Multilingual Image
+  Retrieval**; authors: Usman Shahid, Manan Jain, and Natalie Parde.
+- The method adapts ASIF using frozen encoders, paired English CC12M anchors,
+  and sparse relative representations. Evaluation uses XM3600: 3,600 candidate
+  images, 36 languages, and 261,375 caption queries. The main bank has 1.6M pairs.
+- Table 1 reports 57.5% Recall@10 and 21.2% Recall@1 for the strongest RR
+  configuration selected by Recall@10 (Qwen3-Embed-8B + C-RADIOv4-H, k=800,
+  p=4). Strong dense baselines outperform it. The existing roughly 30% Recall@1
+  website claim is not supported by this table and must be reconciled or replaced.
+- `scripts/xm3600_rr_retrieval.py` implements a vectorized inverted posting index,
+  not a tree. It scores caption/image RRs through shared retained anchor
+  coordinates. Chunked top-k construction still compares queries with every
+  anchor; the inverted index optimizes the subsequent sparse matching stage.
+- Table 2 and Section 5.3 concern a separate anchor-size ablation. At 10% of the
+  bank, mean Recall@10 is 52.56% versus 57.49% at full size; estimated RR
+  construction cost is 2.68 versus 26.84 TFLOP, and stored anchor embeddings are
+  3.97 versus 39.67 GB. These are estimated construction costs, not measured
+  runtime speedups or savings attributable to the inverted index. They exclude
+  encoder inference. Use TFLOP for an operation count, not TFLOPS throughput.
+- Other supported story candidates: caching encoder outputs for repeated sweeps;
+  validating image/caption anchor order to prevent silent alignment errors;
+  seeded anchor subsampling and aggregation of repeated experiments. Which
+  decisions Manan personally proposed, and the problems that motivated them,
+  remain to be discussed before writing a first-person decision narrative.
+- No before/after timing measurements or profiling logs were found in the local
+  repository. Manan's approximate timing recollection is recorded above; do not
+  turn it into a precise or independently benchmarked speedup.
+- The manuscript links a GitHub repository, but its current public accessibility
+  was not checked. This local PDF review also does not verify acceptance or final
+  proceedings publication.
 
 ### Pending portfolio updates
 
@@ -209,8 +352,8 @@ summary.
 - Replace the stale “Manuscript and open-source release are still in preparation”
   statement in `src/content/projects.ts`. Confirm code-release status separately;
   paper acceptance does not establish that the code has been released.
-- Verify the paper's exact title, author list, method, evaluation setting,
-  results, baselines, and limitations before rewriting the case study.
+- Use the reviewed paper details above when drafting; check public publication
+  and code availability separately before publishing the brief.
 - Expand the contribution summary above with concrete implementation examples.
 - Reconcile the existing “roughly 30% Recall@1 on XM3600” claim with the paper;
   do not assume it is still the best or final result.
