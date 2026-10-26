@@ -24,7 +24,11 @@
     "inject-meta": "tsx scripts/inject-meta.ts",
     "deploy": "npm run build && gh-pages -d dist",
     "prototype": "vite --open /src/pages/portfolio-prototype.html",
-    "prototype:reading": "vite --open /src/pages/project-reading-prototype.html"
+    "prototype:reading": "vite --open /src/pages/project-reading-prototype.html",
+    "dev:v3": "npm --prefix v3 run dev",
+    "check:v3": "npm --prefix v3 run check",
+    "build:v3": "npm --prefix v3 run build",
+    "preview:v3": "npm --prefix v3 run preview"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",

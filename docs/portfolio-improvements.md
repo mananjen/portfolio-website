@@ -1,9 +1,15 @@
 # Portfolio improvement planning
 
-Updated: 23 October 2026. These are planning notes, not implemented website changes.
+Updated: 26 October 2026. These are planning notes, not implemented website changes.
 
 ## Agreed direction
 
+- V3 pages must support routine updates through typed content exports: copy,
+  roles, projects, images, links, and editorial ordering belong in `src/content`.
+  Components own presentation and interaction. New layouts or capabilities may
+  require type and component changes; adding entries using existing fields must
+  remain a content-only edit. Publishing stays build/deploy based. This is a
+  requirement for new v3 work, not a prerequisite to retrofit the current site.
 - Prioritize engineers and hiring managers evaluating Manan's AI engineering work.
 - Improve project storytelling first, beginning with multilingual image–text
   retrieval without end-to-end training as the flagship story.
@@ -21,6 +27,38 @@ Updated: 23 October 2026. These are planning notes, not implemented website chan
   prototype wording is provisional.
 
 ## Site structure discussion
+
+### Connected v3 prototype and technology exploration
+
+Agreed on 26 October 2026: connect the Cobalt cut homepage preview to the
+Projects listing with the selected short inline brief open. Keep direct
+paper/code links available. Explore this as a local connected prototype before
+production v3 implementation, preserving the earlier studies and deferring
+visual polish.
+
+The v2/current deployed stack is not a constraint for v3. Rebuilding the
+implementation or adapting existing pages are both acceptable.
+
+Agreed on 26 October 2026: try Astro + TypeScript, component-scoped custom CSS,
+shared style variables, and small browser scripts, targeting GitHub Pages.
+Build Home and Projects as a working slice: more than a throwaway prototype,
+without constructing the complete website shell. React remains an explicit
+fallback if Astro feels unfamiliar to maintain. This is an evaluation choice,
+not a commitment to migrate the entire portfolio.
+
+The slice lives in `v3/`, with independent dependencies and output. Install with
+`npm install --prefix v3`, then run `npm run dev:v3` from the repository root.
+Open `/portfolio-website/` on the printed local address. `npm run build:v3`
+checks Astro/TypeScript and produces `v3/dist`. Existing React and A–I study
+commands remain available; the deploy command still targets the current site.
+See `v3/README.md` for editing locations and a short React-to-Astro comparison.
+
+Home previews link to `/projects/?project=<slug>` under the repository base path.
+Projects uses native disclosures enhanced with URL/history and focus handling.
+The flagship uses the compact draft; supporting briefs retain existing copy
+pending editorial review. Only Home and Projects are implemented; the personal
+link still leads to the current About page. Acceptance of visual details and
+browser interaction remains pending a connected-browser or manual review.
 
 Agreed: the homepage gives a glimpse into Manan's life and work, with details
 kept on separate pages. Retain Projects as a listing, Experience as its own page,

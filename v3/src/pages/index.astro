@@ -1,0 +1,87 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Tags from "../components/Tags.astro"
+import { home, projectLabels } from "../content/site"
+import { featuredProjects } from "../content/projects"
+import { briefUrl, pageUrl } from "../lib/links"
+const [lead, ...supporting] = featuredProjects
+---
+<Layout page="home">
+  <section class="hero">
+    <div class="container intro">
+      <div>
+        <p class="eyebrow">{home.eyebrow}</p>
+        <h1>{home.headline.map(line => <span>{line}</span>)}</h1>
+        <p class="intro-copy">{home.intro}</p>
+        <a class="text-link" href="#work">{home.workCta}</a>
+      </div>
+      <figure class="portrait"><img src={home.portrait.src} alt={home.portrait.alt} width="180" height="215" fetchpriority="high" /><figcaption>{home.portrait.caption}</figcaption></figure>
+    </div>
+  </section>
+  <div class="container">
+    <section id="work" class="work">
+      <div class="section-line"><p class="eyebrow">{home.featuredLabel}</p><a class="text-link" href={pageUrl("projects/")}>{home.allProjects}</a></div>
+      {lead && <article class="lead">
+        <div><p class="eyebrow">{lead.category} / {lead.timeframe}</p><h2>{lead.title}</h2><p class="muted">{lead.summary}</p>{lead.role && <p class="role">{lead.role}</p>}<Tags tags={lead.technologies} /><div class="actions"><a class="text-link" href={briefUrl(lead.slug)} aria-label={projectLabels.readLabel(lead.title)}>{projectLabels.read} →</a>{lead.links.map(link => <a class="text-link" href={link.href} target="_blank" rel="noreferrer">{link.label} ↗</a>)}</div></div>
+        {lead.image && <figure class="research"><a href={lead.image} target="_blank" rel="noreferrer"><img src={lead.image} alt={projectLabels.imageAlt(lead.title)} /></a><figcaption>{projectLabels.image}</figcaption></figure>}
+      </article>}
+      {supporting.length > 0 && <div class="supporting"><p class="eyebrow">{home.moreLabel}</p>{supporting.map((project, index) => <article><span class="number" aria-hidden="true">{String(index + 2).padStart(2, "0")}</span><div><h3><a href={briefUrl(project.slug)}>{project.title}</a></h3><p>{project.summary}</p><div class="actions"><a class="text-link" href={briefUrl(project.slug)} aria-label={projectLabels.readLabel(project.title)}>{projectLabels.read} →</a>{project.links.map(link => <a class="text-link" href={link.href} target="_blank" rel="noreferrer">{link.label} ↗</a>)}</div></div></article>)}</div>}
+    </section>
+    <aside class="personal"><img src={home.personal.image} alt={home.personal.alt} loading="lazy" /><div><p class="eyebrow">{home.personal.eyebrow}</p><h2>{home.personal.title}</h2><p class="muted">{home.personal.description}</p><a class="text-link" href={home.personal.link.href}>{home.personal.link.label}</a></div></aside>
+  </div>
+</Layout>
+<script>
+  import { pageUrl } from "../lib/links"
+  // Existing v2 bookmarks for the pages supported by this slice keep working.
+  const legacy = location.hash.slice(1)
+  if (legacy === "/projects" || legacy.startsWith("/projects?")) {
+    const query = legacy.includes("?") ? legacy.slice(legacy.indexOf("?")) : ""
+    location.replace(`${pageUrl("projects/")}${query}`)
+  } else if (legacy === "/contact") {
+    location.replace(`${pageUrl()}#contact`)
+  }
+</script>
+<style>
+  .hero { background: var(--cobalt); }
+  .intro { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 50px; align-items: center; padding-block: 35px 62px; }
+  .hero .eyebrow, .hero .text-link { color: #e0ebff; }
+  h1 { margin-block: 18px 24px; }
+  h1 span { display: block; }
+  .intro-copy { color: #e0e9ff; max-width: 470px; margin-bottom: 24px; font-size: 16px; }
+  .portrait { border-left: 1px solid #aac5ff88; padding-left: 25px; transform: rotate(3deg); }
+  .portrait img { width: 180px; height: 215px; object-fit: cover; }
+  figcaption { font: 10px/1.7 ui-monospace, monospace; margin-top: 13px; }
+  .work { padding-top: 30px; scroll-margin-top: 24px; }
+  .section-line { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .lead { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 52px; padding: 32px 0; }
+  .lead h2 { margin: 16px 0 20px; }
+  .lead .muted { font-size: 15px; max-width: 450px; }
+  .role { font-size: 12px; color: var(--accent); margin-top: 18px; }
+  .research { max-width: 440px; justify-self: end; }
+  .research a { display: block; padding: 15px; background: #dce6f6; }
+  .research img { max-height: 280px; object-fit: contain; }
+  .research figcaption { color: var(--muted); }
+  .supporting { padding-top: 12px; }
+  .supporting > p { margin-bottom: 16px; }
+  .supporting article { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 22px; padding: 24px 0; border-top: 1px solid var(--line); }
+  .number { font: 25px/1.3 Georgia, serif; color: var(--accent); }
+  .supporting h3 a { text-decoration: none; }
+  .supporting p { font-size: 14px; color: var(--muted); max-width: 750px; margin-block: 10px 14px; }
+  .personal { display: grid; grid-template-columns: 1fr 1fr; margin-top: 30px; background: var(--surface); }
+  .personal > img { height: 300px; width: 100%; object-fit: cover; }
+  .personal > div { padding: 30px; align-self: center; }
+  .personal h2 { font: 32px/1.15 Georgia, serif; margin: 13px 0; }
+  .personal .muted { font-size: 14px; margin-bottom: 18px; }
+  @media (max-width: 700px) {
+    .intro { grid-template-columns: 1fr; gap: 28px; padding-block: 22px 36px; }
+    .portrait { transform: none; border: 0; padding: 0; display: flex; gap: 18px; align-items: center; }
+    .portrait img { width: 65px; height: 78px; }
+    .portrait figcaption { margin: 0; }
+    .lead { grid-template-columns: 1fr; gap: 28px; }
+    .research { justify-self: start; }
+    .supporting article { grid-template-columns: 25px minmax(0, 1fr); gap: 14px; }
+    .personal { grid-template-columns: 1fr; }
+    .personal > img { height: 190px; }
+    .personal > div { padding: 24px; }
+  }
+</style>
