@@ -1,9 +1,14 @@
 # Portfolio improvement planning
 
-Updated: 26 October 2026. These are planning notes, not implemented website changes.
+Updated: 26 October 2026. These notes record decisions, exploration history,
+and the current implementation scope.
 
 ## Agreed direction
 
+- Build v3 with React + TypeScript and Vite, using CSS modules and shared style
+  variables. Astro was evaluated and rejected because Manan finds React easier
+  to maintain. The Astro evaluation is superseded; see
+  [ADR 0001](adr/0001-react-typescript-for-v3.md).
 - V3 pages must support routine updates through typed content exports: copy,
   roles, projects, images, links, and editorial ordering belong in `src/content`.
   Components own presentation and interaction. New layouts or capabilities may
@@ -28,7 +33,28 @@ Updated: 26 October 2026. These are planning notes, not implemented website chan
 
 ## Site structure discussion
 
-### Connected v3 prototype and technology exploration
+### Current v3 implementation
+
+Manan approved beginning the real React implementation on 26 October 2026.
+The first implemented journey is Cobalt cut Home → Projects → URL-selected
+short inline brief → paper/code/contact. Typed content, assets, and approved
+copy from the Astro evaluation carry forward into React components.
+
+The implementation lives in `v3/`. Install with `npm install --prefix v3`, then
+run `npm run dev:v3` from the repository root. `npm run check:v3` checks
+TypeScript; `npm run build:v3` checks and builds into `v3/dist`. The base path
+is `/portfolio-website/`, and a direct brief URL is
+`/portfolio-website/#/projects?project=<slug>`. Hash routing supports refresh
+on GitHub Pages without server rewrites.
+
+Home and Projects are the first production components. About/Experience,
+remaining project copy review, and final visual refinement follow separately.
+The personal link still leads to the current About page. The existing React
+site and A–I study commands remain available; deployment still targets the
+current site until v3 is ready. No deployment is authorized by this decision.
+See `v3/README.md` for the editing map and local validation commands.
+
+### Earlier connected prototype and technology exploration (superseded)
 
 Agreed on 26 October 2026: connect the Cobalt cut homepage preview to the
 Projects listing with the selected short inline brief open. Keep direct
@@ -46,19 +72,10 @@ without constructing the complete website shell. React remains an explicit
 fallback if Astro feels unfamiliar to maintain. This is an evaluation choice,
 not a commitment to migrate the entire portfolio.
 
-The slice lives in `v3/`, with independent dependencies and output. Install with
-`npm install --prefix v3`, then run `npm run dev:v3` from the repository root.
-Open `/portfolio-website/` on the printed local address. `npm run build:v3`
-checks Astro/TypeScript and produces `v3/dist`. Existing React and A–I study
-commands remain available; the deploy command still targets the current site.
-See `v3/README.md` for editing locations and a short React-to-Astro comparison.
-
-Home previews link to `/projects/?project=<slug>` under the repository base path.
-Projects uses native disclosures enhanced with URL/history and focus handling.
-The flagship uses the compact draft; supporting briefs retain existing copy
-pending editorial review. Only Home and Projects are implemented; the personal
-link still leads to the current About page. Acceptance of visual details and
-browser interaction remains pending a connected-browser or manual review.
+The earlier Astro slice generated static pages and enhanced native disclosures
+with URL/history behavior. Its flagship used the compact draft; supporting
+briefs carried existing copy. That implementation has now been replaced by the
+React implementation above. Earlier A–I visual and reading studies remain.
 
 Agreed: the homepage gives a glimpse into Manan's life and work, with details
 kept on separate pages. Retain Projects as a listing, Experience as its own page,

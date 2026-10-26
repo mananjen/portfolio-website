@@ -413,5 +413,9 @@ export const projects: Project[] = [
 ]
 
 export const featuredProjects = projects.filter(project => project.featured)
+export const homeProjects = {
+  lead: featuredProjects[0],
+  supporting: featuredProjects.slice(1),
+}
 export const additionalProjects = projects.filter(project => !project.featured)
   .sort((a, b) => b.year - a.year)

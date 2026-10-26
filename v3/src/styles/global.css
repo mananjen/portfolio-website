@@ -34,5 +34,7 @@
   .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
   .text-link { color: var(--accent); font-size: 14px; }
   .muted { color: var(--muted); }
+  .page-message { padding-block: 60px; }
+  .page-message p { margin-block: 24px; }
   ::selection { background: #a5c9ff; color: #101d34; }
 }

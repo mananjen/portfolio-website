@@ -1,83 +1,87 @@
-# V3: Home + Projects in Astro
+# V3: React + TypeScript
 
-This is a working two-page slice for evaluating Astro, not the replacement for
-the deployed portfolio yet. It uses the Cobalt cut direction, static HTML,
-TypeScript content, scoped CSS, and a small script for project briefs.
+V3 is the new portfolio implementation, starting with the Cobalt cut Home and
+Projects journey. It uses React, TypeScript, Vite, CSS modules, and typed content.
+The Astro evaluation was replaced after owner review; see
+[ADR 0001](../docs/adr/0001-react-typescript-for-v3.md).
 
 From the repository root:
 
 ```sh
 npm install --prefix v3
 npm run dev:v3
+npm run check:v3
+npm --prefix v3 test
 npm run build:v3
 npm run preview:v3
 ```
 
-Open `http://localhost:4321/portfolio-website/`. The repository base path is used
-locally too, so links exercise the same paths required by GitHub Pages. A direct
-brief link is `/portfolio-website/projects/?project=multilingual-image-text-retrieval`.
-The build writes `v3/dist`, separately from the existing React build. The current
-deploy command still publishes v2. No deployment or GitHub settings are changed.
-Astro dependencies and their lockfile live in `v3`, keeping the React toolchain
-independent. Use Node 22.23.4 or newer (this slice was checked with Node 24).
+Open `http://127.0.0.1:4321/portfolio-website/`. A direct brief link is:
+`http://127.0.0.1:4321/portfolio-website/#/projects?project=multilingual-image-text-retrieval`.
+Stop the dev server with Ctrl+C before starting the production preview, since
+both use port 4321. The server reports a port conflict rather than silently
+switching to another port.
 
 ## Where to edit
 
 | Change | File |
 | --- | --- |
-| Homepage copy, navigation, contact links, page labels | `src/content/site.ts` |
+| Homepage copy, navigation, contact links, labels | `src/content/site.ts` |
+| Page titles and descriptions | `src/content/meta.ts` |
 | Add a project, edit its brief, reorder featured work | `src/content/projects.ts` |
-| Homepage composition | `src/pages/index.astro` |
-| Projects composition | `src/pages/projects.astro` |
-| Shared project rendering | `src/components/ProjectCard.astro` |
+| Homepage composition | `src/pages/HomePage.tsx` |
+| Projects selection and URL state | `src/pages/ProjectsPage.tsx` |
+| Shared project rendering | `src/components/ProjectCard.tsx` |
+| Header/footer and shared navigation | `src/components/Layout.tsx` |
 | Fonts, colors, shared spacing | `src/styles/global.css` |
-| URL, history, and focus behavior | `src/scripts/project-briefs.ts` |
+| Component styles | The adjacent `*.module.css` file |
+| Routes, page metadata, route focus/scroll | `src/App.tsx` |
 
-Paths in this table are relative to `v3`. Array order determines featured order;
-the rest sort by `year`, preserving array order for ties. Marking a project
-`featured` adds it to Home and the featured group on Projects. The first featured
-project gets the large homepage treatment. Keep `slug` stable: it is the public
-brief identifier. Every project has a `brief` array and optional artifact links.
+Paths above are relative to `v3`. Adding a project with existing fields only
+requires editing `src/content/projects.ts`. Array order controls featured order;
+other projects sort by project `year`, with stable array order for ties.
+`featured` adds a project to Home and the featured group on Projects. The first
+featured project gets the large homepage treatment. Keep each `slug` stable and
+unique: it is the public brief identifier. Each project has a `brief` array and
+optional artifact links. Content and layout stay separate.
 
-The content files use plain TypeScript objects and asset URL imports, so they can
-also feed React components. Current role/name reuse `../src/content/meta.ts` from
-the repository, and images reuse existing assets. V3 project records are an
-independent evaluation copy; editing them does not alter v2. The flagship brief
-uses the reviewed compact draft. Other narratives carry over existing content
-and still need editorial review before launch.
+`ProjectsPage` derives the open project from React Router's search parameters.
+`ProjectCard` receives `expanded` and `onToggle` props. Opening, closing, refresh,
+and Back/Forward share the same URL state. Ordinary React effects handle focus
+and scroll. Hash routes keep direct links working on GitHub Pages. The Skip link
+and in-page section links move focus without losing the current route.
 
-## Coming from React
+## Scope and migration
 
-An `.astro` file has three familiar parts:
+Home and Projects are the first production pages. About/Experience and final
+copy/design work remain for subsequent changes. The personal link currently
+opens the deployed About page; v3's old `/contact` route leads to its footer.
+Unknown routes show a recovery page. Earlier A-I and reading studies remain
+available through the root prototype scripts.
 
-```astro
----
-// Runs at build time. Import data and compute the props for this page here.
-import { home } from "../content/site"
----
-<h1>{home.headline.map(line => <span>{line}</span>)}</h1>
-<style>
-  /* Scoped to this component. Global tokens live in global.css. */
-  h1 span { display: block; }
-</style>
-```
+V3 dependencies, lockfile, and output are separate from the current site.
+`npm run build:v3` writes `v3/dist`; the existing build/deploy commands still
+build/publish the current site. No hosting settings have changed. The GitHub
+Pages base path is exercised in development as well as the production build.
+Switch deployment after the remaining pages and content are ready for launch.
 
-Use `class` instead of `className`; expressions and `.map()` look much like JSX.
-Component inputs come from `Astro.props`. There is no React render loop or
-`useState` in a static template. A `<script>` handles browser interactions, and
-Astro bundles its TypeScript automatically. Here, native `<details>` controls
-expansion even without JavaScript. The browser script adds one-open-at-a-time
-behavior, URL synchronization, and focus/scroll handling.
+Current role/name reuse the repository's `src/content/meta.ts`; artwork reuses
+existing assets. V3 project records are maintained separately from v2 during the
+migration. The flagship uses the reviewed compact draft; supporting narratives
+carry existing copy and still need editorial review.
 
-## Scope and verification
+The production HTML gets homepage metadata from the content exports. React
+updates page titles/descriptions after navigation. This is a client-rendered
+site; social crawlers that do not run JavaScript receive the homepage metadata,
+including when a project brief URL is shared.
 
-Only Home and Projects are built. The personal link goes to the existing About
-page; other pages, light mode, deployment automation, and final copy are deferred.
-Old `#/projects` and `#/contact` bookmarks are recognized by this slice's homepage.
-Full legacy-route migration belongs to the eventual site replacement.
+## Validation
 
-Before adopting this slice, try the flagship and a supporting project from Home,
-reload the selected brief, use Back/Forward, open another brief, and operate its
-summary with the keyboard. Check narrow and wide layouts and artwork sizing.
-Build/type checks and served-route checks can run without a browser; visual and
-interaction acceptance still need a connected browser or a manual review.
+Run `npm run check:v3`, `npm --prefix v3 test`, and `npm run build:v3`.
+The small app-level suite checks Home-to-brief navigation, direct selection,
+one-open behavior, Back/Forward, focus, Skip, and the legacy contact route using
+React Router and an in-memory DOM. It does not measure browser layout.
+In a browser, open a flagship and
+supporting brief from Home, reload, use Back/Forward, open/close another brief,
+and test the toggle and Skip link with the keyboard. Check narrow and wide
+layouts. Build and HTTP/module checks do not replace visual/interaction review.

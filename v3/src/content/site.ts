@@ -1,18 +1,18 @@
 import portrait from "../../../src/assets/temp.jpg?url"
 import painting from "../../../src/assets/art1.jpg?url"
 import { currentRole, siteName } from "../../../src/content/meta"
+import { pageMeta } from "./meta"
 
 const email = "mailto:mananjen@gmail.com"
 const location = "Hyderabad, India"
 
 export const site = {
   name: siteName,
-  title: `${siteName} — Machine learning & research`,
-  description: "Language, vision, and the engineering around them. Selected research and projects by Manan Jain.",
+  ...pageMeta.home,
   email,
   nav: [
-    { label: "Home", path: "" },
-    { label: "Projects", path: "projects/" },
+    { label: "Home", path: "/" },
+    { label: "Projects", path: "/projects" },
   ],
   hello: "Say hello ↗",
   skip: "Skip to content",
@@ -49,8 +49,7 @@ export const home = {
 }
 
 export const projectPage = {
-  title: `Projects — ${siteName}`,
-  description: "Research and independent work in language, vision, and applied AI. Explore the work, decisions, and results.",
+  ...pageMeta.projects,
   eyebrow: "Selected work",
   headline: ["Questions explored.", "Systems built."],
   featuredLabel: "Featured projects",
@@ -65,4 +64,11 @@ export const projectLabels = {
   imageAlt: (title: string) => `Overview of ${title}`,
   readLabel: (title: string) => `Read brief: ${title}`,
   briefLabel: (title: string) => `Inside the project: ${title}`,
+}
+
+export const notFound = {
+  title: "That page isn’t here yet.",
+  description: "The new portfolio is taking shape. Explore the work or head back home.",
+  home: "Back to Home",
+  projects: "Explore Projects",
 }

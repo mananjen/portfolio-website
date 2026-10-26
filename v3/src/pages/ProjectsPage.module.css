@@ -1,0 +1,6 @@
+.intro { padding-block: 44px 48px; }
+.intro h1 { margin-block: 18px 24px; font-size: clamp(42px, 5.5vw, 68px); }
+.intro h1 span { display: block; }
+.intro > p:last-child { max-width: 600px; }
+.listing + .listing { margin-top: 36px; }
+.listing > p { margin-bottom: 18px; }
