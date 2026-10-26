@@ -283,6 +283,31 @@ experiments; retain their respective precision and scope.
 
 ### Local project reading prototype
 
+#### Revision: shorter inline direction
+
+After comparing the first study, Manan preferred inline expansion provided the
+brief is shorter. He approved trying approximately 80-120 words, with technology
+keywords visible before expansion and direct artifact links. Dedicated pages are
+deferred; paper/code artifacts provide deeper reading. He requested borrowing
+useful aspects of the existing Projects implementation.
+
+The revised prototype defaults to `?variant=compact`: a roughly 100-word flagship
+expansion organized around contribution, engineering decision, and result, with
+Python/PyTorch/multilingual embeddings/sparse retrieval/ASIF tags visible while
+collapsed. The paper link is also visible while collapsed. No unverified code
+release link has been added to the flagship.
+
+Borrowed existing patterns: three featured entries, compact additional-project
+cards, category/date metadata, technology tags, direct artifact links, and one
+URL-selected expansion at a time. The additional list uses project years in
+reverse chronological order. Other projects reuse current content and have not
+yet received the flagship's contribution/outcome review. Their expansions show
+existing challenge/approach content and a review note rather than inventing claims.
+
+The earlier long inline (`?variant=inline`) and dedicated-page (`?variant=page`)
+options remain available through the study controls for reference. New brief
+links default to the shorter direction. Production Projects remains unchanged.
+
 On 24 October 2026, Manan accepted the brief as a basis for exploration, while
 questioning whether it is too long for the portfolio. He authorized prototyping
 both reading formats before deciding. The copy remains provisional.
