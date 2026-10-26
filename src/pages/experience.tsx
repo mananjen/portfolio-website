@@ -1,26 +1,22 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { SectionHeading } from "@/components/layout/section-heading"
-import { education, workExperience } from "@/content/experience"
+import { education, workExperience, experienceContent } from "@/content/experience"
 
 export function ExperiencePage() {
   return (
     <div className="space-y-14 md:space-y-20">
       <section className="space-y-4">
-        <SectionHeading
-          eyebrow="Experience"
-          title="Work, research, and education with detail."
-          description="This page focuses on the experiences that shaped how I work: production engineering, applied research, and a strong academic foundation in AI, NLP, and systems."
-        />
+        <SectionHeading {...experienceContent.intro} />
       </section>
 
       <section className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm font-medium tracking-[0.18em] text-muted-foreground uppercase">
-            Work Experience
+            {experienceContent.workEyebrow}
           </p>
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            Research and engineering experience across industry and academia.
+            {experienceContent.workTitle}
           </h2>
         </div>
 
@@ -75,10 +71,10 @@ export function ExperiencePage() {
       <section className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm font-medium tracking-[0.18em] text-muted-foreground uppercase">
-            Education
+            {experienceContent.educationEyebrow}
           </p>
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            Academic foundation in computer science, AI, and applied systems work.
+            {experienceContent.educationTitle}
           </h2>
         </div>
 

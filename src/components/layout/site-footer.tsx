@@ -1,4 +1,4 @@
-import { contactLinks, siteConfig } from "@/content/site"
+import { contactLinks, siteConfig, footerContent } from "@/content/site"
 
 export function SiteFooter() {
   return (
@@ -9,7 +9,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} {siteConfig.name}
           </p>
           <p className="text-sm text-muted-foreground">
-            Built with React, Vite, Tailwind, and shadcn/ui.
+            {footerContent.credit}
           </p>
         </div>
 

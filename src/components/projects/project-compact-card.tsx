@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { type Project } from "@/content/projects"
+import { type Project, projectCardContent } from "@/content/projects"
 
 type ProjectCompactCardProps = {
   project: Project
@@ -51,7 +51,7 @@ export function ProjectCompactCard({
         </div>
 
         <Button type="button" variant="ghost" className="px-0" onClick={onLearnMore}>
-          Learn more
+          {projectCardContent.expand}
           <ArrowRight className="ml-2 size-4" />
         </Button>
       </CardContent>

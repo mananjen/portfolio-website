@@ -1,9 +1,8 @@
 import { ExternalLink } from "lucide-react"
-import profilePic from "@/assets/temp.jpg"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { SectionHeading } from "@/components/layout/section-heading"
-import { aboutContent } from "@/content/about"
+import { aboutContent, aboutPageContent } from "@/content/about"
 import { siteConfig } from "@/content/site"
 
 export function AboutPage() {
@@ -11,11 +10,7 @@ export function AboutPage() {
     <div className="space-y-14 md:space-y-20">
       <section className="grid items-start gap-10 lg:grid-cols-[1.15fr_0.85fr]">
         <div className="space-y-5">
-          <SectionHeading
-            eyebrow="About"
-            title="A little more about me, outside the résumé version."
-            description="This page is the more personal side of the portfolio — a bit about where I come from, what I enjoy, and what I’ve been into lately."
-          />
+          <SectionHeading {...aboutPageContent.intro} />
 
           <div className="max-w-3xl space-y-4 text-base leading-7 text-muted-foreground md:text-lg">
             {aboutContent.intro.map((paragraph) => (
@@ -28,7 +23,7 @@ export function AboutPage() {
           <div className="relative">
             <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-primary/20 via-transparent to-sky-400/20 blur-3xl" />
             <img
-              src={profilePic}
+              src={siteConfig.profileImage}
               alt={siteConfig.name}
               className="relative h-[320px] w-[280px] rounded-[2rem] border border-border/70 object-cover shadow-2xl md:h-[420px] md:w-[340px]"
             />
@@ -39,10 +34,10 @@ export function AboutPage() {
       <section className="space-y-6">
         <div className="space-y-3">
           <p className="text-sm font-medium tracking-[0.18em] text-muted-foreground uppercase">
-            Outside of code
+            {aboutPageContent.artEyebrow}
           </p>
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            Art is one of the ways I like to slow down and make something for its own sake.
+            {aboutPageContent.artTitle}
           </h2>
           <p className="max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
             {aboutContent.artIntro}
@@ -78,7 +73,7 @@ export function AboutPage() {
               target="_blank"
               rel="noreferrer"
             >
-              View more on Instagram
+              {aboutPageContent.instagramCta}
               <ExternalLink className="ml-2 size-4" />
             </a>
           </Button>
@@ -90,7 +85,7 @@ export function AboutPage() {
           <CardContent className="p-6 md:p-8">
             <div className="space-y-4">
               <p className="text-sm font-medium tracking-[0.18em] text-muted-foreground uppercase">
-                A few things about me
+                {aboutPageContent.factsTitle}
               </p>
 
               <ul className="space-y-3 pl-5 text-sm leading-6 text-muted-foreground md:text-base">
@@ -108,7 +103,7 @@ export function AboutPage() {
           <CardContent className="p-6 md:p-8">
             <div className="space-y-4">
               <p className="text-sm font-medium tracking-[0.18em] text-muted-foreground uppercase">
-                Right now
+                {aboutPageContent.rightNowTitle}
               </p>
 
               <ul className="space-y-3 pl-5 text-sm leading-6 text-muted-foreground md:text-base">

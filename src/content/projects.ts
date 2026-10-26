@@ -29,6 +29,7 @@ export type Project = {
   timeframe: string
 }
 
+// Array order controls display order within featured and additional projects.
 export const projects: Project[] = [
   {
     title: "Multilingual Image–Text Retrieval Without End-to-End Training",
@@ -401,4 +402,31 @@ export function getProjectLinks(project: Project): ProjectLink[] {
   }
 
   return links
+}
+
+export const projectsContent = {
+  eyebrow: "Projects",
+  title:
+    "Selected work across AI research, NLP, computer vision, VR, web systems, and applied machine learning.",
+  description:
+    "Every project can expand into a more detailed case-study view, to give a deeper look at the motivation, process, and impact of the work. Click on any project card to explore!",
+  featuredEyebrow: "Featured Projects",
+  featuredTitle: "The projects I’d want someone to remember first.",
+  additionalEyebrow: "Additional Projects",
+  additionalTitle: "Some more projects that I'm proud of, feel free to explore!",
+}
+
+export const projectCardContent = {
+  overview: "Overview",
+  impact: "Why it matters",
+  collapse: "Show less",
+  expand: "Learn more",
+  challenge: "Challenge",
+  approach: "Technical approach",
+  outcomes: "Outcomes",
+  viewDetailsLabel: (title: string) => `View details for ${title}`,
+  defaultApproach: (technologies: string[]) => [
+    `Built using ${technologies.slice(0, 4).join(", ")}.`,
+    "Focused on turning the core idea into a usable end-to-end implementation.",
+  ],
 }

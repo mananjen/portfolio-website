@@ -1,3 +1,4 @@
+import profileImage from "@/assets/temp.jpg"
 import { featuredProjects } from "@/content/projects"
 import { education, homeExperienceHighlights, workExperience } from "@/content/experience"
 import { currentRole, siteName } from "@/content/meta"
@@ -11,6 +12,7 @@ export type ContactLink = {
 
 export const siteConfig = {
   name: siteName,
+  profileImage,
   email: "mananjen@gmail.com",
   github: "https://github.com/mananjen",
   linkedin: "https://www.linkedin.com/in/mananjen",
@@ -71,3 +73,51 @@ export const contactLinks: ContactLink[] = [
     kind: "external",
   },
 ]
+
+export const homeContent = {
+  featured: {
+    eyebrow: "Featured Work",
+    title: "A few projects that best represent how I like to build.",
+    description:
+      "Selected projects that combine technical depth, practical constraints, and clear product thinking.",
+  },
+  experience: {
+    eyebrow: "Experience Snapshot",
+    title: "Research and engineering work with measurable outcomes.",
+    description:
+      "A quick view of experiences that represent the mix of applied research and production engineering behind the portfolio.",
+  },
+  projectCta: { label: "View details", href: "/projects" },
+  experienceCta: { label: "View Full Experience", href: "/experience" },
+  contactCta: { label: "Open Contact Page", href: "/contact" },
+}
+
+export const contactContent = {
+  call: "Call",
+  open: "Open",
+  eyebrow: "Contact",
+  title: "Easy ways to reach me.",
+  description:
+    "The easiest way to reach me is by email or LinkedIn. I typically respond within a day or two, but it may take longer during busy periods. I look forward to connecting with you!",
+  compose: "Compose",
+  copied: "Copied",
+  copy: "Copy",
+}
+
+export const navItems = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/projects", label: "Projects" },
+  { to: "/experience", label: "Experience" },
+  { to: "/contact", label: "Contact" },
+]
+
+export const navigationContent = {
+  openMenu: "Open menu",
+  title: "Navigate",
+  github: "GitHub",
+}
+
+export const footerContent = {
+  credit: "Built with React, Vite, Tailwind, and shadcn/ui.",
+}

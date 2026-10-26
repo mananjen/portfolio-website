@@ -1,7 +1,6 @@
 import { ArrowRight, Mail, ExternalLink } from "lucide-react"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import profilePic from "@/assets/temp.jpg"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { SectionHeading } from "@/components/layout/section-heading"
@@ -9,10 +8,11 @@ import {
   contactLinks,
   experienceHighlights,
   heroContent,
+  homeContent,
   homeFeaturedProjects,
   siteConfig,
 } from "@/content/site"
-import { getProjectLinks } from "@/content/projects"
+import { getProjectLinks, projectCardContent } from "@/content/projects"
 
 export function HomePage() {
   return (
@@ -75,7 +75,7 @@ export function HomePage() {
           <div className="relative">
             <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-primary/20 via-transparent to-sky-400/20 blur-3xl" />
             <img
-              src={profilePic}
+              src={siteConfig.profileImage}
               alt={siteConfig.name}
               className="relative h-[320px] w-[280px] rounded-[2rem] border border-border/70 object-cover shadow-2xl md:h-[420px] md:w-[340px]"
             />
@@ -84,11 +84,7 @@ export function HomePage() {
       </section>
 
       <section className="space-y-8">
-        <SectionHeading
-          eyebrow="Featured Work"
-          title="A few projects that best represent how I like to build."
-          description="Three recent projects that combine technical depth, practical constraints, and clear product thinking."
-        />
+        <SectionHeading {...homeContent.featured} />
 
         <div className="grid gap-6 lg:grid-cols-3">
           {homeFeaturedProjects.map((project) => {
@@ -100,12 +96,12 @@ export function HomePage() {
                 className="relative overflow-hidden border-border/70 bg-card/80 transition-transform duration-200 hover:-translate-y-1 cursor-pointer"
               >
                 <Link
-                  to="/projects"
+                  to={homeContent.projectCta.href}
                   state={{
                     expandProject: project.slug,
                     preserveScroll: true,
                   }}
-                  aria-label={`View details for ${project.title}`}
+                  aria-label={projectCardContent.viewDetailsLabel(project.title)}
                   className="absolute inset-0 z-10 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 />
 
@@ -154,13 +150,13 @@ export function HomePage() {
                   <div className="flex items-center justify-between pt-1">
                     <Button asChild variant="ghost" className="relative z-20 px-0">
                       <Link
-                        to="/projects"
+                        to={homeContent.projectCta.href}
                         state={{
                           expandProject: project.slug,
                           preserveScroll: true,
                         }}
                       >
-                        View details
+                        {homeContent.projectCta.label}
                         <ArrowRight className="ml-2 size-4" />
                       </Link>
                     </Button>
@@ -187,11 +183,7 @@ export function HomePage() {
       <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <Card className="border-border/70 bg-card/80">
           <CardContent className="flex h-full flex-col p-6 md:p-8">
-            <SectionHeading
-              eyebrow="Experience Snapshot"
-              title="Research and engineering work with measurable outcomes."
-              description="A quick view of the two experiences that best represent the mix of applied research and production engineering behind the portfolio."
-            />
+            <SectionHeading {...homeContent.experience} />
 
             <div className="mt-8 flex-1 space-y-7">
               {experienceHighlights.map((item) => (
@@ -222,7 +214,7 @@ export function HomePage() {
 
             <div className="pt-6">
               <Button asChild size="lg" className="w-full sm:w-auto">
-                <Link to="/experience">View Full Experience</Link>
+                <Link to={homeContent.experienceCta.href}>{homeContent.experienceCta.label}</Link>
               </Button>
             </div>
           </CardContent>
@@ -256,7 +248,7 @@ export function HomePage() {
 
             <div className="pt-6">
               <Button asChild size="lg" className="w-full">
-                <Link to="/contact">Open Contact Page</Link>
+                <Link to={homeContent.contactCta.href}>{homeContent.contactCta.label}</Link>
               </Button>
             </div>
           </CardContent>

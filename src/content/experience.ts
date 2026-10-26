@@ -163,3 +163,16 @@ export const homeExperienceHighlights = workExperience
     description: item.summary,
     highlights: item.homeHighlights!,
   }))
+
+export const experienceContent = {
+  intro: {
+    eyebrow: "Experience",
+    title: "Work, research, and education with detail.",
+    description:
+      "This page focuses on the experiences that shaped how I work: production engineering, applied research, and a strong academic foundation in AI, NLP, and systems.",
+  },
+  workEyebrow: "Work Experience",
+  workTitle: "Research and engineering experience across industry and academia.",
+  educationEyebrow: "Education",
+  educationTitle: "Academic foundation in computer science, AI, and applied systems work.",
+}

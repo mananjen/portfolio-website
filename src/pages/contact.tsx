@@ -3,7 +3,7 @@ import { Mail, FolderGit2, UserRound, Phone, Copy, Check } from "lucide-react"
 import { TbBrandLinkedin } from "react-icons/tb"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { contactLinks, type ContactLink } from "@/content/site"
+import { contactLinks, type ContactLink, contactContent } from "@/content/site"
 
 function getIcon(item: ContactLink) {
   if (item.label === "GitHub") return FolderGit2
@@ -47,13 +47,13 @@ export function ContactPage() {
     <section className="space-y-8">
       <div className="space-y-3">
         <p className="text-sm font-medium tracking-[0.18em] text-muted-foreground uppercase">
-          Contact
+          {contactContent.eyebrow}
         </p>
         <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
-          Easy ways to reach me.
+          {contactContent.title}
         </h1>
         <p className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
-          The easiest way to reach me is by email or LinkedIn. I typically respond within a day or two, but it may take longer during busy periods. I look forward to connecting with you!
+          {contactContent.description}
         </p>
       </div>
 
@@ -88,7 +88,7 @@ export function ContactPage() {
                 {isEmail ? (
                   <div className="grid grid-cols-2 gap-2">
                     <Button asChild variant="outline">
-                      <a href={item.href}>Compose</a>
+                      <a href={item.href}>{contactContent.compose}</a>
                     </Button>
 
                     <Button
@@ -99,12 +99,12 @@ export function ContactPage() {
                       {copiedEmail ? (
                         <>
                           <Check className="mr-2 size-4" />
-                          Copied
+                          {contactContent.copied}
                         </>
                       ) : (
                         <>
                           <Copy className="mr-2 size-4" />
-                          Copy
+                          {contactContent.copy}
                         </>
                       )}
                     </Button>
@@ -116,7 +116,7 @@ export function ContactPage() {
                       target={isExternal ? "_blank" : undefined}
                       rel={isExternal ? "noreferrer" : undefined}
                     >
-                      {item.kind === "phone" ? "Call" : "Open"}
+                      {item.kind === "phone" ? contactContent.call : contactContent.open}
                     </a>
                   </Button>
                 )}

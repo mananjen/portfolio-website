@@ -5,6 +5,7 @@ import { ProjectDetailCard } from "@/components/projects/project-detail-card"
 import {
   additionalProjects,
   featuredProjects,
+  projectsContent,
   type Project,
 } from "@/content/projects"
 
@@ -61,55 +62,48 @@ export function ProjectsPage() {
     })
   }, [expandedProjectSlug])
 
-  const orderedAdditionalProjects = [...additionalProjects].sort((a, b) => {
-    if (a.slug === "real-or-ai-generated") return -1
-    if (b.slug === "real-or-ai-generated") return 1
-    return 0
-  })
-
-  const expandedAdditionalIndex = orderedAdditionalProjects.findIndex(
+  const expandedAdditionalIndex = additionalProjects.findIndex(
     (project) => project.slug === expandedProjectSlug
   )
 
   const additionalBefore =
     expandedAdditionalIndex === -1
-      ? orderedAdditionalProjects
-      : orderedAdditionalProjects.slice(0, expandedAdditionalIndex)
+      ? additionalProjects
+      : additionalProjects.slice(0, expandedAdditionalIndex)
 
   const expandedAdditionalProject =
     expandedAdditionalIndex === -1
       ? null
-      : orderedAdditionalProjects[expandedAdditionalIndex]
+      : additionalProjects[expandedAdditionalIndex]
 
   const additionalAfter =
     expandedAdditionalIndex === -1
       ? []
-      : orderedAdditionalProjects.slice(expandedAdditionalIndex + 1)
+      : additionalProjects.slice(expandedAdditionalIndex + 1)
 
   return (
     <div className="space-y-14 md:space-y-20">
       <section className="space-y-4">
         <p className="text-sm font-medium tracking-[0.18em] text-muted-foreground uppercase">
-          Projects
+          {projectsContent.eyebrow}
         </p>
 
         <h1 className="max-w-4xl text-4xl font-semibold tracking-tight md:text-5xl">
-          Selected work across AI research, NLP, computer vision, VR, web systems,
-          and applied machine learning.
+          {projectsContent.title}
         </h1>
 
         <p className="max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
-          Every project can expand into a more detailed case-study view, to give a deeper look at the motivation, process, and impact of the work. Click on any project card to explore!
+          {projectsContent.description}
         </p>
       </section>
 
       <section className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm font-medium tracking-[0.18em] text-muted-foreground uppercase">
-            Featured Projects
+            {projectsContent.featuredEyebrow}
           </p>
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            The three projects I’d want someone to remember first.
+            {projectsContent.featuredTitle}
           </h2>
         </div>
 
@@ -128,10 +122,10 @@ export function ProjectsPage() {
       <section className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm font-medium tracking-[0.18em] text-muted-foreground uppercase">
-            Additional Projects
+            {projectsContent.additionalEyebrow}
           </p>
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            Some more projects that I'm proud of, feel free to explore!
+            {projectsContent.additionalTitle}
           </h2>
         </div>
 

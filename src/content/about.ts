@@ -51,3 +51,17 @@ export const aboutContent = {
     },
   ],
 }
+
+export const aboutPageContent = {
+  intro: {
+    eyebrow: "About",
+    title: "A little more about me, outside the résumé version.",
+    description:
+      "This page is the more personal side of the portfolio — a bit about where I come from, what I enjoy, and what I’ve been into lately.",
+  },
+  artEyebrow: "Outside of code",
+  artTitle: "Art is one of the ways I like to slow down and make something for its own sake.",
+  instagramCta: "View more on Instagram",
+  factsTitle: "A few things about me",
+  rightNowTitle: "Right now",
+}

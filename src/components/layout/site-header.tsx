@@ -9,15 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { siteConfig } from "@/content/site"
-
-const navItems = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/projects", label: "Projects" },
-  { to: "/experience", label: "Experience" },
-  { to: "/contact", label: "Contact" },
-]
+import { navItems, siteConfig, navigationContent } from "@/content/site"
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   [
@@ -50,7 +42,7 @@ export function SiteHeader() {
           <ThemeToggle />
           <Button asChild>
             <a href={siteConfig.github} target="_blank" rel="noreferrer">
-              GitHub
+              {navigationContent.github}
             </a>
           </Button>
         </div>
@@ -58,7 +50,7 @@ export function SiteHeader() {
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Open menu">
+              <Button variant="ghost" size="icon" aria-label={navigationContent.openMenu}>
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>
@@ -68,7 +60,7 @@ export function SiteHeader() {
               className="w-[min(92vw,320px)] px-4 sm:px-5"
             >
               <SheetHeader className="px-1">
-                <SheetTitle>Navigate</SheetTitle>
+                <SheetTitle>{navigationContent.title}</SheetTitle>
               </SheetHeader>
 
               <div className="mt-8 flex min-w-0 flex-col gap-4">
@@ -97,7 +89,7 @@ export function SiteHeader() {
 
                 <Button asChild className="mt-2 w-full max-w-full rounded-2xl">
                   <a href={siteConfig.github} target="_blank" rel="noreferrer">
-                    GitHub
+                    {navigationContent.github}
                   </a>
                 </Button>
               </div>

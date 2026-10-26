@@ -1,7 +1,7 @@
 import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { type Project, getProjectLinks } from "@/content/projects"
+import { type Project, getProjectLinks, projectCardContent } from "@/content/projects"
 
 type ProjectDetailCardProps = {
   project: Project
@@ -19,10 +19,7 @@ export function ProjectDetailCard({
   const challenge = project.details?.challenge ?? project.summary
 
   const approach =
-    project.details?.approach ?? [
-      `Built using ${project.technologies.slice(0, 4).join(", ")}.`,
-      "Focused on turning the core idea into a usable end-to-end implementation.",
-    ]
+    project.details?.approach ?? projectCardContent.defaultApproach(project.technologies)
 
   const results = project.details?.results ?? [project.impact]
 
@@ -66,7 +63,7 @@ export function ProjectDetailCard({
         <div className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2">
             <h3 className="text-sm font-semibold tracking-wide uppercase">
-              Overview
+              {projectCardContent.overview}
             </h3>
             <p className="text-sm leading-6 text-muted-foreground md:text-base">
               {project.summary}
@@ -75,7 +72,7 @@ export function ProjectDetailCard({
 
           <div className="space-y-2">
             <h3 className="text-sm font-semibold tracking-wide uppercase">
-              Why it matters
+              {projectCardContent.impact}
             </h3>
             <p className="text-sm leading-6 text-foreground/90 md:text-base">
               {project.impact}
@@ -87,12 +84,12 @@ export function ProjectDetailCard({
           <Button type="button" variant="outline" onClick={onToggle}>
             {expanded ? (
               <>
-                Show less
+                {projectCardContent.collapse}
                 <ChevronUp className="ml-2 size-4" />
               </>
             ) : (
               <>
-                Learn more
+                {projectCardContent.expand}
                 <ChevronDown className="ml-2 size-4" />
               </>
             )}
@@ -112,7 +109,7 @@ export function ProjectDetailCard({
           <div className="grid gap-6 rounded-2xl border border-border bg-background/70 p-5 md:grid-cols-3">
             <div className="space-y-2">
               <h4 className="text-sm font-semibold tracking-wide uppercase">
-                Challenge
+                {projectCardContent.challenge}
               </h4>
               <p className="text-sm leading-6 text-muted-foreground">
                 {challenge}
@@ -121,7 +118,7 @@ export function ProjectDetailCard({
 
             <div className="space-y-2">
               <h4 className="text-sm font-semibold tracking-wide uppercase">
-                Technical approach
+                {projectCardContent.approach}
               </h4>
               <ul className="space-y-2 text-sm leading-6 text-muted-foreground">
                 {approach.map((item) => (
@@ -132,7 +129,7 @@ export function ProjectDetailCard({
 
             <div className="space-y-2">
               <h4 className="text-sm font-semibold tracking-wide uppercase">
-                Outcomes
+                {projectCardContent.outcomes}
               </h4>
               <ul className="space-y-2 text-sm leading-6 text-muted-foreground">
                 {results.map((item) => (
