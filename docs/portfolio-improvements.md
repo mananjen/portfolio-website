@@ -47,9 +47,9 @@ is `/portfolio-website/`, and a direct brief URL is
 `/portfolio-website/#/projects?project=<slug>`. Hash routing supports refresh
 on GitHub Pages without server rewrites.
 
-Home, Projects, and Experience are implemented in React. About,
-remaining project copy review, and final visual refinement follow separately.
-The personal link still leads to the current About page. The existing React
+Home, Projects, Experience, and About are implemented in React.
+Remaining project copy review and final visual refinement follow separately.
+The personal link opens v3's About page. The existing React
 site and A–I study commands remain available; deployment still targets the
 current site until v3 is ready. No deployment is authorized by this decision.
 See `v3/README.md` for the editing map and local validation commands.
@@ -70,6 +70,22 @@ production build, and `git diff --check` passed. The new navigation and research
 link tests each failed before their implementation and passed afterward. V3's
 npm audit reports zero vulnerabilities. Browser layout/interaction review remains
 pending; Vite reports existing native-config compatibility warnings.
+
+Next chunk on 30 October 2026: added About at `/portfolio-website/#/about` and
+connected both the navigation and homepage personal link. The page carries over
+existing personal copy, all four artworks, books, and interests rather than
+inventing new personal details. Shared facts, assets, and descriptive image text
+live in `src/content/about.ts`; v3 section labels and ordering live in
+`v3/src/content/about.ts`. Gallery images remain uncropped and link to full-size
+files. “About” remains the working name. The existing “Right now” entries still
+need owner review for freshness. New navigation wraps on narrow screens.
+Visual refinement, supporting-project copy review, and deployment stay deferred.
+
+About validation: v3 typecheck/build, all seven App/router tests, the current-site
+build, and `git diff --check` passed. Both new tests failed before their
+implementation and passed afterward. Standards and spec reviews found no
+actionable issues. Browser layout/keyboard acceptance is pending; the existing
+Vite native-config warnings remain. No dependencies were added.
 
 ### Earlier connected prototype and technology exploration (superseded)
 

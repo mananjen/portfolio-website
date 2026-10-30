@@ -53,6 +53,33 @@ function briefToggle(slug: string) {
 }
 
 describe("the v3 project reading journey", () => {
+  it("opens About from the homepage personal link and returns through history", async () => {
+    await renderAt("/")
+    await click(container.querySelector("main aside a"))
+
+    expect(container.querySelector("h1")?.textContent).toContain("A little more about me")
+    expect(document.title).toBe("About — Manan Jain")
+    expect(container.querySelector('nav a[aria-current="page"]')?.textContent).toBe("About")
+    expect(document.activeElement).toBe(container.querySelector("#main"))
+
+    await click(container.querySelector("#test-back"))
+    expect(container.querySelector("h1")?.textContent).toContain("Hi, I’m Manan.")
+  })
+
+  it("shows artwork and personal interests on a direct About visit", async () => {
+    await renderAt("/about")
+    expect(container.querySelector('nav a[aria-current="page"]')?.textContent).toBe("About")
+    expect(document.activeElement).toBe(container.querySelector("#main"))
+    expect(container.querySelector("main")?.textContent).toContain("The Wheel of Time")
+    expect(container.querySelector("main")?.textContent).toContain("Divinity Original Sin 2")
+
+    const artwork = container.querySelector('main img[alt="Watercolor of a cottage beside a sunlit forest road, by Manan Jain"]')
+    expect(artwork).not.toBeNull()
+    expect(artwork?.closest("a")?.getAttribute("href")).toContain("art1.jpg")
+    expect(artwork?.closest("a")?.getAttribute("aria-label")).toContain("Open full-size artwork")
+    expect(container.querySelector('main a[href^="https://www.instagram.com/mananjen"]')?.textContent).toContain("View more on Instagram")
+  })
+
   it("navigates to Experience with its title, active navigation, and page focus", async () => {
     await renderAt("/")
     await click(container.querySelector('nav a[href="/experience"]'))

@@ -1,0 +1,22 @@
+.intro { padding-block: 44px 48px; max-width: 850px; }
+.intro h1 { margin-block: 18px 24px; font-size: clamp(42px, 5.5vw, 68px); }
+.intro > p:last-of-type { max-width: 650px; }
+.story { margin-top: 28px; max-width: 730px; font-size: 15px; color: var(--muted); }
+.story p + p { margin-top: 18px; }
+.art { padding-block: 28px; border-top: 1px solid var(--line); }
+.art h2 { max-width: 880px; font-size: clamp(28px, 3.5vw, 40px); margin-block: 14px 20px; }
+.art > p { max-width: 730px; }
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; margin-block: 28px; }
+.gallery a { display: block; text-decoration: none; }
+.gallery a:hover .imageLabel { text-decoration: underline; }
+.gallery img { width: 100%; height: auto; }
+.imageLabel { display: block; margin-top: 10px; color: var(--accent); font-size: 12px; }
+.interests { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--line); }
+.interests h2 { font-size: 24px; margin-bottom: 18px; }
+.interests p, .interests li { color: var(--muted); font-size: 14px; }
+.interests p + p, .interests li + li { margin-top: 12px; }
+.interests ul { margin: 0; padding-left: 20px; }
+@media (max-width: 700px) {
+  .gallery, .interests { grid-template-columns: 1fr; }
+  .interests { gap: 28px; }
+}

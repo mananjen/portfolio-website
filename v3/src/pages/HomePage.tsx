@@ -77,7 +77,7 @@ export function HomePage() {
             <p className="eyebrow">{home.personal.eyebrow}</p>
             <h2>{home.personal.title}</h2>
             <p className="muted">{home.personal.description}</p>
-            <a className="text-link" href={home.personal.link.href}>{home.personal.link.label}</a>
+            <Link className="text-link" to={home.personal.link.path}>{home.personal.link.label}</Link>
           </div>
         </aside>
       </div>

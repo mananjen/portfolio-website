@@ -13,4 +13,8 @@ export const pageMeta = {
     title: `Experience — ${siteName}`,
     description: "Industry engineering, multilingual NLP research, and a foundation in computer science.",
   },
+  about: {
+    title: `About — ${siteName}`,
+    description: "A little beyond work: Manan’s artwork, books, games, and other interests.",
+  },
 }

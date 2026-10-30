@@ -1,7 +1,8 @@
 # V3: React + TypeScript
 
 V3 is the new portfolio implementation, starting with the Cobalt cut Home and
-Projects journey, with Experience for roles and education. It uses React,
+Projects journey, with Experience for roles and education and About for personal
+interests and artwork. It uses React,
 TypeScript, Vite, CSS modules, and typed content.
 The Astro evaluation was replaced after owner review; see
 [ADR 0001](../docs/adr/0001-react-typescript-for-v3.md).
@@ -32,9 +33,12 @@ switching to another port.
 | Add a project, edit its brief, reorder featured work | `src/content/projects.ts` |
 | Experience headings and shared record imports | `src/content/experience.ts` |
 | Roles, education, order, related project links | `../src/content/experience.ts` |
+| About sections, labels, and editorial order | `src/content/about.ts` |
+| Shared personal copy, artwork, image descriptions/dimensions, Instagram | `../src/content/about.ts` |
 | Homepage composition | `src/pages/HomePage.tsx` |
 | Projects selection and URL state | `src/pages/ProjectsPage.tsx` |
 | Experience composition | `src/pages/ExperiencePage.tsx` |
+| About composition | `src/pages/AboutPage.tsx` |
 | Shared project rendering | `src/components/ProjectCard.tsx` |
 | Header/footer and shared navigation | `src/components/Layout.tsx` |
 | Fonts, colors, shared spacing | `src/styles/global.css` |
@@ -57,9 +61,9 @@ and in-page section links move focus without losing the current route.
 
 ## Scope and migration
 
-Home, Projects, and Experience are implemented. About and final
-copy/design work remain for subsequent changes. The personal link currently
-opens the deployed About page; v3's old `/contact` route leads to its footer.
+Home, Projects, Experience, and About are implemented. Final copy/design work
+remains for subsequent changes. The homepage personal link opens v3's About page
+at `#/about`; v3's old `/contact` route leads to its footer.
 Unknown routes show a recovery page. Earlier A-I and reading studies remain
 available through the root prototype scripts.
 
@@ -82,6 +86,14 @@ only content edits. The research role's outdated retrieval metric and manuscript
 status have been replaced by the reviewed contribution summary in this shared
 source, which also updates the current site's Experience page.
 
+About reuses the existing personal copy and artwork from `../src/content/about.ts`.
+V3 selects and orders personal sections in `src/content/about.ts`. Adding or
+reordering artwork, paragraphs, or list entries requires only content edits.
+Gallery images retain their full proportions and link to full-size files. Keep
+their intrinsic dimensions with each image to reserve space while loading.
+The shared image descriptions are also used by the current site. The existing
+“Right now” entries are carried forward and should be checked during copy review.
+
 The production HTML gets homepage metadata from the content exports. React
 updates page titles/descriptions after navigation. This is a client-rendered
 site; social crawlers that do not run JavaScript receive the homepage metadata,
@@ -95,6 +107,8 @@ one-open behavior, Back/Forward, focus, Skip, and the legacy contact route using
 React Router and an in-memory DOM. It does not measure browser layout.
 Experience coverage includes navigation/title/focus and research brief links with
 Back navigation from a direct Experience visit.
+About coverage includes the homepage personal link, active navigation, title,
+focus, Back navigation, and artwork/interests on a direct visit.
 In a browser, open a flagship and
 supporting brief from Home, reload, use Back/Forward, open/close another brief,
 and test the toggle and Skip link with the keyboard. Check narrow and wide

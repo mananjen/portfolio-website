@@ -1,7 +1,7 @@
-import art1 from "@/assets/art1.jpg"
-import art2 from "@/assets/art2.jpg"
-import art3 from "@/assets/art3.jpg"
-import art4 from "@/assets/art4.jpg"
+import art1 from "../assets/art1.jpg"
+import art2 from "../assets/art2.jpg"
+import art3 from "../assets/art3.jpg"
+import art4 from "../assets/art4.jpg"
 
 export const aboutContent = {
   intro: [
@@ -35,19 +35,27 @@ export const aboutContent = {
   gallery: [
     {
       src: art1,
-      alt: "Artwork by Manan Jain 1",
+      width: 1080,
+      height: 834,
+      alt: "Watercolor of a cottage beside a sunlit forest road, by Manan Jain",
     },
     {
       src: art2,
-      alt: "Artwork by Manan Jain 2",
+      width: 1440,
+      height: 1122,
+      alt: "Watercolor of village houses and trees reflected in water, by Manan Jain",
     },
     {
       src: art3,
-      alt: "Artwork by Manan Jain 3",
+      width: 1440,
+      height: 1080,
+      alt: "Painting of a warm-toned house and a boat by the water, by Manan Jain",
     },
     {
       src: art4,
-      alt: "Artwork by Manan Jain 4",
+      width: 1440,
+      height: 1440,
+      alt: "Painting of a swirling blue and yellow night sky above a village, by Manan Jain",
     },
   ],
 }

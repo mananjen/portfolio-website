@@ -14,6 +14,7 @@ export const site = {
     { label: "Home", path: "/" },
     { label: "Projects", path: "/projects" },
     { label: "Experience", path: "/experience" },
+    { label: "About", path: "/about" },
   ],
   hello: "Say hello ↗",
   skip: "Skip to content",
@@ -45,7 +46,7 @@ export const home = {
     description: "Watercolors, long fantasy novels, and a game I’ll probably spend too much time exploring.",
     image: painting,
     alt: "Manan’s watercolor of a house among trees",
-    link: { label: "A little beyond work ↗", href: "https://mananjen.github.io/portfolio-website/#/about" },
+    link: { label: "A little beyond work →", path: "/about" },
   },
 }
 
