@@ -13,6 +13,7 @@ export const site = {
   nav: [
     { label: "Home", path: "/" },
     { label: "Projects", path: "/projects" },
+    { label: "Experience", path: "/experience" },
   ],
   hello: "Say hello ↗",
   skip: "Skip to content",

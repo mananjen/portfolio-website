@@ -7,6 +7,7 @@ export type ExperienceEntry = {
   technologies: string[]
   bullets: string[]
   homeHighlights?: string[]
+  relatedProjects?: { slug: string; label: string }[]
 }
 
 export type EducationEntry = {
@@ -62,11 +63,15 @@ export const workExperience: ExperienceEntry[] = [
     ],
     bullets: [
       "Built a training-free / non-parametric multilingual image-text retrieval pipeline using pretrained unimodal vision and multilingual text encoders with an external anchor set.",
-      "Reached usable multilingual retrieval performance around 30% R@1 without end-to-end multimodal training; manuscript in preparation for ACL Rolling Review.",
+      "As an equal-contributing coauthor, conducted the initial literature review, investigated candidate datasets and models, built the complete research codebase, and contributed experimental results and research discussions.",
       "Led Hinglish sarcasm detection work by building an end-to-end pipeline, running ablations and error analysis, and contributing to an ACL Rolling Review submission.",
     ],
     homeHighlights: [
       "Led research, implementation and evaluation of solutions for diverse multilingual and code-mixed NLP tasks, on both classical NLP and deep learning based approaches.",
+    ],
+    relatedProjects: [
+      { slug: "multilingual-image-text-retrieval", label: "Multilingual retrieval brief →" },
+      { slug: "hinglish-sarcasm-detection", label: "Hinglish sarcasm brief →" },
     ],
   },
   {

@@ -6,13 +6,15 @@ import { notFound } from "./content/site"
 import { pageMeta } from "./content/meta"
 import { HomePage } from "./pages/HomePage"
 import { ProjectsPage } from "./pages/ProjectsPage"
+import { ExperiencePage } from "./pages/ExperiencePage"
 
 function RouteEffects() {
   const { pathname, search, hash } = useLocation()
   const previousPath = useRef<string | undefined>(undefined)
 
   useEffect(() => {
-    const meta = pathname === "/projects" ? pageMeta.projects : pageMeta.home
+    const meta = pathname === "/projects" ? pageMeta.projects
+      : pathname === "/experience" ? pageMeta.experience : pageMeta.home
     document.title = meta.title
     document.querySelector('meta[name="description"]')?.setAttribute("content", meta.description)
     document.querySelector('meta[property="og:title"]')?.setAttribute("content", meta.title)
@@ -43,6 +45,7 @@ export function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
           <Route path="/contact" element={<Navigate to="/#contact" replace />} />
           <Route path="*" element={(
             <section className="container page-message">

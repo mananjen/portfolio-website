@@ -53,6 +53,31 @@ function briefToggle(slug: string) {
 }
 
 describe("the v3 project reading journey", () => {
+  it("navigates to Experience with its title, active navigation, and page focus", async () => {
+    await renderAt("/")
+    await click(container.querySelector('nav a[href="/experience"]'))
+
+    expect(container.querySelector("h1")?.textContent).toContain("Engineering in practice.")
+    expect(document.title).toBe("Experience — Manan Jain")
+    expect(container.querySelector('nav a[aria-current="page"]')?.textContent).toBe("Experience")
+    expect(document.activeElement).toBe(container.querySelector("#main"))
+  })
+
+  it("opens research briefs from a direct Experience visit and returns through history", async () => {
+    await renderAt("/experience")
+    expect(container.querySelector("h1")?.textContent).toContain("Research in context.")
+
+    await click(container.querySelector('main a[href="/projects?project=multilingual-image-text-retrieval"]'))
+    expect(briefToggle("multilingual-image-text-retrieval")?.getAttribute("aria-expanded")).toBe("true")
+    expect(document.activeElement).toBe(briefToggle("multilingual-image-text-retrieval"))
+
+    await click(container.querySelector("#test-back"))
+    expect(container.querySelector('nav a[aria-current="page"]')?.textContent).toBe("Experience")
+    expect(document.activeElement).toBe(container.querySelector("#main"))
+    await click(container.querySelector('main a[href="/projects?project=hinglish-sarcasm-detection"]'))
+    expect(briefToggle("hinglish-sarcasm-detection")?.getAttribute("aria-expanded")).toBe("true")
+  })
+
   it("opens the homepage flagship on Projects and returns through history", async () => {
     await renderAt("/")
     await click(container.querySelector('a[href="/projects?project=multilingual-image-text-retrieval"]'))

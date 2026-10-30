@@ -1,0 +1,19 @@
+.intro { padding-block: 44px 48px; }
+.intro h1 { margin-block: 18px 24px; font-size: clamp(42px, 5.5vw, 68px); }
+.intro h1 span { display: block; }
+.intro > p:last-child { max-width: 600px; }
+.listing + .listing { margin-top: 36px; }
+.listing > h2 { margin-bottom: 18px; }
+.entry { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 36px; padding-block: 30px; border-top: 1px solid var(--line); }
+.context { font-size: 13px; color: var(--accent); }
+.context p + p { margin-top: 6px; }
+.detail { max-width: 750px; min-width: 0; }
+.organization { margin-block: 8px 18px; color: var(--accent); }
+.summary, .bullets li { font-size: 14px; }
+.bullets { padding-left: 20px; margin-block: 18px; }
+.bullets li { color: var(--muted); padding-left: 4px; }
+.bullets li + li { margin-top: 10px; }
+.related { margin-top: 18px; }
+@media (max-width: 700px) {
+  .entry { grid-template-columns: 1fr; gap: 14px; }
+}

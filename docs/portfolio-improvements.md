@@ -1,6 +1,6 @@
 # Portfolio improvement planning
 
-Updated: 26 October 2026. These notes record decisions, exploration history,
+Updated: 30 October 2026. These notes record decisions, exploration history,
 and the current implementation scope.
 
 ## Agreed direction
@@ -47,12 +47,29 @@ is `/portfolio-website/`, and a direct brief URL is
 `/portfolio-website/#/projects?project=<slug>`. Hash routing supports refresh
 on GitHub Pages without server rewrites.
 
-Home and Projects are the first production components. About/Experience,
+Home, Projects, and Experience are implemented in React. About,
 remaining project copy review, and final visual refinement follow separately.
 The personal link still leads to the current About page. The existing React
 site and A–I study commands remain available; deployment still targets the
 current site until v3 is ready. No deployment is authorized by this decision.
 See `v3/README.md` for the editing map and local validation commands.
+
+Continuation on 30 October 2026: synced the React foundation from the other
+laptop and deleted the local rollback backup branch. Added Experience at
+`/portfolio-website/#/experience`, with shared role/education records rendered in
+declared reverse chronological order, navigation, page metadata, and research
+links to the existing URL-selected briefs. Industry contributions remain on
+Experience. Replaced the shared research role's stale retrieval metric and
+manuscript status with reviewed contribution wording; publication/code status
+still require separate verification. Page copy is in `v3/src/content/experience.ts`
+and `v3/src/content/meta.ts`; roles and education remain in
+`src/content/experience.ts`. Visual refinement and deployment remain deferred.
+
+Validation: v3 typecheck/build, all five App/router tests, the current site's
+production build, and `git diff --check` passed. The new navigation and research
+link tests each failed before their implementation and passed afterward. V3's
+npm audit reports zero vulnerabilities. Browser layout/interaction review remains
+pending; Vite reports existing native-config compatibility warnings.
 
 ### Earlier connected prototype and technology exploration (superseded)
 

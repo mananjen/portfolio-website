@@ -9,4 +9,8 @@ export const pageMeta = {
     title: `Projects — ${siteName}`,
     description: "Research and independent work in language, vision, and applied AI. Explore the work, decisions, and results.",
   },
+  experience: {
+    title: `Experience — ${siteName}`,
+    description: "Industry engineering, multilingual NLP research, and a foundation in computer science.",
+  },
 }
