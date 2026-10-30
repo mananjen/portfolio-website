@@ -17,7 +17,8 @@ export type Project = {
 }
 
 // Featured order is editorial. Other projects sort by project year, with stable ties.
-// Supporting-project narratives are carried over; their editorial review is pending.
+// Supporting briefs are edited from existing portfolio records, not independently
+// verified results. Confirm contribution details and artifact availability before launch.
 export const projects: Project[] = [
   {
     slug: "multilingual-image-text-retrieval",
@@ -60,7 +61,7 @@ export const projects: Project[] = [
   {
     slug: "hinglish-sarcasm-detection",
     title: "Hindi-English Code-mixed Sarcasm Detection",
-    summary: "An advanced deep learning project focused on sarcasm detection in Hindi-English code-mixed online text, paired with dataset curation and experimentation support.",
+    summary: "Sarcasm detection in Hindi-English code-mixed text, combining dataset curation, deep learning, and experimental evaluation.",
     category: "NLP",
     timeframe: "2025",
     year: 2025,
@@ -81,22 +82,22 @@ export const projects: Project[] = [
     brief: [
       {
         heading: "The problem",
-        text: "Sarcasm detection is hard even in monolingual settings, and Hindi-English code-mixed text introduces additional complexity through code-switching and informal language patterns."
+        text: "Hindi-English online text mixes languages and informal expressions. Detecting sarcasm requires handling those patterns as well as the gap between literal wording and intended meaning."
       },
       {
         heading: "The work",
-        text: "Built on recent multilingual and code-mixed NLP research from 2023–2024. Used deep learning methods to improve sarcasm detection accuracy and adaptability for Hinglish text. Contributed to the research effort by curating and refining a higher-quality dataset for Hindi-English code-mixed linguistic patterns."
+        text: "Built a deep learning pipeline for Hinglish sarcasm detection and curated and refined the dataset, drawing on multilingual and code-mixed NLP research from 2023–2024."
       },
       {
-        heading: "Outcome",
-        text: "Created a stronger experimental base for sarcasm detection in code-mixed text. Improved the quality of the underlying dataset used for experimentation and analysis. Strengthened the portfolio’s research depth in multilingual NLP."
+        heading: "Evaluation",
+        text: "Ran ablations and error analysis as part of the research effort and contributed to an ACL Rolling Review submission."
       }
     ]
   },
   {
     slug: "riot-amazon-hackathon",
     title: "Riot and Amazon Hackathon",
-    summary: "A Retrieval-Augmented Generation project built on Riot Valorant esports data using Amazon Bedrock, turning a massive raw dataset into an interactive player-insight web experience.",
+    summary: "An Amazon Bedrock RAG application for querying Valorant player statistics and playstyles and assembling esports teams.",
     category: "AI Research",
     timeframe: "2024",
     year: 2024,
@@ -122,15 +123,15 @@ export const projects: Project[] = [
     brief: [
       {
         heading: "The problem",
-        text: "The core challenge was making a very large esports dataset usable inside a hackathon project while still producing a meaningful interactive experience."
+        text: "Make a large collection of Valorant esports data usable for player analysis within a hackathon project."
       },
       {
         heading: "The work",
-        text: "Used Riot Valorant esports data as the knowledge source for a RAG system powered by Amazon Bedrock. Reduced more than 3 TB of raw game data into a concise 20 MB actionable dataset focused on player statistics and playstyles. Built an interactive web interface that lets users query player insights and assemble strong esports teams."
+        text: "Reduced more than 3 TB of raw game data to a 20 MB dataset focused on player statistics and playstyles. Used that dataset as the knowledge source for a retrieval-augmented generation system powered by Amazon Bedrock."
       },
       {
         heading: "Outcome",
-        text: "Delivered a working AI-assisted web product with real user-facing value. Demonstrated large-scale data handling and practical generative AI integration. Preserved both a GitHub artifact and a supporting document for the project."
+        text: "Built an interactive web interface for querying player insights and assembling esports teams. The repository and supporting document provide the implementation and project context."
       }
     ]
   },
@@ -158,15 +159,15 @@ export const projects: Project[] = [
     brief: [
       {
         heading: "The problem",
-        text: "The project focused on detecting subtle cues that separate real photos from synthetic images, especially when AI generation quality is high."
+        text: "Investigate whether inconsistencies in shadows and lighting can help distinguish real photographs from AI-generated images."
       },
       {
-        heading: "The work",
-        text: "Curated a custom dataset by capturing real images and generating synthetic counterparts with DALL-E and other AI image generators. Used foreground-background shadow consistency as the main forensic signal for identifying synthetic content. Framed the project as an image forensics problem instead of relying only on shallow visual artifact detection."
+        heading: "Dataset",
+        text: "Captured real images and generated synthetic counterparts with DALL-E and other image generators to curate a custom dataset."
       },
       {
-        heading: "Outcome",
-        text: "Produced a computer vision project with a clear and interesting forensic angle. Demonstrated dataset creation skills in addition to modeling work. Added variety beyond the portfolio’s NLP-heavy projects."
+        heading: "Approach",
+        text: "Used foreground-background shadow consistency as the main forensic signal. The project examined lighting relationships within an image rather than relying only on visible generation artifacts."
       }
     ]
   },
@@ -200,15 +201,15 @@ export const projects: Project[] = [
     brief: [
       {
         heading: "The problem",
-        text: "The goal was to make astronomical data exploration immersive, intuitive, and visually compelling inside a CAVE2 virtual environment."
+        text: "Turn astronomical datasets containing millions of stars into an explorable visualization inside the CAVE2 virtual environment."
       },
       {
         heading: "The work",
-        text: "Built the experience in Unity for the CAVE2 environment. Used precise datasets containing millions of stars to render dynamic celestial visualizations. Implemented navigation, zoom, and interactive exploration features for browsing large cosmic structures."
+        text: "Built the experience in Unity using real astronomical datasets to render celestial visualizations for CAVE2."
       },
       {
         heading: "Outcome",
-        text: "Combined real astronomical data with advanced VR interaction. Showcased graphics, visualization, and large-scale data handling skills. Produced one of the most visually distinctive projects in the portfolio."
+        text: "Implemented navigation and zoom so users could explore the star data interactively. The project website provides additional context alongside the Unity repository."
       }
     ]
   },
@@ -240,15 +241,11 @@ export const projects: Project[] = [
     brief: [
       {
         heading: "The problem",
-        text: "Older webcam and handycam video suffers from blur, noise, and low resolution, making restoration a practical but technically messy problem."
+        text: "Restore personal webcam and handycam recordings from 2003–2015 affected by blur, noise, and low resolution."
       },
       {
         heading: "The work",
-        text: "Applied super-resolution frameworks including RealESRGAN and SwinIR. Combined these with Gaussian denoising and frame interpolation methods to improve quality and temporal smoothness. Built the workflow around realistic archival footage rather than curated benchmark media."
-      },
-      {
-        heading: "Outcome",
-        text: "Improved the clarity and usability of legacy personal videos. Demonstrated practical use of deep learning for video restoration. Added a hands-on computer vision engineering project with a real-world use case."
+        text: "Built a restoration workflow around the archival footage, applying RealESRGAN and SwinIR for super-resolution alongside Gaussian denoising and frame interpolation. Combined spatial enhancement with temporal smoothing to address both image quality and motion."
       }
     ]
   },
@@ -277,22 +274,18 @@ export const projects: Project[] = [
     brief: [
       {
         heading: "The problem",
-        text: "The project focused on extracting meaningful political sentiment from large volumes of messy social-media text."
+        text: "Analyze political sentiment in noisy Twitter posts from the 2012 Obama-Romney U.S. presidential election."
       },
       {
         heading: "The work",
-        text: "Fine-tuned a BERT-based architecture for sentiment classification. Processed large-scale raw Twitter data with preprocessing tailored for social media text. Used the model to analyze discourse around the 2012 Obama-Romney election."
-      },
-      {
-        heading: "Outcome",
-        text: "Demonstrated strong transformer-based NLP fundamentals. Showed practical skill in preprocessing noisy public text data. Added a politically themed but technically grounded classification project to the portfolio."
+        text: "Preprocessed the raw Twitter data for social-media language and fine-tuned a BERT-based model for sentiment classification. Applied the model to the election discourse to examine public sentiment."
       }
     ]
   },
   {
     slug: "sentiment-analyzing-chatbot",
     title: "Sentiment Analyzing Chatbot",
-    summary: "An interactive chatbot using sentiment analysis, Markov modeling, TF-IDF, dependency parsing, and multiple classical machine learning approaches.",
+    summary: "A sentiment-aware chatbot combining Markov-based conversation with a comparison of classical sentiment classifiers.",
     category: "NLP",
     timeframe: "2024",
     year: 2024,
@@ -313,15 +306,15 @@ export const projects: Project[] = [
     brief: [
       {
         heading: "The problem",
-        text: "The goal was to build a chatbot that could respond conversationally while also understanding sentiment from user input."
+        text: "Build a chatbot that can respond conversationally while identifying sentiment in user input."
       },
       {
-        heading: "The work",
-        text: "Used NLTK and Markov modeling as the conversational backbone. Implemented Logistic Regression, Gaussian Naive Bayes, Linear SVM, and MLP-based neural networks for sentiment classification. Applied TF-IDF vectorization and dependency parsing to improve contextual understanding and response quality."
+        heading: "Conversation",
+        text: "Used NLTK and Markov modeling for the conversational backbone, with TF-IDF vectorization and dependency parsing to represent and analyze the input text."
       },
       {
-        heading: "Outcome",
-        text: "Delivered a practical conversational NLP system with sentiment-awareness. Demonstrated model comparison across multiple classical ML approaches. Strengthened the portfolio’s breadth in practical NLP applications."
+        heading: "Sentiment classification",
+        text: "Implemented and compared Logistic Regression, Gaussian Naive Bayes, Linear SVM, and MLP neural networks as sentiment classifiers."
       }
     ]
   },
@@ -344,15 +337,11 @@ export const projects: Project[] = [
     brief: [
       {
         heading: "The problem",
-        text: "The project focused on predicting accident severity and trends from a long-range real-world dataset spanning a decade of U.S. accident records."
+        text: "Predict accident severity and analyze trends using ten years of U.S. accident records."
       },
       {
         heading: "The work",
-        text: "Preprocessed a large accident dataset for classification modeling. Implemented Support Vector Machines, Logistic Regression, and a custom-built neural network. Compared model behavior and evaluation outcomes to understand performance tradeoffs."
-      },
-      {
-        heading: "Outcome",
-        text: "Built a full applied ML workflow around a realistic tabular dataset. Produced comparative model results rather than relying on a single baseline. Connected the work to prevention-oriented insight rather than just raw accuracy."
+        text: "Preprocessed the tabular accident data and implemented Support Vector Machines, Logistic Regression, and a custom neural network. Compared model behavior and evaluation results across those approaches."
       }
     ]
   },
@@ -376,10 +365,6 @@ export const projects: Project[] = [
       {
         heading: "The project",
         text: "A web-based system that translates natural language queries into database operations using semantic modeling and deep learning."
-      },
-      {
-        heading: "What it demonstrates",
-        text: "An early project showing interest in user-friendly interfaces over technical systems."
       }
     ]
   },
@@ -403,10 +388,6 @@ export const projects: Project[] = [
       {
         heading: "The project",
         text: "An IoT-based smart building model using Node.js and Python on a Raspberry Pi, with automated control of appliances based on sensor feedback."
-      },
-      {
-        heading: "What it demonstrates",
-        text: "An early project showing embedded systems and automation experience."
       }
     ]
   }

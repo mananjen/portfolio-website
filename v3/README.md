@@ -75,8 +75,14 @@ Switch deployment after the remaining pages and content are ready for launch.
 
 Current role/name reuse the repository's `src/content/meta.ts`; artwork reuses
 existing assets. V3 project records are maintained separately from v2 during the
-migration. The flagship uses the reviewed compact draft; supporting narratives
-carry existing copy and still need editorial review.
+migration. The flagship uses the reviewed compact draft. Supporting briefs have
+received a copy edit using existing portfolio records: concrete methods and
+artifacts replace generic claims about skills or portfolio value. The Hinglish
+brief also uses the pipeline, ablation, and error-analysis work recorded in the
+shared research role. This is not independent verification of results, artifact
+availability, or individual ownership; those still need owner review before launch.
+Older entries with limited source material stay short rather than gaining
+invented outcomes. All brief copy remains in `src/content/projects.ts`.
 
 Experience reuses `../src/content/experience.ts` for role and education records,
 rendering their declared order. Maintain reverse chronology there. Optional

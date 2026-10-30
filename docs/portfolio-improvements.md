@@ -48,7 +48,7 @@ is `/portfolio-website/`, and a direct brief URL is
 on GitHub Pages without server rewrites.
 
 Home, Projects, Experience, and About are implemented in React.
-Remaining project copy review and final visual refinement follow separately.
+Project evidence/ownership review and final visual refinement follow separately.
 The personal link opens v3's About page. The existing React
 site and A–I study commands remain available; deployment still targets the
 current site until v3 is ready. No deployment is authorized by this decision.
@@ -86,6 +86,24 @@ build, and `git diff --check` passed. Both new tests failed before their
 implementation and passed afterward. Standards and spec reviews found no
 actionable issues. Browser layout/keyboard acceptance is pending; the existing
 Vite native-config warnings remain. No dependencies were added.
+
+Supporting-project copy pass on 30 October 2026: edited the ten non-flagship
+briefs in `v3/src/content/projects.ts` using existing portfolio records. Removed
+generic skill/portfolio claims and unsubstantiated improvement language, while
+retaining recorded methods, scale, datasets, and artifacts. The Hinglish brief
+also draws on the pipeline, ablations, error analysis, and submission contribution
+already recorded in `src/content/experience.ts`. The two oldest projects keep
+their substantive descriptions without filler or invented outcomes. No new
+metrics, ownership claims, or artifact destinations were introduced. Existing
+links and the flagship copy are unchanged; public availability and evidence are
+not independently verified by this editorial pass. Owner review remains pending.
+
+Validation: v3 typecheck/build, all seven App/router tests, and
+`git diff --check` passed. A structured before/after comparison confirmed that
+the complete flagship record and all project identifiers, order, dates,
+technologies, featured selection, images, and links are unchanged. No component,
+dependency, or deployment changes were needed. Existing Vite configuration
+warnings remain; browser review of the edited briefs is still pending.
 
 ### Earlier connected prototype and technology exploration (superseded)
 
