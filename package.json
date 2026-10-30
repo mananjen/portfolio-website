@@ -20,7 +20,7 @@
     "dev": "vite",
     "build": "tsc -b && tsx scripts/inject-meta.ts && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --project tsconfig.app.json --noEmit && tsc --project tsconfig.node.json --noEmit",
     "inject-meta": "tsx scripts/inject-meta.ts",
     "deploy": "npm run build && gh-pages -d dist",
     "prototype": "vite --open /src/pages/portfolio-prototype.html",
