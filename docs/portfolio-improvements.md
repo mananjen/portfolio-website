@@ -1,7 +1,14 @@
 # Portfolio improvement planning
 
-Updated: 30 October 2026. These notes record decisions, exploration history,
+Updated: 2 November 2026. These notes record decisions, exploration history,
 and the current implementation scope.
+
+The [2 November readiness review](reviews/v3-readiness-2026-11-02.md) records
+the current GitHub backlog, additional confirmed gaps, and unpublished ticket
+drafts. Manan deferred ticket publication to his personal laptop. The agreed
+scope is technical/editorial readiness before hands-on review; design experiments
+and deployment remain outside this review. The evidence/approval standard and
+contact-capability choices are captured as open decision drafts.
 
 ## Agreed direction
 
