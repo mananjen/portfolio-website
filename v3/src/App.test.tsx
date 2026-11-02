@@ -31,8 +31,25 @@ beforeEach(() => {
 afterEach(async () => {
   await act(() => root.unmount())
   container.remove()
+  document.head.querySelectorAll("[data-test-meta]").forEach(element => element.remove())
   vi.restoreAllMocks()
 })
+
+function addMetadataTags() {
+  for (const [attribute, name] of [["name", "description"], ["property", "og:title"], ["property", "og:description"]]) {
+    const meta = document.createElement("meta")
+    meta.setAttribute(attribute, name)
+    meta.setAttribute("data-test-meta", "")
+    document.head.append(meta)
+  }
+}
+
+function expectMetadata(title: string, description: string) {
+  expect(document.title).toBe(title)
+  expect(document.querySelector('meta[name="description"]')?.getAttribute("content")).toBe(description)
+  expect(document.querySelector('meta[property="og:title"]')?.getAttribute("content")).toBe(title)
+  expect(document.querySelector('meta[property="og:description"]')?.getAttribute("content")).toBe(description)
+}
 
 async function renderAt(url: string) {
   await act(() => root.render(
@@ -53,6 +70,69 @@ function briefToggle(slug: string) {
 }
 
 describe("the v3 project reading journey", () => {
+  it.each(["/ABOUT/", "/%61bout"])("uses About metadata for route variant %s", async url => {
+    addMetadataTags()
+    await renderAt(url)
+
+    expect(container.querySelector("h1")?.textContent).toContain("A little more about me")
+    expectMetadata("About — Manan Jain", "A little beyond work: Manan’s artwork, books, games, and other interests.")
+  })
+
+  it.each(["/PROJECTS/", "/%70rojects"])("keeps project metadata and brief focus on %s", async path => {
+    addMetadataTags()
+    await renderAt(`${path}?project=hinglish-sarcasm-detection`)
+
+    expectMetadata("Projects — Manan Jain", "Research and independent work in language, vision, and applied AI. Explore the work, decisions, and results.")
+    expect(briefToggle("hinglish-sarcasm-detection")?.getAttribute("aria-expanded")).toBe("true")
+    expect(document.activeElement).toBe(briefToggle("hinglish-sarcasm-detection"))
+  })
+
+  it("uses recovery metadata for an unknown destination", async () => {
+    addMetadataTags()
+    await renderAt("/about/unknown")
+
+    expect(container.querySelector("h1")?.textContent).toBe("That page isn’t here yet.")
+    expectMetadata("Page not found — Manan Jain", "This page could not be found. Explore Manan Jain’s projects or return home.")
+  })
+
+  it.each(["/EXPERIENCE", "/experience/"])("uses Experience metadata for %s", async url => {
+    addMetadataTags()
+    await renderAt(url)
+
+    expect(container.querySelector("h1")?.textContent).toContain("Engineering in practice.")
+    expectMetadata("Experience — Manan Jain", "Industry engineering, multilingual NLP research, and a foundation in computer science.")
+  })
+
+  it.each([
+    ["/", "Manan Jain — Machine learning & research", "Language, vision, and the engineering around them. Selected research and projects by Manan Jain."],
+    ["/projects", "Projects — Manan Jain", "Research and independent work in language, vision, and applied AI. Explore the work, decisions, and results."],
+    ["/experience", "Experience — Manan Jain", "Industry engineering, multilingual NLP research, and a foundation in computer science."],
+    ["/about", "About — Manan Jain", "A little beyond work: Manan’s artwork, books, games, and other interests."],
+  ])("uses the correct metadata for canonical route %s", async (url, title, description) => {
+    addMetadataTags()
+    await renderAt(url)
+
+    expectMetadata(title, description)
+  })
+
+  it("updates metadata when navigating and using Back and Forward", async () => {
+    addMetadataTags()
+    await renderAt("/")
+    await click(container.querySelector('nav a[href="/about"]'))
+    expect(document.title).toBe("About — Manan Jain")
+    expect(document.querySelector('meta[property="og:title"]')?.getAttribute("content")).toBe("About — Manan Jain")
+
+    await click(container.querySelector("#test-back"))
+    expect(document.title).toBe("Manan Jain — Machine learning & research")
+    expect(document.querySelector('meta[property="og:description"]')?.getAttribute("content"))
+      .toBe("Language, vision, and the engineering around them. Selected research and projects by Manan Jain.")
+
+    await click(container.querySelector("#test-forward"))
+    expect(document.title).toBe("About — Manan Jain")
+    expect(document.querySelector('meta[name="description"]')?.getAttribute("content"))
+      .toBe("A little beyond work: Manan’s artwork, books, games, and other interests.")
+  })
+
   it("returns focus and scroll to work when its link is activated again", async () => {
     await renderAt("/")
     const workLink = container.querySelector<HTMLAnchorElement>('a[href="/#work"]')

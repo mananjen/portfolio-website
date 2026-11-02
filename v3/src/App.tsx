@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom"
+import { Link, Navigate, Route, Routes, useLocation, useMatch } from "react-router-dom"
 import { Layout } from "./components/Layout"
 import { projects } from "./content/projects"
 import { notFound } from "./content/site"
@@ -12,11 +12,16 @@ import { AboutPage } from "./pages/AboutPage"
 function RouteEffects() {
   const { pathname, search, hash, key: navigationKey } = useLocation()
   const previousPath = useRef<string | undefined>(undefined)
+  const isProjects = useMatch("/projects") !== null
+  const isExperience = useMatch("/experience") !== null
+  const isAbout = useMatch("/about") !== null
+  const isHome = useMatch("/") !== null
+  const meta = isProjects ? pageMeta.projects
+    : isExperience ? pageMeta.experience
+    : isAbout ? pageMeta.about
+    : isHome ? pageMeta.home : pageMeta.notFound
 
   useEffect(() => {
-    const meta = pathname === "/projects" ? pageMeta.projects
-      : pathname === "/experience" ? pageMeta.experience
-      : pathname === "/about" ? pageMeta.about : pageMeta.home
     document.title = meta.title
     document.querySelector('meta[name="description"]')?.setAttribute("content", meta.description)
     document.querySelector('meta[property="og:title"]')?.setAttribute("content", meta.title)
@@ -25,7 +30,7 @@ function RouteEffects() {
     const changedPage = previousPath.current !== pathname
     previousPath.current = pathname
     const selected = new URLSearchParams(search).get("project")
-    if (pathname === "/projects" && projects.some(project => project.slug === selected)) return
+    if (isProjects && projects.some(project => project.slug === selected)) return
     const anchor = hash ? document.getElementById(hash.slice(1)) : null
     if (anchor) {
       anchor.focus({ preventScroll: true })
@@ -34,7 +39,7 @@ function RouteEffects() {
       window.scrollTo(0, 0)
       document.getElementById("main")?.focus({ preventScroll: true })
     }
-  }, [pathname, search, hash, navigationKey])
+  }, [pathname, search, hash, navigationKey, isProjects, meta])
 
   return null
 }

@@ -17,4 +17,8 @@ export const pageMeta = {
     title: `About — ${siteName}`,
     description: "A little beyond work: Manan’s artwork, books, games, and other interests.",
   },
+  notFound: {
+    title: `Page not found — ${siteName}`,
+    description: `This page could not be found. Explore ${siteName}’s projects or return home.`,
+  },
 }
