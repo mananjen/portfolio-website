@@ -10,7 +10,7 @@ import { ExperiencePage } from "./pages/ExperiencePage"
 import { AboutPage } from "./pages/AboutPage"
 
 function RouteEffects() {
-  const { pathname, search, hash } = useLocation()
+  const { pathname, search, hash, key: navigationKey } = useLocation()
   const previousPath = useRef<string | undefined>(undefined)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function RouteEffects() {
       window.scrollTo(0, 0)
       document.getElementById("main")?.focus({ preventScroll: true })
     }
-  }, [pathname, search, hash])
+  }, [pathname, search, hash, navigationKey])
 
   return null
 }

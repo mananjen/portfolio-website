@@ -53,6 +53,27 @@ function briefToggle(slug: string) {
 }
 
 describe("the v3 project reading journey", () => {
+  it("returns focus and scroll to work when its link is activated again", async () => {
+    await renderAt("/")
+    const workLink = container.querySelector<HTMLAnchorElement>('a[href="/#work"]')
+    const work = container.querySelector("#work")
+    const scrollIntoView = vi.mocked(HTMLElement.prototype.scrollIntoView)
+
+    await click(workLink)
+    expect(document.activeElement).toBe(work)
+    expect(scrollIntoView).toHaveBeenCalledWith({ block: "start" })
+    expect(scrollIntoView.mock.contexts).toEqual([work])
+
+    // Move focus back to the hero; jsdom observes scroll requests, not layout.
+    await act(() => workLink?.focus())
+    scrollIntoView.mockClear()
+    await click(workLink)
+
+    expect(document.activeElement).toBe(work)
+    expect(scrollIntoView).toHaveBeenCalledWith({ block: "start" })
+    expect(scrollIntoView.mock.contexts).toEqual([work])
+  })
+
   it("opens About from the homepage personal link and returns through history", async () => {
     await renderAt("/")
     await click(container.querySelector("main aside a"))
