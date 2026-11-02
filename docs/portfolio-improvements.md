@@ -4,11 +4,34 @@ Updated: 2 November 2026. These notes record decisions, exploration history,
 and the current implementation scope.
 
 The [2 November readiness review](reviews/v3-readiness-2026-11-02.md) records
-the current GitHub backlog, additional confirmed gaps, and unpublished ticket
-drafts. Manan deferred ticket publication to his personal laptop. The agreed
-scope is technical/editorial readiness before hands-on review; design experiments
-and deployment remain outside this review. The evidence/approval standard and
-contact-capability choices are captured as open decision drafts.
+the reviewed GitHub backlog and published follow-up issues. The
+[readiness overview](https://github.com/mananjen/portfolio-website/issues/15)
+tracks technical/editorial readiness before hands-on review; design experiments
+and deployment remain outside this review. The
+[evidence/approval standard](https://github.com/mananjen/portfolio-website/issues/13#issuecomment-6574806527)
+is agreed, with an [evidence inventory next](https://github.com/mananjen/portfolio-website/issues/17).
+Manan resolved the
+[contact-capability decision](https://github.com/mananjen/portfolio-website/issues/14#issuecomment-6574737861):
+keep footer email/GitHub/LinkedIn, the top email action, and the legacy contact
+redirect; add selectable email and copy-email with success/failure feedback;
+omit phone in v3. [Implementation is tracked separately](https://github.com/mananjen/portfolio-website/issues/16).
+
+## Editorial evidence and owner review
+
+Agreed on 2 November 2026: specific claims require an identifiable source or
+Manan's explicit confirmation of their meaning and scope. Exact metrics also
+need measurement context: what was measured, compared against what, and how.
+A paper, benchmark, or Manan's explanation can provide that context; public
+employer material is not required. Unsupported rough recollections should use
+concrete non-numeric wording. Record uncertainty in working notes.
+
+Manan reviews individual contributions, role/publication/code-release status,
+and time-sensitive personal facts. Routine wording edits within already-confirmed
+facts need no fresh approval. Publication acceptance, manuscript availability,
+proceedings publication, and code release remain separate facts. A prose edit or
+passing build does not verify claims or approve launch. The evidence-inventory
+issue above identifies the next review work; accepting this standard does not
+confirm any previously unverified claim.
 
 ## Agreed direction
 
