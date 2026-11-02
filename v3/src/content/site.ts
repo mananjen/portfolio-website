@@ -65,6 +65,7 @@ export const projectLabels = {
   image: "Open full-size image ↗",
   imageAlt: (title: string) => `Overview of ${title}`,
   readLabel: (title: string) => `Read brief: ${title}`,
+  closeLabel: (title: string) => `Close brief: ${title}`,
   briefLabel: (title: string) => `Inside the project: ${title}`,
 }
 

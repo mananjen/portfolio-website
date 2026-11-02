@@ -51,6 +51,7 @@ export function ProjectCard({ project, expanded, onToggle }: ProjectCardProps) {
         ref={toggle}
         className={styles.toggle}
         type="button"
+        aria-label={expanded ? projectLabels.closeLabel(project.title) : projectLabels.readLabel(project.title)}
         aria-expanded={expanded}
         aria-controls={briefId}
         onClick={onToggle}

@@ -123,14 +123,20 @@ describe("the v3 project reading journey", () => {
   it("restores a supporting brief from its URL and preserves one-open behavior", async () => {
     await renderAt("/projects?project=hinglish-sarcasm-detection")
     expect(briefToggle("hinglish-sarcasm-detection")?.getAttribute("aria-expanded")).toBe("true")
+    expect(briefToggle("hinglish-sarcasm-detection")?.getAttribute("aria-label")).toBe("Close brief: Hindi-English Code-mixed Sarcasm Detection")
+    expect(document.activeElement).toBe(briefToggle("hinglish-sarcasm-detection"))
+    expect(briefToggle("video-enhancement")?.getAttribute("aria-label")).toBe("Read brief: Video Enhancement")
 
     await click(briefToggle("video-enhancement"))
     expect(briefToggle("hinglish-sarcasm-detection")?.getAttribute("aria-expanded")).toBe("false")
+    expect(briefToggle("hinglish-sarcasm-detection")?.getAttribute("aria-label")).toBe("Read brief: Hindi-English Code-mixed Sarcasm Detection")
     expect(briefToggle("video-enhancement")?.getAttribute("aria-expanded")).toBe("true")
+    expect(briefToggle("video-enhancement")?.getAttribute("aria-label")).toBe("Close brief: Video Enhancement")
     expect(document.activeElement).toBe(briefToggle("video-enhancement"))
 
     await click(briefToggle("video-enhancement"))
     expect(container.querySelectorAll('button[aria-expanded="true"]')).toHaveLength(0)
+    expect(briefToggle("video-enhancement")?.getAttribute("aria-label")).toBe("Read brief: Video Enhancement")
     expect(document.activeElement).toBe(briefToggle("video-enhancement"))
 
     await click(container.querySelector("#test-back"))
