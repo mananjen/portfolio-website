@@ -2,6 +2,7 @@ import profileImage from "@/assets/temp.jpg"
 import { featuredProjects } from "@/content/projects"
 import { education, homeExperienceHighlights, workExperience } from "@/content/experience"
 import { currentRole, siteName } from "@/content/meta"
+import { emailAddress } from "@/content/contact"
 
 export type ContactLink = {
   label: string
@@ -13,7 +14,7 @@ export type ContactLink = {
 export const siteConfig = {
   name: siteName,
   profileImage,
-  email: "mananjen@gmail.com",
+  email: emailAddress,
   github: "https://github.com/mananjen",
   linkedin: "https://www.linkedin.com/in/mananjen",
   currentLocation: "Hyderabad, Telangana, India",

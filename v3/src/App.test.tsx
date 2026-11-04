@@ -33,6 +33,7 @@ afterEach(async () => {
   container.remove()
   document.head.querySelectorAll("[data-test-meta]").forEach(element => element.remove())
   vi.restoreAllMocks()
+  vi.unstubAllGlobals()
 })
 
 function addMetadataTags() {
@@ -70,6 +71,63 @@ function briefToggle(slug: string) {
 }
 
 describe("the v3 project reading journey", () => {
+  it("shows a selectable email and confirms copying only after it succeeds", async () => {
+    let finishCopy = () => {}
+    const writeText = vi.fn(() => new Promise<void>(resolve => { finishCopy = resolve }))
+    vi.stubGlobal("navigator", { clipboard: { writeText } })
+    await renderAt("/contact")
+
+    const footer = container.querySelector("#contact")
+    expect(document.activeElement).toBe(footer)
+    expect(footer?.textContent).toContain("mananjen@gmail.com")
+    expect(footer?.querySelector('a[href="mailto:mananjen@gmail.com"]')).not.toBeNull()
+    expect(footer?.querySelector('a[href^="tel:"]')).toBeNull()
+    expect(container.querySelector('nav a[href="mailto:mananjen@gmail.com"]')).not.toBeNull()
+    expect(footer?.querySelector('a[href="https://github.com/mananjen"]')).not.toBeNull()
+    expect(footer?.querySelector('a[href="https://www.linkedin.com/in/mananjen"]')).not.toBeNull()
+    const copyButton = footer?.querySelector<HTMLButtonElement>("button") ?? null
+    expect(copyButton?.textContent).toBe("Copy email")
+    expect(copyButton?.type).toBe("button")
+    expect(footer?.querySelector('[role="status"]')?.getAttribute("aria-live")).toBe("polite")
+
+    await click(copyButton)
+    expect(writeText).toHaveBeenCalledWith("mananjen@gmail.com")
+    expect(copyButton?.disabled).toBe(true)
+    expect(footer?.querySelector('[role="status"]')?.textContent).not.toBe("Email copied.")
+    await act(async () => finishCopy())
+    expect(copyButton?.disabled).toBe(false)
+    expect(footer?.querySelector('[role="status"]')?.textContent).toBe("Email copied.")
+  })
+
+  it("offers manual copying after clipboard rejection and allows a retry", async () => {
+    const writeText = vi.fn().mockRejectedValueOnce(new Error("Permission denied")).mockResolvedValueOnce(undefined)
+    vi.stubGlobal("navigator", { clipboard: { writeText } })
+    await renderAt("/")
+
+    const footer = container.querySelector("#contact")
+    const copyButton = footer?.querySelector<HTMLButtonElement>("button") ?? null
+    await click(copyButton)
+    expect(footer?.querySelector('[role="status"]')?.textContent)
+      .toBe("Could not copy email. Select the address above to copy it manually.")
+    expect(footer?.textContent).toContain("mananjen@gmail.com")
+    expect(copyButton?.disabled).toBe(false)
+
+    await click(copyButton)
+    expect(writeText).toHaveBeenCalledTimes(2)
+    expect(footer?.querySelector('[role="status"]')?.textContent).toBe("Email copied.")
+  })
+
+  it("offers manual copying when the clipboard API is unavailable", async () => {
+    vi.stubGlobal("navigator", {})
+    await renderAt("/")
+
+    const footer = container.querySelector("#contact")
+    await click(footer?.querySelector("button") ?? null)
+    expect(footer?.querySelector('[role="status"]')?.textContent)
+      .toBe("Could not copy email. Select the address above to copy it manually.")
+    expect(footer?.textContent).toContain("mananjen@gmail.com")
+  })
+
   it.each(["/ABOUT/", "/%61bout"])("uses About metadata for route variant %s", async url => {
     addMetadataTags()
     await renderAt(url)

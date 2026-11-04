@@ -1,15 +1,17 @@
 import portrait from "../../../src/assets/temp.jpg?url"
 import painting from "../../../src/assets/art1.jpg?url"
 import { currentRole, siteName } from "../../../src/content/meta"
+import { emailAddress } from "../../../src/content/contact"
 import { pageMeta } from "./meta"
 
-const email = "mailto:mananjen@gmail.com"
+const email = `mailto:${emailAddress}`
 const location = "Hyderabad, India"
 
 export const site = {
   name: siteName,
   ...pageMeta.home,
   email,
+  emailAddress,
   nav: [
     { label: "Home", path: "/" },
     { label: "Projects", path: "/projects" },
@@ -22,6 +24,10 @@ export const site = {
   footer: {
     eyebrow: "Have something in mind?",
     title: "Let’s talk.",
+    copyEmail: "Copy email",
+    copyingEmail: "Copying email…",
+    emailCopied: "Email copied.",
+    copyEmailFailed: "Could not copy email. Select the address above to copy it manually.",
     signature: `${siteName} · ${location}`,
     links: [
       { label: "Email", href: email },
