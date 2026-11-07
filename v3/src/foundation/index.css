@@ -29,15 +29,10 @@
   h3 { font-size: var(--size-subheading); line-height: var(--leading-subheading); letter-spacing: var(--tracking-subheading); font-weight: var(--weight-subheading); }
   p { text-wrap: pretty; }
   .container { width: min(1200px, 100%); padding-inline: var(--space); margin-inline: auto; }
-  /* Retired: use the foundation `label` style. Kept until the last use is migrated. */
-  .eyebrow {
-    font-family: var(--font-mono); font-size: var(--size-label); line-height: var(--leading-label);
-    letter-spacing: var(--tracking-label); font-weight: var(--weight-label); text-transform: uppercase; color: var(--accent);
-  }
   .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
   .text-link { color: var(--accent); font-size: var(--size-ui); }
   .muted { color: var(--muted); }
   .page-message { padding-block: 60px; }
-  .page-message p { margin-block: 24px; }
+  .page-message p { margin-block: var(--flow-loose); }
   ::selection { background: var(--selection); color: var(--background); }
 }
