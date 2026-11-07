@@ -64,8 +64,9 @@ and in-page section links move focus without losing the current route.
 Home, Projects, Experience, and About are implemented. Final copy/design work
 remains for subsequent changes. The homepage personal link opens v3's About page
 at `#/about`; v3's old `/contact` route leads to its footer.
-Unknown routes show a recovery page. Earlier A-I and reading studies remain
-available through the root prototype scripts.
+Unknown routes show a recovery page. Earlier A-I and reading studies have been
+retired; their exploration history remains in `../docs/portfolio-improvements.md`.
+The v3 app renders its own page components and does not use prototype entrypoints.
 
 V3 dependencies, lockfile, and output are separate from the current site.
 `npm run build:v3` writes `v3/dist`; the existing build/deploy commands still

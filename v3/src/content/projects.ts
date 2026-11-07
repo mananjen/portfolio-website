@@ -1,4 +1,4 @@
-import researchImage from "../../../src/assets/training_free_cross_modal_alignment.JPG?url"
+import researchImage from "../../../src/assets/training_free_cross_modal_alignment.png?url"
 import sarcasmImage from "../../../src/assets/hinglish_sarcasm_infographic.svg?url"
 
 export type Project = {

@@ -222,10 +222,11 @@ substantive information. Do not invent details or pad a story to fill a page. Fu
 experiment histories and implementation walkthroughs are unnecessary. Compare
 the two reading formats later; neither has been selected or implemented.
 
-## Local homepage design exploration
+## Local homepage design exploration (historical)
 
-Run `npm run prototype`. This opens the separate, development-only HTML entry
-at `/src/pages/portfolio-prototype.html`; the current homepage is untouched.
+The study used the development-only `/src/pages/portfolio-prototype.html` entry
+and `npm run prototype` script. Both were retired on 7 November 2026 after the
+v3 implementation replaced them. The notes below preserve the design history.
 
 - `?variant=A`: Personal publication — serif introduction and editorial spreads.
 - `?variant=B`: Research notebook — rejected; retained for comparison only.
@@ -417,7 +418,11 @@ can be presented separately with paper/code links once public destinations are
 checked. The result and ablation numbers above come from different reported
 experiments; retain their respective precision and scope.
 
-### Local project reading prototype
+### Local project reading prototype (historical)
+
+The standalone study files and `prototype:reading` script were retired on
+7 November 2026. V3 implements the selected inline-brief behavior. Commands and
+file paths below describe the earlier study, not the current workflow.
 
 #### Revision: shorter inline direction
 
