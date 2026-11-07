@@ -106,12 +106,19 @@ updates page titles/descriptions after navigation. This is a client-rendered
 site; social crawlers that do not run JavaScript receive the homepage metadata,
 including when a project brief URL is shared.
 
+Social preview URLs reuse `../src/content/meta.ts`. The v3 build includes the
+existing `../public/og-image.jpg` at the path named by its shared URL; it does not
+copy the older site's whole public directory. Open Graph and Twitter preview
+tags use the homepage metadata.
+
 ## Validation
 
 Run `npm run check:v3`, `npm --prefix v3 test`, and `npm run build:v3`.
 The small app-level suite checks Home-to-brief navigation, direct selection,
 one-open behavior, Back/Forward, focus, Skip, and the legacy contact route using
 React Router and an in-memory DOM. It does not measure browser layout.
+The production-build test checks the emitted social metadata and verifies that
+the referenced preview image ships unchanged. It does not test platform caches.
 Experience coverage includes navigation/title/focus and research brief links with
 Back navigation from a direct Experience visit.
 About coverage includes the homepage personal link, active navigation, title,
