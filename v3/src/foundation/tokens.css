@@ -1,0 +1,107 @@
+/*
+  Fallback faces reduce layout shift while web fonts load. Metrics computed with
+  @capsizecss/core 4.1.3 createFontStack and @capsizecss/metrics 4.4.0.
+*/
+@font-face {
+  font-family: "Fraunces Variable Fallback";
+  src: local("Georgia");
+  ascent-override: 92.9623%;
+  descent-override: 24.2386%;
+  size-adjust: 105.2039%;
+}
+@font-face {
+  font-family: "Recursive Variable Fallback";
+  src: local("Arial"), local("ArialMT");
+  ascent-override: 83.0413%;
+  descent-override: 21.853%;
+  line-gap-override: 0%;
+  size-adjust: 114.4009%;
+}
+@font-face {
+  font-family: "Syne Mono Fallback";
+  src: local("Courier New"), local("CourierNewPSMT");
+  ascent-override: 100.9255%;
+  descent-override: 30.0049%;
+  size-adjust: 91.6517%;
+}
+
+/* Fluid sizes scale from a 360px to a 1440px viewport and are capped outside it. */
+:root {
+  --font-display: "Fraunces Variable", "Fraunces Variable Fallback", Georgia, serif;
+  --font-body: "Recursive Variable", "Recursive Variable Fallback", Arial, sans-serif;
+  --font-mono: "Syne Mono", "Syne Mono Fallback", "Courier New", monospace;
+
+  --size-display: clamp(2.75rem, 1.8333rem + 4.0741vw, 5.5rem);
+  --leading-display: 1.02;
+  --tracking-display: -0.03em;
+  --weight-display: 500;
+
+  --size-title: clamp(2.5rem, 2rem + 2.2222vw, 4rem);
+  --leading-title: 1.05;
+  --tracking-title: -0.025em;
+  --weight-title: 500;
+
+  --size-heading: clamp(1.75rem, 1.5rem + 1.1111vw, 2.5rem);
+  --leading-heading: 1.12;
+  --tracking-heading: -0.015em;
+  --weight-heading: 500;
+
+  --size-subheading: clamp(1.3125rem, 1.2292rem + 0.3704vw, 1.5625rem);
+  --leading-subheading: 1.2;
+  --tracking-subheading: -0.005em;
+  --weight-subheading: 500;
+
+  --size-body: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem);
+  --leading-body: 1.65;
+  --tracking-body: 0;
+  --weight-body: 400;
+
+  --size-small: clamp(0.9375rem, 0.9167rem + 0.0926vw, 1rem);
+  --leading-small: 1.6;
+  --tracking-small: 0;
+  --weight-small: 400;
+
+  --size-ui: clamp(0.875rem, 0.8542rem + 0.0926vw, 0.9375rem);
+  --leading-ui: 1.5;
+  --tracking-ui: 0;
+  --weight-ui: 400;
+
+  --size-meta: clamp(0.78125rem, 0.7708rem + 0.0463vw, 0.8125rem);
+  --leading-meta: 1.45;
+  --tracking-meta: 0;
+  --weight-meta: 400;
+
+  --size-label: clamp(0.75rem, 0.7292rem + 0.0926vw, 0.8125rem);
+  --leading-label: 1.5;
+  --tracking-label: 0.1em;
+  --weight-label: 400;
+
+  --size-caption: clamp(0.75rem, 0.7396rem + 0.0463vw, 0.78125rem);
+  --leading-caption: 1.5;
+  --tracking-caption: 0;
+  --weight-caption: 400;
+
+  --size-code: clamp(0.75rem, 0.7292rem + 0.0926vw, 0.8125rem);
+  --leading-code: 1.5;
+  --tracking-code: 0;
+  --weight-code: 400;
+
+  --flow-tight: clamp(0.5rem, 0.4167rem + 0.3704vw, 0.75rem);
+  --flow: clamp(0.875rem, 0.75rem + 0.5556vw, 1.25rem);
+  --flow-loose: clamp(1.5rem, 1.25rem + 1.1111vw, 2.25rem);
+
+  /* Layout gutter carried over unchanged; spacing tokens belong to a later map. */
+  --space: clamp(22px, 4vw, 48px);
+
+  --background: #101d34;
+  --surface: #1b324a;
+  --cobalt: #204eb7;
+  --text: #f1f5ff;
+  --muted: #b6c6df;
+  --accent: #b6d3ff;
+  --line: #3f5472;
+  --on-cobalt: #e0ebff;
+  --on-cobalt-line: #aac5ff88;
+  --figure-background: #dce6f6;
+  --selection: #a5c9ff;
+}

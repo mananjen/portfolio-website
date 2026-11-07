@@ -1,0 +1,12 @@
+/* Text styles set type only, never margins or colour. Compose one, then tweak layout or weight, or swap a token. */
+.display { font-family: var(--font-display); font-size: var(--size-display); line-height: var(--leading-display); letter-spacing: var(--tracking-display); font-weight: var(--weight-display); }
+.title { font-family: var(--font-display); font-size: var(--size-title); line-height: var(--leading-title); letter-spacing: var(--tracking-title); font-weight: var(--weight-title); }
+.heading { font-family: var(--font-display); font-size: var(--size-heading); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); font-weight: var(--weight-heading); }
+.subheading { font-family: var(--font-display); font-size: var(--size-subheading); line-height: var(--leading-subheading); letter-spacing: var(--tracking-subheading); font-weight: var(--weight-subheading); }
+.body { font-family: var(--font-body); font-size: var(--size-body); line-height: var(--leading-body); letter-spacing: var(--tracking-body); font-weight: var(--weight-body); }
+.small { font-family: var(--font-body); font-size: var(--size-small); line-height: var(--leading-small); letter-spacing: var(--tracking-small); font-weight: var(--weight-small); }
+.ui { font-family: var(--font-body); font-size: var(--size-ui); line-height: var(--leading-ui); letter-spacing: var(--tracking-ui); font-weight: var(--weight-ui); }
+.meta { font-family: var(--font-body); font-size: var(--size-meta); line-height: var(--leading-meta); letter-spacing: var(--tracking-meta); font-weight: var(--weight-meta); }
+.label { font-family: var(--font-mono); font-size: var(--size-label); line-height: var(--leading-label); letter-spacing: var(--tracking-label); font-weight: var(--weight-label); text-transform: uppercase; }
+.caption { font-family: var(--font-mono); font-size: var(--size-caption); line-height: var(--leading-caption); letter-spacing: var(--tracking-caption); font-weight: var(--weight-caption); }
+.code { font-family: var(--font-mono); font-size: var(--size-code); line-height: var(--leading-code); letter-spacing: var(--tracking-code); font-weight: var(--weight-code); }

@@ -38,7 +38,7 @@ export function Layout() {
       <main id="main" tabIndex={-1}><Outlet /></main>
       <footer id="contact" tabIndex={-1} className={`container ${styles.footer}`}>
         <div>
-          <p className="eyebrow">{site.footer.eyebrow}</p>
+          <p className={styles.footerLabel}>{site.footer.eyebrow}</p>
           <a className={styles.contactTitle} href={site.email}>{site.footer.title}<span aria-hidden="true"> ↗</span></a>
         </div>
         <div className={styles.footerLinks}>
@@ -52,7 +52,7 @@ export function Layout() {
               : copyStatus === "copied" ? site.footer.emailCopied
               : copyStatus === "failed" ? site.footer.copyEmailFailed : ""}
           </p>
-          <p>{site.footer.signature}</p>
+          <p className={styles.signature}>{site.footer.signature}</p>
         </div>
       </footer>
     </>

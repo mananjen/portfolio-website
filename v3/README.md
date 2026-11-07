@@ -41,7 +41,7 @@ switching to another port.
 | About composition | `src/pages/AboutPage.tsx` |
 | Shared project rendering | `src/components/ProjectCard.tsx` |
 | Header/footer and shared navigation | `src/components/Layout.tsx` |
-| Fonts, colors, shared spacing | `src/styles/global.css` |
+| Fonts, text styles, colors, shared spacing | `src/foundation/` (`tokens.css` values, `text.module.css` styles, `index.css` base) |
 | Component styles | The adjacent `*.module.css` file |
 | Routes, page metadata, route focus/scroll | `src/App.tsx` |
 
@@ -119,6 +119,8 @@ one-open behavior, Back/Forward, focus, Skip, and the legacy contact route using
 React Router and an in-memory DOM. It does not measure browser layout.
 The production-build test checks the emitted social metadata and verifies that
 the referenced preview image ships unchanged. It does not test platform caches.
+It also checks that the heading, body, and label fonts ship as self-hosted woff2
+files under the site base path and that no third-party font host is referenced.
 Experience coverage includes navigation/title/focus and research brief links with
 Back navigation from a direct Experience visit.
 About coverage includes the homepage personal link, active navigation, title,

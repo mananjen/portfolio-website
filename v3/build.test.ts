@@ -48,3 +48,29 @@ it("ships the unchanged preview image at the path named by its production URL", 
   const original = await readFile(fileURLToPath(new URL(`../public/${path}`, import.meta.url)))
   expect(emitted).toEqual(original)
 })
+
+const basePath = new URL(siteUrl).pathname
+const emittedPath = (url: string) => join(output, url.slice(basePath.length))
+
+async function emittedCss() {
+  const hrefs = [...document.querySelectorAll('link[rel="stylesheet"]')].map(link => link.getAttribute("href")!)
+  const sheets = await Promise.all(hrefs.map(href => readFile(emittedPath(href), "utf8")))
+  return sheets.join("\n")
+}
+
+it("self-hosts the heading, body, and label fonts as woff2 files under the site base path", async () => {
+  const css = await emittedCss()
+  const fontUrls = [...css.matchAll(/url\(([^)]+\.woff2)\)/g)].map(match => match[1].replace(/["']/g, ""))
+  for (const family of ["fraunces", "recursive", "syne-mono"]) {
+    expect(fontUrls.some(url => url.includes(family)), `${family} woff2 referenced`).toBe(true)
+  }
+  for (const url of fontUrls) {
+    expect(url.startsWith(`${basePath}assets/`), url).toBe(true)
+    await expect(readFile(emittedPath(url))).resolves.toBeDefined()
+  }
+})
+
+it("requests no fonts from third-party hosts", async () => {
+  const shipped = `${document.documentElement.outerHTML}\n${await emittedCss()}`
+  expect(shipped).not.toMatch(/fonts\.(googleapis|gstatic)\.com|use\.typekit|fonts\.bunny/)
+})
