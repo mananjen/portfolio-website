@@ -88,6 +88,10 @@ terms for this handoff, and no architecture trade-off warrants another ADR.
 
 ## Later validation
 
+The [claim evidence inventory and precise owner questions](v3-claim-evidence.md)
+records the 7 November evidence pass for issue #17. Its pending recommendations
+are separate from owner-approved website copy and launch acceptance.
+
 The suite uses MemoryRouter and jsdom; production uses HashRouter and StrictMode.
 Include a small actual-entrypoint smoke check for a hash-selected brief, initial
 visit, Back/Forward, and the legacy contact route when planning the later

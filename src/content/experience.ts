@@ -64,7 +64,7 @@ export const workExperience: ExperienceEntry[] = [
     bullets: [
       "Built a training-free / non-parametric multilingual image-text retrieval pipeline using pretrained unimodal vision and multilingual text encoders with an external anchor set.",
       "As an equal-contributing coauthor, conducted the initial literature review, investigated candidate datasets and models, built the complete research codebase, and contributed experimental results and research discussions.",
-      "Led Hinglish sarcasm detection work by building an end-to-end pipeline, running ablations and error analysis, and contributing to an ACL Rolling Review submission.",
+      "Implemented the Hinglish sarcasm detection pipeline, ran ablations and error analysis, and curated the dataset with help from another contributor.",
     ],
     homeHighlights: [
       "Led research, implementation and evaluation of solutions for diverse multilingual and code-mixed NLP tasks, on both classical NLP and deep learning based approaches.",

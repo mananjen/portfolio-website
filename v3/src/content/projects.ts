@@ -26,7 +26,7 @@ export const projects: Project[] = [
     title: "Training-free multilingual image retrieval",
     summary: "Connecting frozen text and vision encoders through paired anchors to retrieve images across 36 languages.",
     category: "AI Research",
-    timeframe: "2025 – Present",
+    timeframe: "2025 – 2026",
     year: 2025,
     featured: true,
     technologies: [
@@ -82,7 +82,7 @@ export const projects: Project[] = [
   {
     slug: "hinglish-sarcasm-detection",
     title: "Hindi-English Code-mixed Sarcasm Detection",
-    summary: "Sarcasm detection in Hindi-English code-mixed text, combining dataset curation, deep learning, and experimental evaluation.",
+    summary: "Transformer-based sarcasm detection in Hindi-English code-mixed text, combining dataset curation and experimental evaluation.",
     category: "NLP",
     timeframe: "2025",
     year: 2025,
@@ -96,8 +96,12 @@ export const projects: Project[] = [
     image: sarcasmImage,
     links: [
       {
-        label: "GitHub",
+        label: "Code",
         href: "https://github.com/mananjen/cs521"
+      },
+      {
+        label: "Dataset",
+        href: "https://github.com/mananjen/hinglish_sarcasm_dataset"
       }
     ],
     brief: [
@@ -107,11 +111,11 @@ export const projects: Project[] = [
       },
       {
         heading: "The work",
-        text: "Built a deep learning pipeline for Hinglish sarcasm detection and curated and refined the dataset, drawing on multilingual and code-mixed NLP research from 2023–2024."
+        text: "Owned the project and implemented the transformer-based sarcasm detection pipeline. Curated and refined the dataset with help from another contributor."
       },
       {
         heading: "Evaluation",
-        text: "Ran ablations and error analysis as part of the research effort and contributed to an ACL Rolling Review submission."
+        text: "Ran ablations and error analysis to evaluate the sarcasm detection pipeline."
       }
     ]
   },
@@ -286,12 +290,7 @@ export const projects: Project[] = [
       "TF-IDF",
       "Google Cloud"
     ],
-    links: [
-      {
-        label: "GitHub",
-        href: "https://github.com/mananjen/CS583"
-      }
-    ],
+    links: [],
     brief: [
       {
         heading: "The problem",
