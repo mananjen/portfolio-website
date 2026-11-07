@@ -1,7 +1,51 @@
 # Portfolio improvement planning
 
-Updated: 2 November 2026. These notes record decisions, exploration history,
+Updated: 7 November 2026. These notes record decisions, exploration history,
 and the current implementation scope.
+
+## Current state and remaining work
+
+Manan's assessment on 7 November: **v3 is only a shell. None of the current UI
+is accepted as suitable for launch.** Many UI elements require proper design and
+repeated improvements so the experience works smoothly. This is substantial
+design and interaction work, not a final visual-polish pass. Implemented routes,
+passing tests, and the earlier Cobalt cut selection do not establish UI acceptance.
+
+- **Implemented shell:** React/TypeScript Home, Projects, Experience and About,
+  URL-selected inline project briefs, shared navigation, and content-driven pages.
+  The footer has email/GitHub/LinkedIn, a selectable address, and copy-email
+  success/failure feedback. The top email action and legacy contact redirect are
+  present; phone is omitted under the
+  [contact decision](https://github.com/mananjen/portfolio-website/issues/14#issuecomment-6574737861).
+  [Issue #16](https://github.com/mananjen/portfolio-website/issues/16) remains open,
+  but the capability exists in code; this is not final interaction acceptance.
+- **Settled foundations:** [ADR 0001](adr/0001-react-typescript-for-v3.md) records
+  React/TypeScript. Content stays in typed exports; components own layout and
+  interaction. Inline briefs are implemented. Cobalt cut is a working direction,
+  not an approved final design. Prototype files/scripts were retired on
+  7 November; the A–I studies below remain as written exploration history.
+- **Evidence and copy:** the [claim inventory and owner answers](reviews/v3-claim-evidence.md)
+  complete the review recorded in [#17](https://github.com/mananjen/portfolio-website/issues/17).
+  Reuse those confirmations. Several resulting copy revisions still need to be
+  applied; the inventory distinguishes them from edits already made. ACL
+  proceedings/manuscript availability and public research code were checked
+  separately there. A new broad ownership interview is not required.
+- **Remaining work:** design and iterate on the UI elements and page flows;
+  evaluate responsive layout, typography, spacing, images, motion, keyboard use
+  and interaction behavior in the browser; apply the remaining content revisions;
+  and address [social preview metadata](https://github.com/mananjen/portfolio-website/issues/5).
+  About's final name and appearance remain open. Browser/owner acceptance follows
+  the iterative work; a build or test pass cannot substitute for it.
+- **Deployment boundary:** Manan would like v3 online this week, but readiness is
+  the condition, not the date. No deployment or hosting cutover is authorized
+  until he is satisfied with v3. Root build/deploy still targets the older site;
+  publishing v3 needs an explicit workflow/cutover change. He declined the
+  older-site correction in [#9](https://github.com/mananjen/portfolio-website/issues/9)
+  in favor of replacing that site with v3; the old content is not thereby corrected.
+
+The current state above controls the status of the dated records below.
+Historical proposals and implementation logs preserve context, not current
+restrictions, pending owner decisions, or acceptance of the UI.
 
 The [2 November readiness review](reviews/v3-readiness-2026-11-02.md) records
 the reviewed GitHub backlog and published follow-up issues. The
@@ -9,12 +53,13 @@ the reviewed GitHub backlog and published follow-up issues. The
 tracks technical/editorial readiness before hands-on review; design experiments
 and deployment remain outside this review. The
 [evidence/approval standard](https://github.com/mananjen/portfolio-website/issues/13#issuecomment-6574806527)
-is agreed, with an [evidence inventory next](https://github.com/mananjen/portfolio-website/issues/17).
+is agreed and applied in the [evidence inventory](reviews/v3-claim-evidence.md).
 Manan resolved the
 [contact-capability decision](https://github.com/mananjen/portfolio-website/issues/14#issuecomment-6574737861):
 keep footer email/GitHub/LinkedIn, the top email action, and the legacy contact
-redirect; add selectable email and copy-email with success/failure feedback;
-omit phone in v3. [Implementation is tracked separately](https://github.com/mananjen/portfolio-website/issues/16).
+redirect; provide selectable email and copy-email with success/failure feedback;
+omit phone in v3. These capabilities are implemented in the shell; the interaction
+design remains subject to the UI work above.
 
 ## Editorial evidence and owner review
 
@@ -29,9 +74,9 @@ Manan reviews individual contributions, role/publication/code-release status,
 and time-sensitive personal facts. Routine wording edits within already-confirmed
 facts need no fresh approval. Publication acceptance, manuscript availability,
 proceedings publication, and code release remain separate facts. A prose edit or
-passing build does not verify claims or approve launch. The evidence-inventory
-issue above identifies the next review work; accepting this standard does not
-confirm any previously unverified claim.
+passing build does not verify claims or approve launch. The evidence inventory
+records the completed owner interview, supported facts and remaining copy work;
+accepting the standard alone does not confirm an individual claim.
 
 ## Agreed direction
 
@@ -48,18 +93,19 @@ confirm any previously unverified claim.
 - Prioritize engineers and hiring managers evaluating Manan's AI engineering work.
 - Improve project storytelling first, beginning with multilingual image–text
   retrieval without end-to-end training as the flagship story.
-- Initial design exploration has selected I (Cobalt cut) as the working direction.
-  Defer visual fine-tuning while moving on to the next planning decisions.
-  Typography, spacing, image treatment, and responsive details remain open.
+- Initial design exploration selected I (Cobalt cut) as the working direction.
+  The earlier pause on design work is historical. Substantial UI design and
+  interaction iteration remain; typography, spacing, image treatment, and
+  responsive details are not accepted.
 - Include a brief personal glimpse near the end of the homepage and evolve About
   into a dedicated personal page for art, books, gaming, and other interests.
   Its final name and appearance remain open.
 - V3 should feel personal and minimal, with restrained motion and no visual
   bloat. Substantial changes to the homepage and visual style are welcome.
-- Explore subtle references to Manan's own artwork, a person-first introduction,
-  and three different homepage compositions before choosing a direction.
-- Detailed research storytelling is paused until after this initial exploration;
-  prototype wording is provisional.
+- Artwork references and a person-first introduction were explored through the
+  earlier homepage studies. Their compositions remain useful history, not a
+  requirement to repeat that selection exercise. Research briefs are implemented;
+  their current copy and remaining revisions are tracked in the evidence inventory.
 
 ## Site structure discussion
 
@@ -77,12 +123,18 @@ is `/portfolio-website/`, and a direct brief URL is
 `/portfolio-website/#/projects?project=<slug>`. Hash routing supports refresh
 on GitHub Pages without server rewrites.
 
-Home, Projects, Experience, and About are implemented in React.
-Project evidence/ownership review and final visual refinement follow separately.
-The personal link opens v3's About page. The existing React
-site and A–I study commands remain available; deployment still targets the
-current site until v3 is ready. No deployment is authorized by this decision.
-See `v3/README.md` for the editing map and local validation commands.
+Home, Projects, Experience, and About exist as a React shell. The personal link
+opens v3's About page. The owner interview is recorded in the evidence inventory;
+remaining copy revisions and substantial UI design/iteration are still separate
+work. The standalone studies and their commands have been removed. Deployment
+still targets the older site and is deferred until owner satisfaction with v3.
+See [v3/README.md](../v3/README.md) for the editing map and validation commands.
+
+#### Implementation log: 30 October 2026 (historical)
+
+The following entries report what was implemented and checked at that time.
+Their pending-review statements and validation counts are historical; consult
+the current-state section and evidence inventory for today's status.
 
 Continuation on 30 October 2026: synced the React foundation from the other
 laptop and deleted the local rollback backup branch. Added Experience at
@@ -156,7 +208,8 @@ not a commitment to migrate the entire portfolio.
 The earlier Astro slice generated static pages and enhanced native disclosures
 with URL/history behavior. Its flagship used the compact draft; supporting
 briefs carried existing copy. That implementation has now been replaced by the
-React implementation above. Earlier A–I visual and reading studies remain.
+React implementation above. Earlier A–I visual and reading studies were retained
+at that time; their files/scripts have since been retired, while these notes remain.
 
 Agreed: the homepage gives a glimpse into Manan's life and work, with details
 kept on separate pages. Retain Projects as a listing, Experience as its own page,
@@ -185,31 +238,31 @@ the listing into additional pages. Such labels remain a presentation proposal.
 
 ### Contact and project reading flow
 
-Contact: Manan is open to sunsetting the separate page and placing LinkedIn,
-GitHub, and email in the footer. Recommendation: do this, retain a direct email
-action near the top, and preserve old contact links with a route that leads to
-the contact section. This is a recommendation, not yet an implemented change.
-The current contact page also includes a phone link and copy-email behavior;
-decide what to retain when implementing the replacement.
+The earlier proposal to consolidate contact into the footer was resolved by
+[decision #14](https://github.com/mananjen/portfolio-website/issues/14#issuecomment-6574737861).
+V3 implements the footer links, selectable email and copy feedback, top email
+action, legacy contact redirect and phone omission. The earlier site's phone
+link does not create an open v3 capability decision. UI design and interaction
+acceptance remain open, as described in the current-state section.
 
-Project reading flow is undecided: explore both inline expansion and dedicated
-detail pages using identical content, retaining the Projects listing either way.
-Manan wants enough substance to establish credibility and invite interview
-questions, without exhaustive accounts of the work. Current content may not
-justify separate pages; inline expansion is the provisional recommendation.
+The original inline-versus-dedicated comparison is historical. The React shell
+implements URL-selected inline briefs in the Projects listing. Manan wants enough
+substance to establish credibility and invite interview questions, without
+exhaustive accounts of the work. Implementing the behavior does not approve its
+current UI design or usability.
 
 Agreed: every project has a preview and a full brief. Featured projects appear
 on Home and Projects; the remaining projects appear on Projects. Use one
-consistent opening behavior across all projects, chosen after comparing inline
-expansion with dedicated pages. Brief length may vary without changing behavior.
+consistent inline opening behavior across projects. Brief length may vary without
+changing behavior. This capability is implemented; its presentation needs iteration.
 
-Agreed Projects listing order: three curated featured projects first, followed by
+Agreed Projects listing order: curated featured projects first, followed by
 the remaining projects in reverse chronological order, without duplicating the
 featured entries in that list. Featured order reflects editorial emphasis rather
 than recency. Within the remaining list, use project dates rather than the date
 a portfolio entry was edited. Exact same-year ties can retain editorial order;
 do not invent month-level precision where only years are known. Detailed date
-handling remains an implementation decision.
+handling is implemented with project years and stable same-year array order.
 
 Preserve useful detail in older work; age alone does not justify reducing it.
 Featured status determines prominence, not a project's entitlement to detail.
@@ -219,8 +272,9 @@ Cover the problem,
 Manan's contribution, one meaningful decision or challenge, and the outcome with
 available evidence. Remove repetition and generic claims without discarding
 substantive information. Do not invent details or pad a story to fill a page. Full
-experiment histories and implementation walkthroughs are unnecessary. Compare
-the two reading formats later; neither has been selected or implemented.
+experiment histories and implementation walkthroughs are unnecessary. The earlier
+reading-format comparison led to the implemented inline brief; it is not an open
+prerequisite to UI design work.
 
 ## Local homepage design exploration (historical)
 
@@ -288,7 +342,12 @@ The prototype files are `src/pages/portfolio-prototype.{html,tsx,css}`.
 They use existing assets and no new project dependencies. The separate HTML entry
 is not included in the default production build.
 
-### Working selection and next discussion
+### Working selection and next discussion (historical)
+
+The pause and authorization limits below applied during the initial study.
+The 26 October React implementation approval superseded the build restriction;
+the 7 November owner assessment requires substantial UI design and iteration.
+Prototype-retention instructions were superseded by the owner's removal request.
 
 Manan selected I (Cobalt cut) as the working direction after round three.
 Keep A–I available; selection does not authorize discarding earlier explorations.
@@ -321,10 +380,13 @@ Manan reported on 23 October 2026:
 - Usman will present it online on 7 November 2026.
 - The paper should already be available through the supplied OpenReview link.
 
-Verification status: OpenReview could not be retrieved during this session;
+Historical verification status (23 October): OpenReview could not be retrieved during that session;
 the acceptance and presentation details above are attributed to Manan.
 Acceptance, public manuscript availability, and proceedings publication should
-be described separately in the eventual website copy.
+be described separately in the website copy. The later
+[evidence inventory](reviews/v3-claim-evidence.md) verifies proceedings/manuscript
+availability and public code separately; the earlier retrieval failure is not
+current uncertainty about their availability.
 
 ### Contribution and research roles
 
@@ -379,7 +441,7 @@ Proposed engineering paragraph, pending review:
 Keep approximate timing in background notes rather than the first public draft.
 Do not attribute reduced anchor-construction TFLOP estimates to this index.
 
-### First flagship brief draft
+### First flagship brief draft (historical)
 
 On 24 October 2026, Manan approved this structure: research question, personal
 contribution, sparse matching challenge, main result, and a short supporting
@@ -474,7 +536,7 @@ Validation: `npx tsc -b`, `npm run build`, and `git diff --check` passed; HTML,
 transformed React module, and research image returned HTTP 200 from Vite.
 No browser was connected for visual or interaction verification in this session.
 
-### Paper and implementation review
+### Paper and implementation review (23 October 2026)
 
 Read the supplied `ASIF_PAPER (5).pdf` and the local research repository
 `D:/Random/npa-multilingual` on 23 October 2026. These establish the technical
@@ -511,7 +573,13 @@ details below; they do not independently establish individual decision ownership
   was not checked. This local PDF review also does not verify acceptance or final
   proceedings publication.
 
-### Pending portfolio updates
+### Pending portfolio updates from 23 October (historical)
+
+This list records the earlier handoff, not today's backlog. V3 now uses the ACL
+paper link, reviewed metric/limitations and completed timeframe. Publication/code
+availability and ownership were reviewed in the evidence inventory. Manan chose
+to skip the older-site repair in #9 and focus on v3 replacement; the current-state
+section and inventory identify the actual remaining work.
 
 - Link the paper from the project; the supplied OpenReview URL is available to
   record now. Check for a final published/proceedings URL when updating the site.
