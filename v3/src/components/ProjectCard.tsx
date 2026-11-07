@@ -36,7 +36,7 @@ export function ProjectCard({ project, expanded, onToggle }: ProjectCardProps) {
           <p className={styles.summary}>{project.summary}</p>
           {project.role && <p className={styles.role}>{project.role}</p>}
           <Tags tags={project.technologies} />
-          <div className="actions"><ArtifactLinks links={project.links} /></div>
+          <div className="actions"><ArtifactLinks links={project.links} bibtex={project.bibtex} /></div>
         </div>
         {project.image && (
           <figure className={styles.figure}>

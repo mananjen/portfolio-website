@@ -65,6 +65,11 @@ export const projectPage = {
 }
 
 export const projectLabels = {
+  copyBibtex: "Copy BibTeX",
+  copyingBibtex: "Copying citation…",
+  bibtexCopied: "BibTeX copied.",
+  bibtexFailed: "Could not copy citation. Select the BibTeX below to copy it manually, or try again.",
+  bibtexLabel: "BibTeX citation",
   read: "Read brief",
   close: "Close brief",
   technologies: "Technologies and methods",

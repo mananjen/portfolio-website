@@ -41,7 +41,7 @@ export function HomePage() {
                 <Tags tags={lead.technologies} />
                 <div className="actions">
                   <Link className="text-link" to={briefUrl(lead.slug)} aria-label={projectLabels.readLabel(lead.title)}>{projectLabels.read} →</Link>
-                  <ArtifactLinks links={lead.links} />
+                  <ArtifactLinks links={lead.links} bibtex={lead.bibtex} />
                 </div>
               </div>
               {lead.image && (
@@ -63,7 +63,7 @@ export function HomePage() {
                     <p>{project.summary}</p>
                     <div className="actions">
                       <Link className="text-link" to={briefUrl(project.slug)} aria-label={projectLabels.readLabel(project.title)}>{projectLabels.read} →</Link>
-                      <ArtifactLinks links={project.links} />
+                      <ArtifactLinks links={project.links} bibtex={project.bibtex} />
                     </div>
                   </div>
                 </article>

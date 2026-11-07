@@ -13,6 +13,7 @@ export type Project = {
   image?: string
   role?: string
   links: { label: string; href: string }[]
+  bibtex?: string
   brief: { heading: string; text: string }[]
 }
 
@@ -36,10 +37,30 @@ export const projects: Project[] = [
       "ASIF"
     ],
     image: researchImage,
+    bibtex: `@inproceedings{shahid-etal-2026-training,
+    title = "Training free Cross-Modal Alignment for Multilingual Image Retrieval",
+    author = "Shahid, Usman  and
+      Jain, Manan  and
+      Parde, Natalie",
+    editor = "Zhang, Yue  and
+      Xu, Ruifeng  and
+      Purwarianti, Ayu  and
+      Rong, Tong  and
+      Suzuki, Jun",
+    booktitle = "Findings of the {A}ssociation for {C}omputational {L}inguistics: {IJCNLP}-{AACL} 2026",
+    month = nov,
+    year = "2026",
+    address = "Hengqin, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.findings-aacl.203/",
+    pages = "4039--4049",
+    ISBN = "979-8-89176-444-6",
+    abstract = "We investigate whether multilingual image-text retrieval can be made practical without training a multi-modal model, using frozen multilingual uni-modal encoders and inducing cross-modal alignment through relative representations computed against a large external anchor set. We use English image-caption pairs as anchors and evaluate caption-to-image retrieval on 3,600 images with captions in 36 languages (some low-resource). Across multiple encoder pairings and hyperparameter settings, the method yields usable performance, positioning training-free relative representation as a baseline for multilingual cross-modal alignment when target-language multi-modal training data is unavailable."
+}`,
     links: [
       {
         label: "Paper",
-        href: "https://openreview.net/forum?id=v35BaCj1kc"
+        href: "https://aclanthology.org/2026.findings-aacl.203/"
       }
     ],
     brief: [

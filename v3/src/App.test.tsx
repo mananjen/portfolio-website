@@ -3,6 +3,7 @@ import { createRoot, type Root } from "react-dom/client"
 import { MemoryRouter, useNavigate } from "react-router-dom"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { App } from "./App"
+import { projects } from "./content/projects"
 
 // Exercise the rendered application and router history, rather than individual
 // components or private URL helpers. Real browser layout remains a manual check.
@@ -67,10 +68,49 @@ async function click(element: Element | null) {
 }
 
 function briefToggle(slug: string) {
-  return container.querySelector<HTMLButtonElement>(`#project-${slug} button`)
+  return container.querySelector<HTMLButtonElement>(`#project-${slug} button[aria-controls]`)
 }
 
 describe("the v3 project reading journey", () => {
+  it.each(["/", "/projects"])("copies the full research citation on %s only after clipboard success", async url => {
+    let finishCopy = () => {}
+    const writeText = vi.fn(() => new Promise<void>(resolve => { finishCopy = resolve }))
+    vi.stubGlobal("navigator", { clipboard: { writeText } })
+    await renderAt(url)
+    const buttons = Array.from(container.querySelectorAll<HTMLButtonElement>("main button"))
+      .filter(button => button.textContent === "Copy BibTeX")
+    expect(buttons).toHaveLength(1)
+    const button = buttons[0]
+    await click(button)
+    expect(writeText).toHaveBeenCalledWith(projects[0].bibtex)
+    expect(button.disabled).toBe(true)
+    expect(button.parentElement?.querySelector('[role="status"]')?.textContent).toBe("Copying citation…")
+    await act(() => finishCopy())
+    expect(button.disabled).toBe(false)
+    expect(button.parentElement?.querySelector('[role="status"]')?.textContent).toBe("BibTeX copied.")
+  })
+
+  it.each(["denied", "unavailable"])("offers selectable BibTeX when copying is %s and permits a retry", async failure => {
+    const writeText = vi.fn().mockRejectedValueOnce(new Error("Permission denied")).mockResolvedValueOnce(undefined)
+    vi.stubGlobal("navigator", failure === "denied" ? { clipboard: { writeText } } : {})
+    await renderAt("/projects")
+    const button = Array.from(container.querySelectorAll<HTMLButtonElement>("main button"))
+      .find(button => button.textContent === "Copy BibTeX")!
+    await click(button)
+    const textarea = button.parentElement?.querySelector("textarea")
+    expect(textarea?.value).toBe(projects[0].bibtex)
+    expect(textarea?.readOnly).toBe(true)
+    await act(() => textarea?.focus())
+    expect(textarea?.selectionStart).toBe(0)
+    expect(textarea?.selectionEnd).toBe(textarea?.value.length)
+    expect(button.disabled).toBe(false)
+    if (failure === "denied") {
+      await click(button)
+      expect(button.parentElement?.querySelector("textarea")).toBeNull()
+      expect(button.parentElement?.querySelector('[role="status"]')?.textContent).toBe("BibTeX copied.")
+    }
+  })
+
   it("shows a selectable email and confirms copying only after it succeeds", async () => {
     let finishCopy = () => {}
     const writeText = vi.fn(() => new Promise<void>(resolve => { finishCopy = resolve }))
