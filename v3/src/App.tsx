@@ -8,6 +8,7 @@ import { HomePage } from "./pages/HomePage"
 import { ProjectsPage } from "./pages/ProjectsPage"
 import { ExperiencePage } from "./pages/ExperiencePage"
 import { AboutPage } from "./pages/AboutPage"
+import { TypeScalePrototype } from "./prototype/TypeScalePrototype"
 
 function RouteEffects() {
   const { pathname, search, hash, key: navigationKey } = useLocation()
@@ -48,6 +49,7 @@ export function App() {
   return (
     <>
       <RouteEffects />
+      {import.meta.env.DEV && <TypeScalePrototype />}
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
