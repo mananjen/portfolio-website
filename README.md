@@ -1,78 +1,75 @@
-# Getting Started with Create React App
+﻿# Manan Jain's portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains two React/TypeScript implementations built with Vite:
 
-## Available Scripts
+- `v3/`: the new portfolio shell and the focus of current work. It needs
+  substantial UI design and iterative interaction improvements before launch.
+- `src/`: the older site, which the existing deployment script still publishes.
 
-In the project directory, you can run:
+## Setup
 
-### `npm start`
+Use Node.js 22.x (22.12 or newer) or 24.x, and npm. From the repository root,
+install both sets of dependencies; v3 imports shared content and assets from the
+root project.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```sh
+npm ci
+npm ci --prefix v3
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Work on v3
 
-### `npm test`
+Start the development server:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+npm run dev:v3
+```
 
-### `npm run build`
+Open <http://127.0.0.1:4321/portfolio-website/>. For example, a direct project
+brief opens at
+<http://127.0.0.1:4321/portfolio-website/#/projects?project=multilingual-image-text-retrieval>.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Check types, run tests, and create a production build:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```sh
+npm run check:v3
+npm --prefix v3 test
+npm run build:v3
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The build output is `v3/dist`. To serve that build locally:
 
-### `npm run eject`
+```sh
+npm run preview:v3
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Stop the dev server before starting preview: both use port 4321 and report a
+conflict if it is occupied. A passing build or test run does not mean the UI is
+accepted or ready to publish.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+See the [v3 editing guide](v3/README.md) for content files, components and routing,
+and the [current plan](docs/portfolio-improvements.md#current-state-and-remaining-work)
+for remaining design and content work.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Older site
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+These commands operate on the root implementation:
 
-### `npm run deploy`
+```sh
+npm run dev
+npm run typecheck
+npm run build
+npm run preview
+```
 
-This will auto deploy the current itreation of the website to the gh-pages branch.
+Use the URL printed by Vite for development or preview. The build output is
+`dist`. The root package has no test script; the v3 tests use the command above.
 
-### `npm run updateProjects`
+## Deployment
 
-This will auto update the firestore database with the new project information.
+The existing `npm run deploy` command builds the **older root site** and publishes
+`dist` to the `gh-pages` branch. It does not publish `v3/dist`.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Deployment remains deferred until Manan is satisfied with v3 after UI design and
+iteration. Publishing v3 requires an explicit deployment workflow/cutover change;
+the local development and build commands above do not deploy anything.
