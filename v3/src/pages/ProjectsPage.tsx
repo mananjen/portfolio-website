@@ -20,16 +20,16 @@ export function ProjectsPage() {
   return (
     <div className="container">
       <section className={styles.intro}>
-        <p className="eyebrow">{projectPage.eyebrow}</p>
+        <p className={styles.accentLabel}>{projectPage.eyebrow}</p>
         <h1>{projectPage.headline.map(line => <span key={line}>{line}</span>)}</h1>
-        <p className="muted">{projectPage.description}</p>
+        <p className={styles.introCopy}>{projectPage.description}</p>
       </section>
       {[
         { label: projectPage.featuredLabel, projects: featuredProjects },
         { label: projectPage.additionalLabel, projects: additionalProjects },
       ].map(group => group.projects.length > 0 && (
         <section key={group.label} className={styles.listing} aria-label={group.label}>
-          <p className="eyebrow">{group.label} / {String(group.projects.length).padStart(2, "0")}</p>
+          <p className={styles.groupLabel}>{group.label} / {String(group.projects.length).padStart(2, "0")}</p>
           {group.projects.map(project => (
             <ProjectCard
               key={project.slug}

@@ -31,7 +31,7 @@ export function ProjectCard({ project, expanded, onToggle }: ProjectCardProps) {
     <article ref={article} id={`project-${project.slug}`} className={styles.project}>
       <div className={styles.preview}>
         <div>
-          <p className="eyebrow">{project.category} / {project.timeframe}</p>
+          <p className={styles.categoryLabel}>{project.category} / {project.timeframe}</p>
           <h2>{project.title}</h2>
           <p className={styles.summary}>{project.summary}</p>
           {project.role && <p className={styles.role}>{project.role}</p>}
@@ -43,7 +43,7 @@ export function ProjectCard({ project, expanded, onToggle }: ProjectCardProps) {
             <a href={project.image} target="_blank" rel="noreferrer" aria-label={`${projectLabels.image}: ${project.title}`}>
               <img src={project.image} alt={projectLabels.imageAlt(project.title)} loading="lazy" />
             </a>
-            <figcaption>{projectLabels.image}</figcaption>
+            <figcaption className={styles.figureCaption}>{projectLabels.image}</figcaption>
           </figure>
         )}
       </div>
@@ -62,8 +62,8 @@ export function ProjectCard({ project, expanded, onToggle }: ProjectCardProps) {
       <div id={briefId} className={styles.brief} hidden={!expanded}>
         {project.brief.map(section => (
           <section key={section.heading}>
-            <h3>{section.heading}</h3>
-            <p>{section.text}</p>
+            <h3 className={styles.briefHeading}>{section.heading}</h3>
+            <p className={styles.briefText}>{section.text}</p>
           </section>
         ))}
       </div>
