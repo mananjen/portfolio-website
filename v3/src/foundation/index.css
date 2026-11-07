@@ -23,6 +23,8 @@
   a { color: inherit; text-underline-offset: .28em; text-decoration-thickness: 1px; }
   a:hover { text-decoration-thickness: 2px; }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 6px; }
+  /* tabindex="-1" marks elements focused only by script (for screen readers); they get no ring. */
+  [tabindex="-1"]:focus { outline: none; }
   h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; }
   h1 { font-size: var(--size-title); line-height: var(--leading-title); letter-spacing: var(--tracking-title); font-weight: var(--weight-title); }
   h2 { font-size: var(--size-heading); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); font-weight: var(--weight-heading); }
