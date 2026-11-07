@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "check": "tsc --noEmit",
+    "check": "tsc --noEmit && stylelint \"src/**/*.module.css\"",
     "build": "npm run check && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest run"
@@ -22,6 +22,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "jsdom": "^27.4.0",
+    "stylelint": "^18.0.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.3",
     "vitest": "^4.1.12"

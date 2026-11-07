@@ -41,7 +41,7 @@ switching to another port.
 | About composition | `src/pages/AboutPage.tsx` |
 | Shared project rendering | `src/components/ProjectCard.tsx` |
 | Header/footer and shared navigation | `src/components/Layout.tsx` |
-| Fonts, text styles, colors, shared spacing | `src/foundation/` (`tokens.css` values, `text.module.css` styles, `index.css` base) |
+| Fonts, text styles, colors, shared spacing | `src/foundation/` (`tokens.css` values, `text.module.css` styles, `index.css` base); see `../docs/design-system.md` |
 | Component styles | The adjacent `*.module.css` file |
 | Routes, page metadata, route focus/scroll | `src/App.tsx` |
 
@@ -114,6 +114,9 @@ tags use the homepage metadata.
 ## Validation
 
 Run `npm run check:v3`, `npm --prefix v3 test`, and `npm run build:v3`.
+`check:v3` typechecks and runs Stylelint, which rejects raw font sizes,
+families, line-heights, letter-spacing, and colours in component modules
+(`src/foundation/` is exempt); `stylelint.test.ts` covers that guard.
 The small app-level suite checks Home-to-brief navigation, direct selection,
 one-open behavior, Back/Forward, focus, Skip, and the legacy contact route using
 React Router and an in-memory DOM. It does not measure browser layout.
