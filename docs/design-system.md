@@ -131,6 +131,25 @@ like `var(--size-ui, 14px)` is rejected because it hides a raw value.
 For a deliberate one-off, put `/* stylelint-disable-next-line */` above the
 line. Prefer adding a token instead.
 
+## Input: touch-first and mouse-first
+
+Screen width decides how a component is used, not just how it is laid out
+([ADR 0003](adr/0003-touch-first-below-64rem.md)).
+
+| Width | Designed for | Means |
+| --- | --- | --- |
+| below `64rem` | touch (phones, tablets) | 44px targets, press feedback (`:active`), visible labels instead of tooltips, in-view emphasis instead of hover |
+| `64rem` and above | mouse (laptops, desktops) | hover effects, tooltips, compact 32px icon targets |
+
+- **Design every component for both.** The touch view is decided when the
+  component is redesigned, not bolted on afterwards.
+- **Hover always sits inside `@media (hover: hover)`,** as well as the width
+  rule, so a large touch screen never keeps a stuck hover state. A Stylelint
+  guard that rejects `:hover` anywhere else comes with the links build.
+- **Layout is a separate question.** `48rem` is the page layout width, and
+  components switch layout with container queries. `64rem` is only for
+  input. A tablet can have a wide layout and still be touch-first.
+
 ## Known follow-ups
 
 - **Project brief columns:** at body size, the three-column brief gives about
