@@ -1,23 +1,10 @@
-import { useState } from "react"
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom"
+import { Footer } from "./Footer"
 import { site } from "../content/site"
 import styles from "./Layout.module.css"
 
 export function Layout() {
   const { pathname } = useLocation()
-  const [copyStatus, setCopyStatus] = useState<"idle" | "copying" | "copied" | "failed">("idle")
-
-  async function copyEmail() {
-    setCopyStatus("copying")
-    try {
-      if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable")
-      await navigator.clipboard.writeText(site.emailAddress)
-      setCopyStatus("copied")
-    } catch {
-      setCopyStatus("failed")
-    }
-  }
-
   return (
     <>
       <a className={styles.skip} href="#main" onClick={event => {
@@ -36,25 +23,7 @@ export function Layout() {
         </header>
       </div>
       <main id="main" tabIndex={-1}><Outlet /></main>
-      <footer id="contact" tabIndex={-1} className={`container ${styles.footer}`}>
-        <div>
-          <p className={styles.footerLabel}>{site.footer.eyebrow}</p>
-          <a className={styles.contactTitle} href={site.email}>{site.footer.title}<span aria-hidden="true"> ↗</span></a>
-        </div>
-        <div className={styles.footerLinks}>
-          <div className="actions">{site.footer.links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</div>
-          <p className={styles.emailAddress}><a href={site.email}>{site.emailAddress}</a></p>
-          <button type="button" className={styles.copyEmail} onClick={copyEmail} disabled={copyStatus === "copying"}>
-            {site.footer.copyEmail}
-          </button>
-          <p className={styles.copyStatus} role="status" aria-live="polite">
-            {copyStatus === "copying" ? site.footer.copyingEmail
-              : copyStatus === "copied" ? site.footer.emailCopied
-              : copyStatus === "failed" ? site.footer.copyEmailFailed : ""}
-          </p>
-          <p className={styles.signature}>{site.footer.signature}</p>
-        </div>
-      </footer>
+      <Footer />
     </>
   )
 }

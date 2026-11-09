@@ -1,0 +1,105 @@
+/* "Design the V3 footer" (issue #38). Layout: the footer's own width (36rem). Input: screen width (64rem, ADR 0003). */
+.footer { margin-top: 50px; border-top: 1px solid var(--line); container-type: inline-size; }
+
+/* Wide footer: "Let's talk" on the left; the email and icon row end-aligned on the right; small print below. */
+.inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "invite email" "invite social" "meta meta";
+  column-gap: 24px;
+  padding-block: clamp(44px, 7vw, 88px) 20px;
+}
+.invite { grid-area: invite; align-self: end; }
+.eyebrow { composes: label from "../foundation/text.module.css"; color: var(--accent); }
+.cta { margin-top: var(--flow-tight); }
+
+.email {
+  composes: ui from "../foundation/text.module.css";
+  grid-area: email;
+  justify-self: end;
+  align-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  align-items: center;
+  gap: 6px;
+}
+.address { color: var(--text); overflow-wrap: anywhere; }
+.copied { color: var(--accent); }
+.failed { composes: meta from "../foundation/text.module.css"; flex-basis: 100%; text-align: end; color: var(--muted); }
+
+.social { grid-area: social; justify-self: end; align-self: end; display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+
+/* Résumé: a download link, "Résumé ↓" in the wide footer. */
+.resume { composes: ui from "../foundation/text.module.css"; margin-left: 6px; color: var(--accent); text-decoration: none; }
+.resumeBadge { display: none; }
+
+.smallPrint {
+  composes: meta from "../foundation/text.module.css";
+  grid-area: meta;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: clamp(36px, 6vw, 64px);
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+/* Input: mouse-first shows the address as text plus a copy button; touch-first makes the address the button. */
+.mouseOnly { display: inline-flex; align-items: center; gap: 6px; }
+.touchOnly { display: none; }
+.tap { --link-rule: transparent; justify-items: start; gap: 2px; text-align: start; }
+.hint { composes: caption from "../foundation/text.module.css"; color: var(--muted); }
+.hint[data-copied] { color: var(--accent); }
+
+.floatingDock { display: none; }
+
+@media (width < 64rem) {
+  .mouseOnly { display: none; }
+  .touchOnly { display: grid; }
+  .social { gap: 2px; }
+
+  /* Back to top floats at the bottom centre, then hands over to the arrow in the small print. */
+  .floatingDock {
+    position: fixed;
+    inset-inline: 0;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 900;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .floating {
+    pointer-events: auto;
+    border: 1px solid var(--line);
+    background-color: var(--surface);
+    color: var(--text);
+    transition: opacity .2s, translate .2s, visibility .2s, background-color .15s;
+  }
+  .floating[data-hidden] { opacity: 0; visibility: hidden; translate: 0 8px; }
+}
+
+/* Wide footer, touch: the hint hangs below the address, out of the flow, so the right column stays aligned. */
+@container (width >= 36rem) {
+  .tap { position: relative; justify-items: end; text-align: end; }
+  .hint { position: absolute; top: calc(100% - 2px); right: 0; white-space: nowrap; }
+}
+
+/* Narrow footer (phones): the icons stay beside "Let's talk"; the address takes its own row. */
+@container (width < 36rem) {
+  .inner { grid-template-areas: "invite social" "email email" "meta meta"; }
+  .cta { font-size: var(--size-heading); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); }
+  .email { justify-self: start; justify-content: start; margin-top: clamp(28px, 6vw, 40px); }
+  .failed { text-align: start; }
+  .social { margin-top: 0; }
+  /* The résumé link becomes the CV badge, a 44px icon target. */
+  .resume { display: inline-grid; place-items: center; width: 44px; height: 44px; margin: 0; color: var(--text); }
+  .resumeText, .resume [data-arrow] { display: none; }
+  .resumeBadge { display: inline-grid; }
+}
+
+
+@media (prefers-reduced-motion: reduce) { .floating { transition: none; } }

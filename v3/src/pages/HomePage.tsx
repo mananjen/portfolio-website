@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom"
+import { TextLink } from "../components/link"
 import { ArtifactLinks } from "../components/ArtifactLinks"
 import { Tags } from "../components/Tags"
 import { homeProjects } from "../content/projects"
-import { home, projectLabels } from "../content/site"
+import { home, linkLabels, projectLabels } from "../content/site"
 import { briefUrl } from "../lib/links"
 import styles from "./HomePage.module.css"
 
@@ -17,7 +17,7 @@ export function HomePage() {
             <p className={styles.heroLabel}>{home.eyebrow}</p>
             <h1 className={styles.heroTitle}>{home.headline.map(line => <span key={line}>{line}</span>)}</h1>
             <p className={styles.introCopy}>{home.intro}</p>
-            <Link className="text-link" to="/#work">{home.workCta}</Link>
+            <TextLink href="/#work">{home.workCta}</TextLink>
           </div>
           <figure className={styles.portrait}>
             <img src={home.portrait.src} alt={home.portrait.alt} width="180" height="215" fetchPriority="high" />
@@ -29,7 +29,7 @@ export function HomePage() {
         <section id="work" className={styles.work} tabIndex={-1}>
           <div className={styles.sectionLine}>
             <p className={styles.accentLabel}>{home.featuredLabel}</p>
-            <Link className="text-link" to="/projects">{home.allProjects}</Link>
+            <TextLink href="/projects">{home.allProjects}</TextLink>
           </div>
           {lead && (
             <article className={styles.lead}>
@@ -40,13 +40,13 @@ export function HomePage() {
                 {lead.role && <p className={styles.role}>{lead.role}</p>}
                 <Tags tags={lead.technologies} />
                 <div className="actions">
-                  <Link className="text-link" to={briefUrl(lead.slug)} aria-label={projectLabels.readLabel(lead.title)}>{projectLabels.read} →</Link>
+                  <TextLink href={briefUrl(lead.slug)} aria-label={projectLabels.readLabel(lead.title)}>{projectLabels.read}</TextLink>
                   <ArtifactLinks links={lead.links} bibtex={lead.bibtex} />
                 </div>
               </div>
               {lead.image && (
                 <figure className={styles.research}>
-                  <a href={lead.image} target="_blank" rel="noreferrer"><img src={lead.image} alt={projectLabels.imageAlt(lead.title)} /></a>
+                  <a href={lead.image} target="_blank" rel="noreferrer" aria-label={`${projectLabels.image}: ${lead.title} ${linkLabels.newTab}`}><img src={lead.image} alt={projectLabels.imageAlt(lead.title)} /></a>
                   <figcaption className={styles.researchCaption}>{projectLabels.image}</figcaption>
                 </figure>
               )}
@@ -59,10 +59,10 @@ export function HomePage() {
                 <article key={project.slug}>
                   <span className={styles.number} aria-hidden="true">{String(index + 2).padStart(2, "0")}</span>
                   <div>
-                    <h3><Link to={briefUrl(project.slug)}>{project.title}</Link></h3>
+                    <h3><TextLink tone="plain" href={briefUrl(project.slug)}>{project.title}</TextLink></h3>
                     <p className={styles.supportingSummary}>{project.summary}</p>
                     <div className="actions">
-                      <Link className="text-link" to={briefUrl(project.slug)} aria-label={projectLabels.readLabel(project.title)}>{projectLabels.read} →</Link>
+                      <TextLink href={briefUrl(project.slug)} aria-label={projectLabels.readLabel(project.title)}>{projectLabels.read}</TextLink>
                       <ArtifactLinks links={project.links} bibtex={project.bibtex} />
                     </div>
                   </div>
@@ -77,7 +77,7 @@ export function HomePage() {
             <p className={styles.accentLabel}>{home.personal.eyebrow}</p>
             <h2>{home.personal.title}</h2>
             <p className={styles.personalBlurb}>{home.personal.description}</p>
-            <Link className="text-link" to={home.personal.link.path}>{home.personal.link.label}</Link>
+            <TextLink href={home.personal.link.href}>{home.personal.link.label}</TextLink>
           </div>
         </aside>
       </div>

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
-import { Link, Navigate, Route, Routes, useLocation, useMatch } from "react-router-dom"
+import { Navigate, Route, Routes, useLocation, useMatch } from "react-router-dom"
 import { Layout } from "./components/Layout"
+import { TextLink } from "./components/link"
 import { projects } from "./content/projects"
 import { notFound } from "./content/site"
 import { pageMeta } from "./content/meta"
@@ -59,7 +60,7 @@ export function App() {
             <section className="container page-message">
               <h1>{notFound.title}</h1>
               <p className="muted">{notFound.description}</p>
-              <div className="actions"><Link to="/">{notFound.home}</Link><Link to="/projects">{notFound.projects}</Link></div>
+              <div className="actions"><TextLink tone="plain" href="/">{notFound.home}</TextLink><TextLink tone="plain" href="/projects">{notFound.projects}</TextLink></div>
             </section>
           )} />
         </Route>

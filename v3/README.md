@@ -40,7 +40,9 @@ switching to another port.
 | Experience composition | `src/pages/ExperiencePage.tsx` |
 | About composition | `src/pages/AboutPage.tsx` |
 | Shared project rendering | `src/components/ProjectCard.tsx` |
-| Header/footer and shared navigation | `src/components/Layout.tsx` |
+| Header and shared navigation | `src/components/Layout.tsx` |
+| Footer (contact, copy email, social links, résumé, back to top) | `src/components/Footer.tsx`; copy in `site.footer` (`src/content/site.ts`), where `resume.href` turns the résumé link on |
+| Links, link-like buttons, icons | `src/components/link/` (`TextLink`, `CtaLink`, `IconLink`, `TextButton`, `IconButton`, the `Icon` registry); see "Links" in `../docs/design-system.md` |
 | Fonts, text styles, colors, shared spacing | `src/foundation/` (`tokens.css` values, `text.module.css` styles, `index.css` base); see `../docs/design-system.md` |
 | Component styles | The adjacent `*.module.css` file |
 | Routes, page metadata, route focus/scroll | `src/App.tsx` |
@@ -114,9 +116,11 @@ tags use the homepage metadata.
 ## Validation
 
 Run `npm run check:v3`, `npm --prefix v3 test`, and `npm run build:v3`.
-`check:v3` typechecks and runs Stylelint, which rejects raw font sizes,
-families, line-heights, letter-spacing, and colours in component modules
-(`src/foundation/` is exempt); `stylelint.test.ts` covers that guard.
+`check:v3` typechecks and runs Stylelint over every stylesheet. It rejects raw
+font sizes, families, line-heights, letter-spacing, and colours in component
+modules (`src/foundation/` is exempt). Everywhere, it rejects media widths
+other than 48rem and 64rem, `container-type: size`, and `:hover` outside
+`@media (width >= 64rem) and (hover: hover)`. `stylelint.test.ts` covers these guards.
 The small app-level suite checks Home-to-brief navigation, direct selection,
 one-open behavior, Back/Forward, focus, Skip, and the legacy contact route using
 React Router and an in-memory DOM. It does not measure browser layout.

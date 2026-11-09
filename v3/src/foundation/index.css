@@ -21,8 +21,8 @@
     letter-spacing: var(--tracking-body); font-weight: var(--weight-body);
   }
   a { color: inherit; text-underline-offset: .28em; text-decoration-thickness: 1px; }
-  a:hover { text-decoration-thickness: 2px; }
-  :focus-visible { outline: 3px solid var(--accent); outline-offset: 6px; }
+  @media (width >= 64rem) and (hover: hover) { a:hover { text-decoration-thickness: 2px; } }
+  :focus-visible { outline: 2px dashed var(--accent); outline-offset: 5px; }
   /* tabindex="-1" marks elements focused only by script (for screen readers); they get no ring. */
   [tabindex="-1"]:focus { outline: none; }
   h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; }
@@ -32,8 +32,9 @@
   p { text-wrap: pretty; }
   .container { width: min(1200px, 100%); padding-inline: var(--space); margin-inline: auto; }
   .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
-  .text-link { color: var(--accent); font-size: var(--size-ui); }
   .muted { color: var(--muted); }
+  /* Read by screen readers, not shown. */
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .page-message { padding-block: 60px; }
   .page-message p { margin-block: var(--flow-loose); }
   ::selection { background: var(--selection); color: var(--background); }

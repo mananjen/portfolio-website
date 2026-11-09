@@ -104,4 +104,5 @@
   --on-cobalt-line: #aac5ff88;
   --figure-background: #dce6f6;
   --selection: #a5c9ff;
+  --brand-mark: #fff; /* GitHub and LinkedIn marks: white on this background, never recoloured */
 }

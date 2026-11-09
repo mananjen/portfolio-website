@@ -16,7 +16,7 @@ export const aboutPage = {
     title: aboutPageContent.artTitle,
     description: aboutContent.artIntro,
     gallery: aboutContent.gallery,
-    imageLabel: "Open full-size artwork ↗",
+    imageLabel: "Open full-size artwork",
     instagram: { label: aboutPageContent.instagramCta, href: aboutContent.instagramUrl },
   },
   sections: [

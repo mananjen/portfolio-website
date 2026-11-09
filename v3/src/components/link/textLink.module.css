@@ -1,0 +1,35 @@
+/* TextLink and TextButton. Two tones: `text` (accent, UI size) and `plain` (inherits colour and type). */
+/* The rule is provisional (see "Choose the V3 link styles"): a soft 1px line at rest, drawn to 2px on hover or focus. */
+.link {
+  --rule-soft: var(--link-rule, color-mix(in srgb, currentColor 35%, transparent));
+  text-decoration: none;
+  padding-bottom: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background-image: linear-gradient(currentColor, currentColor), linear-gradient(var(--rule-soft), var(--rule-soft));
+  background-repeat: no-repeat;
+  background-position: 0 100%, 0 100%;
+  background-size: 0% 2px, 100% 1px;
+  transition: color .15s, background-size .25s ease;
+}
+/* Links that carry an arrow (new tab, download) carry no rule. */
+.link:is([data-destination="external"], [data-destination="download"]) { background-image: none; }
+.link:focus-visible { background-size: 100% 2px, 100% 1px; }
+@media (width >= 64rem) and (hover: hover) {
+  .link:hover { background-size: 100% 2px, 100% 1px; }
+}
+
+/* Owners recolour links by setting --link-color (the cobalt hero), or hide the resting rule with --link-rule: transparent (titles). */
+.text { composes: ui from "../../foundation/text.module.css"; color: var(--link-color, var(--accent)); }
+.plain { color: inherit; font: inherit; }
+
+.button { border: 0; border-radius: 0; padding-inline: 0; padding-top: 0; background-color: transparent; text-align: inherit; cursor: pointer; }
+
+/* Touch-first: a press tint over a slightly larger area instead of hover. */
+@media (width < 64rem) {
+  .link { position: relative; }
+  .link::before { content: ""; position: absolute; inset: -10px -6px; border-radius: 8px; transition: background-color .15s; }
+  .link:active::before { background-color: color-mix(in srgb, currentColor 18%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) { .link, .link::before { transition: none; } }

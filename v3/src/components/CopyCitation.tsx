@@ -1,31 +1,17 @@
-import { useState } from "react"
 import { projectLabels } from "../content/site"
+import { useCopyToClipboard } from "../lib/useCopyToClipboard"
+import { TextButton } from "./link"
 import styles from "./CopyCitation.module.css"
 
 export function CopyCitation({ bibtex }: { bibtex: string }) {
-  const [status, setStatus] = useState<"idle" | "copying" | "copied" | "failed">("idle")
-
-  async function copy() {
-    setStatus("copying")
-    try {
-      if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable")
-      await navigator.clipboard.writeText(bibtex)
-      setStatus("copied")
-    } catch {
-      setStatus("failed")
-    }
-  }
+  const { status, busy, copy, message } = useCopyToClipboard(bibtex, {
+    messages: { copying: projectLabels.copyingBibtex, copied: projectLabels.bibtexCopied, failed: projectLabels.bibtexFailed },
+  })
 
   return (
     <span className={styles.citation}>
-      <button type="button" className={`text-link ${styles.copy}`} onClick={copy} disabled={status === "copying"}>
-        {projectLabels.copyBibtex}
-      </button>
-      <span className={styles.status} role="status" aria-live="polite">
-        {status === "copying" ? projectLabels.copyingBibtex
-          : status === "copied" ? projectLabels.bibtexCopied
-          : status === "failed" ? projectLabels.bibtexFailed : ""}
-      </span>
+      <TextButton onClick={copy} aria-busy={busy}>{projectLabels.copyBibtex}</TextButton>
+      <span className={styles.status} role="status" aria-live="polite">{message}</span>
       {status === "failed" && (
         <textarea
           className={styles.bibtex}

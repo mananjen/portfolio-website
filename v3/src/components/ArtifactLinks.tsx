@@ -1,10 +1,9 @@
 import type { Project } from "../content/projects"
 import { CopyCitation } from "./CopyCitation"
+import { TextLink } from "./link"
 
 export function ArtifactLinks({ links, bibtex }: Pick<Project, "links" | "bibtex">) {
   return <>{links.map(link => (
-    <a key={link.href} className="text-link" href={link.href} target="_blank" rel="noreferrer">
-      {link.label} <span aria-hidden="true">↗</span>
-    </a>
+    <TextLink key={link.href} href={link.href}>{link.label}</TextLink>
   ))}{bibtex && <CopyCitation bibtex={bibtex} />}</>
 }

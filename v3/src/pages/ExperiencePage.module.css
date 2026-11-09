@@ -16,6 +16,6 @@
 .bullets li { padding-left: 4px; }
 .bullets li + li { margin-top: var(--flow-tight); }
 .related { margin-top: var(--flow); }
-@media (max-width: 700px) {
+@media (width < 48rem) {
   .entry { grid-template-columns: 1fr; gap: 14px; }
 }

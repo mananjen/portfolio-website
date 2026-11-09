@@ -3,6 +3,7 @@ import painting from "../../../src/assets/art1.jpg?url"
 import { currentRole, siteName } from "../../../src/content/meta"
 import { emailAddress } from "../../../src/content/contact"
 import { pageMeta } from "./meta"
+import type { LinkContent } from "./link"
 
 const email = `mailto:${emailAddress}`
 const location = "Hyderabad, India"
@@ -18,22 +19,34 @@ export const site = {
     { label: "Experience", path: "/experience" },
     { label: "About", path: "/about" },
   ],
-  hello: "Say hello ↗",
+  hello: "Say hello",
   skip: "Skip to content",
   navigationLabel: "Main navigation",
   footer: {
     eyebrow: "Have something in mind?",
     title: "Let’s talk.",
-    copyEmail: "Copy email",
-    copyingEmail: "Copying email…",
-    emailCopied: "Email copied.",
-    copyEmailFailed: "Could not copy email. Select the address above to copy it manually.",
-    signature: `${siteName} · ${location}`,
-    links: [
-      { label: "Email", href: email },
-      { label: "GitHub", href: "https://github.com/mananjen" },
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/mananjen" },
-    ],
+    copy: {
+      label: "Copy email address",
+      tip: "Copy email",
+      copiedTip: "Copied",
+      tapHint: "Tap to copy",
+      copiedHint: "Copied ✓",
+      copied: "Email address copied",
+      failed: "Couldn’t copy. Select the address to copy it.",
+      failedTouch: "Couldn’t copy. Press and hold to select it.",
+    },
+    social: [
+      { label: "GitHub", href: "https://github.com/mananjen", icon: "github" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/mananjen", icon: "linkedin" },
+    ] satisfies LinkContent[],
+    resume: {
+      /** The public résumé PDF. While empty, the footer shows no résumé link. */
+      href: undefined as string | undefined,
+      label: "Résumé",
+      name: "Download résumé (PDF)",
+    },
+    backToTop: "Back to top",
+    smallPrint: (year: number) => `© ${year} ${siteName} · ${location}`,
   },
 }
 
@@ -41,18 +54,18 @@ export const home = {
   eyebrow: `${currentRole.title} / ${location}`,
   headline: ["Hi, I’m Manan.", "Let’s make sense", "of things."],
   intro: `I work on language, vision, and the engineering around them. Currently at ${currentRole.organization}.`,
-  workCta: "Start with the work ↓",
+  workCta: "Start with the work",
   portrait: { src: portrait, alt: siteName, caption: "Panipat → Chicago → Hyderabad" },
   featuredLabel: "Selected work / Research & engineering",
   moreLabel: "More work",
-  allProjects: "All projects →",
+  allProjects: "All projects",
   personal: {
     eyebrow: "Okay, enough work talk.",
     title: "I make things without a keyboard, too.",
     description: "Watercolors, long fantasy novels, and a game I’ll probably spend too much time exploring.",
     image: painting,
     alt: "Manan’s watercolor of a house among trees",
-    link: { label: "A little beyond work →", path: "/about" },
+    link: { label: "A little beyond work", href: "/about" } satisfies LinkContent,
   },
 }
 
@@ -64,6 +77,11 @@ export const projectPage = {
   additionalLabel: "More projects",
 }
 
+export const linkLabels = {
+  /** Added to the accessible name of every link that opens a new tab. */
+  newTab: "(opens in a new tab)",
+}
+
 export const projectLabels = {
   copyBibtex: "Copy BibTeX",
   copyingBibtex: "Copying citation…",
@@ -73,7 +91,7 @@ export const projectLabels = {
   read: "Read brief",
   close: "Close brief",
   technologies: "Technologies and methods",
-  image: "Open full-size image ↗",
+  image: "Open full-size image",
   imageAlt: (title: string) => `Overview of ${title}`,
   readLabel: (title: string) => `Read brief: ${title}`,
   closeLabel: (title: string) => `Close brief: ${title}`,

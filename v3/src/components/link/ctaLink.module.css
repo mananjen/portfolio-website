@@ -1,0 +1,9 @@
+/* The one large call to action ("Let's talk"): display size, always ↗, no rule. */
+.cta { composes: title from "../../foundation/text.module.css"; --arrow-nudge: 3px; display: inline-block; color: var(--text); text-decoration: none; }
+
+@media (width < 64rem) {
+  .cta { border-radius: 8px; transition: background-color .15s; }
+  .cta:active { background-color: color-mix(in srgb, currentColor 12%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) { .cta { transition: none; } }

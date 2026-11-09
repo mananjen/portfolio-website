@@ -4,6 +4,7 @@ import { MemoryRouter, useNavigate } from "react-router-dom"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { App } from "./App"
 import { projects } from "./content/projects"
+import { site } from "./content/site"
 
 // Exercise the rendered application and router history, rather than individual
 // components or private URL helpers. Real browser layout remains a manual check.
@@ -81,9 +82,14 @@ describe("the v3 project reading journey", () => {
       .filter(button => button.textContent === "Copy BibTeX")
     expect(buttons).toHaveLength(1)
     const button = buttons[0]
+    await act(() => button.focus())
     await click(button)
     expect(writeText).toHaveBeenCalledWith(projects[0].bibtex)
-    expect(button.disabled).toBe(true)
+    // Stays usable while copying (disabling would drop keyboard focus); a second press does not copy again.
+    expect(button.disabled).toBe(false)
+    expect(document.activeElement).toBe(button)
+    await click(button)
+    expect(writeText).toHaveBeenCalledTimes(1)
     expect(button.parentElement?.querySelector('[role="status"]')?.textContent).toBe("Copying citation…")
     await act(() => finishCopy())
     expect(button.disabled).toBe(false)
@@ -111,7 +117,7 @@ describe("the v3 project reading journey", () => {
     }
   })
 
-  it("shows a selectable email and confirms copying only after it succeeds", async () => {
+  it("shows the footer's contact details and confirms copying only after it succeeds", async () => {
     let finishCopy = () => {}
     const writeText = vi.fn(() => new Promise<void>(resolve => { finishCopy = resolve }))
     vi.stubGlobal("navigator", { clipboard: { writeText } })
@@ -120,23 +126,46 @@ describe("the v3 project reading journey", () => {
     const footer = container.querySelector("#contact")
     expect(document.activeElement).toBe(footer)
     expect(footer?.textContent).toContain("mananjen@gmail.com")
-    expect(footer?.querySelector('a[href="mailto:mananjen@gmail.com"]')).not.toBeNull()
+    expect(footer?.querySelector('a[href="mailto:mananjen@gmail.com"]')?.textContent).toContain("Let’s talk.")
     expect(footer?.querySelector('a[href^="tel:"]')).toBeNull()
     expect(container.querySelector('nav a[href="mailto:mananjen@gmail.com"]')).not.toBeNull()
-    expect(footer?.querySelector('a[href="https://github.com/mananjen"]')).not.toBeNull()
-    expect(footer?.querySelector('a[href="https://www.linkedin.com/in/mananjen"]')).not.toBeNull()
-    const copyButton = footer?.querySelector<HTMLButtonElement>("button") ?? null
-    expect(copyButton?.textContent).toBe("Copy email")
+    for (const [href, name] of [["https://github.com/mananjen", "GitHub"], ["https://www.linkedin.com/in/mananjen", "LinkedIn"]]) {
+      const link = footer?.querySelector(`a[href="${href}"]`)
+      expect(link?.getAttribute("target")).toBe("_blank")
+      expect(link?.getAttribute("aria-label")).toBe(`${name} (opens in a new tab)`)
+    }
+    expect(footer?.querySelector("a[download]")).toBeNull() // no public résumé yet
+    expect(footer?.textContent).toContain(`© ${new Date().getFullYear()}`)
+
+    const copyButton = footer?.querySelector<HTMLButtonElement>('button[aria-label="Copy email address"]') ?? null
     expect(copyButton?.type).toBe("button")
     expect(footer?.querySelector('[role="status"]')?.getAttribute("aria-live")).toBe("polite")
 
+    await act(() => copyButton?.focus())
     await click(copyButton)
     expect(writeText).toHaveBeenCalledWith("mananjen@gmail.com")
-    expect(copyButton?.disabled).toBe(true)
-    expect(footer?.querySelector('[role="status"]')?.textContent).not.toBe("Email copied.")
+    expect(copyButton?.disabled).toBe(false)
+    expect(document.activeElement).toBe(copyButton)
+    await click(copyButton)
+    expect(writeText).toHaveBeenCalledTimes(1)
+    expect(footer?.querySelector('[role="status"]')?.textContent).toBe("")
     await act(async () => finishCopy())
     expect(copyButton?.disabled).toBe(false)
-    expect(footer?.querySelector('[role="status"]')?.textContent).toBe("Email copied.")
+    expect(footer?.querySelector('[role="status"]')?.textContent).toBe("Email address copied")
+    expect(copyButton?.dataset.tip).toBe("Copied")
+  })
+
+  it("lets touch screens copy by tapping the address", async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined)
+    vi.stubGlobal("navigator", { clipboard: { writeText } })
+    await renderAt("/")
+
+    const footer = container.querySelector("#contact")
+    const tap = footer?.querySelector<HTMLButtonElement>('button[aria-label="Copy email address mananjen@gmail.com"]') ?? null
+    expect(tap?.textContent).toContain("Tap to copy")
+    await click(tap)
+    expect(writeText).toHaveBeenCalledWith("mananjen@gmail.com")
+    expect(tap?.textContent).toContain("Copied ✓")
   })
 
   it("offers manual copying after clipboard rejection and allows a retry", async () => {
@@ -145,16 +174,15 @@ describe("the v3 project reading journey", () => {
     await renderAt("/")
 
     const footer = container.querySelector("#contact")
-    const copyButton = footer?.querySelector<HTMLButtonElement>("button") ?? null
+    const copyButton = footer?.querySelector<HTMLButtonElement>('button[aria-label="Copy email address"]') ?? null
     await click(copyButton)
-    expect(footer?.querySelector('[role="status"]')?.textContent)
-      .toBe("Could not copy email. Select the address above to copy it manually.")
+    expect(footer?.querySelector('[role="status"]')?.textContent).toBe("Couldn’t copy. Select the address to copy it.")
     expect(footer?.textContent).toContain("mananjen@gmail.com")
     expect(copyButton?.disabled).toBe(false)
 
     await click(copyButton)
     expect(writeText).toHaveBeenCalledTimes(2)
-    expect(footer?.querySelector('[role="status"]')?.textContent).toBe("Email copied.")
+    expect(footer?.querySelector('[role="status"]')?.textContent).toBe("Email address copied")
   })
 
   it("offers manual copying when the clipboard API is unavailable", async () => {
@@ -162,10 +190,31 @@ describe("the v3 project reading journey", () => {
     await renderAt("/")
 
     const footer = container.querySelector("#contact")
-    await click(footer?.querySelector("button") ?? null)
-    expect(footer?.querySelector('[role="status"]')?.textContent)
-      .toBe("Could not copy email. Select the address above to copy it manually.")
+    await click(footer?.querySelector('button[aria-label="Copy email address"]') ?? null)
+    expect(footer?.querySelector('[role="status"]')?.textContent).toBe("Couldn’t copy. Select the address to copy it.")
     expect(footer?.textContent).toContain("mananjen@gmail.com")
+  })
+
+  it("shows the résumé download once its URL is set", async () => {
+    site.footer.resume.href = "/resume.pdf"
+    try {
+      await renderAt("/")
+      const link = container.querySelector("#contact a[download]")
+      expect(link?.getAttribute("href")).toBe("/resume.pdf")
+      expect(link?.getAttribute("aria-label")).toBe("Download résumé (PDF)")
+      expect(link?.hasAttribute("target")).toBe(false)
+    } finally {
+      site.footer.resume.href = undefined
+    }
+  })
+
+  it("takes the reader back to the top and focuses the header", async () => {
+    await renderAt("/about")
+
+    const footer = container.querySelector("#contact")
+    await click(footer?.querySelector('button[aria-label="Back to top"]') ?? null)
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "smooth" })
+    expect(document.activeElement).toBe(container.querySelector("header a"))
   })
 
   it.each(["/ABOUT/", "/%61bout"])("uses About metadata for route variant %s", async url => {

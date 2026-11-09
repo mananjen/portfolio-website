@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react"
 import type { Project } from "../content/projects"
-import { projectLabels } from "../content/site"
+import { linkLabels, projectLabels } from "../content/site"
 import { ArtifactLinks } from "./ArtifactLinks"
+import { TextButton } from "./link"
 import { Tags } from "./Tags"
 import styles from "./ProjectCard.module.css"
 
@@ -40,25 +41,23 @@ export function ProjectCard({ project, expanded, onToggle }: ProjectCardProps) {
         </div>
         {project.image && (
           <figure className={styles.figure}>
-            <a href={project.image} target="_blank" rel="noreferrer" aria-label={`${projectLabels.image}: ${project.title}`}>
+            <a href={project.image} target="_blank" rel="noreferrer" aria-label={`${projectLabels.image}: ${project.title} ${linkLabels.newTab}`}>
               <img src={project.image} alt={projectLabels.imageAlt(project.title)} loading="lazy" />
             </a>
             <figcaption className={styles.figureCaption}>{projectLabels.image}</figcaption>
           </figure>
         )}
       </div>
-      <button
+      <TextButton
         ref={toggle}
         className={styles.toggle}
-        type="button"
         aria-label={expanded ? projectLabels.closeLabel(project.title) : projectLabels.readLabel(project.title)}
         aria-expanded={expanded}
         aria-controls={briefId}
         onClick={onToggle}
       >
         {expanded ? projectLabels.close : projectLabels.read}
-        <span aria-hidden="true"> {expanded ? "↑" : "↓"}</span>
-      </button>
+      </TextButton>
       <div id={briefId} className={styles.brief} hidden={!expanded}>
         {project.brief.map(section => (
           <section key={section.heading}>

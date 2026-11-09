@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { TextLink } from "../components/link"
 import { Tags } from "../components/Tags"
 import { experiencePage, workExperience, education } from "../content/experience"
 import { pageMeta } from "../content/meta"
@@ -27,7 +27,7 @@ export function ExperiencePage() {
             {entry.bullets.length > 0 && <ul className={styles.bullets}>{entry.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul>}
             <Tags tags={entry.technologies} />
             {entry.relatedProjects && <div className={`actions ${styles.related}`}>
-              {entry.relatedProjects.map(project => <Link key={project.slug} className="text-link" to={briefUrl(project.slug)}>{project.label}</Link>)}
+              {entry.relatedProjects.map(project => <TextLink key={project.slug} href={briefUrl(project.slug)}>{project.label}</TextLink>)}
             </div>}
           </div>
         </article>)}

@@ -1,7 +1,6 @@
-.hero { background: var(--cobalt); }
+.hero { background: var(--cobalt); --link-color: var(--on-cobalt); }
 .intro { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 50px; align-items: center; padding-block: 35px 62px; }
 .heroLabel { composes: label from "../foundation/text.module.css"; color: var(--on-cobalt); }
-.hero :global(.text-link) { color: var(--on-cobalt); }
 .heroTitle { composes: display from "../foundation/text.module.css"; margin-block: var(--flow-tight) var(--flow); }
 .heroTitle span { display: block; }
 .introCopy { composes: body from "../foundation/text.module.css"; color: var(--on-cobalt); max-width: 470px; margin-bottom: var(--flow); }
@@ -23,14 +22,15 @@
 .supportingLabel { composes: accentLabel; margin-bottom: var(--flow); }
 .supporting article { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 22px; padding: 24px 0; border-top: 1px solid var(--line); }
 .number { composes: subheading from "../foundation/text.module.css"; color: var(--accent); }
-.supporting h3 a { text-decoration: none; }
+/* Titles show their rule only on hover or focus. */
+.supporting h3 { --link-rule: transparent; }
 .supportingSummary { composes: small from "../foundation/text.module.css"; color: var(--muted); max-width: 750px; margin-block: var(--flow-tight); }
 .personal { display: grid; grid-template-columns: 1fr 1fr; margin-top: 30px; background: var(--surface); }
 .personal > img { height: 300px; width: 100%; object-fit: cover; }
 .personal > div { padding: 30px; align-self: center; }
 .personal h2 { margin-block: var(--flow-tight); }
 .personalBlurb { composes: small from "../foundation/text.module.css"; color: var(--muted); margin-bottom: var(--flow); }
-@media (max-width: 700px) {
+@media (width < 48rem) {
   .intro { grid-template-columns: 1fr; gap: 28px; padding-block: 22px 36px; }
   .portrait { transform: none; border: 0; padding: 0; display: flex; gap: 18px; align-items: center; }
   .portrait img { width: 65px; height: 78px; }

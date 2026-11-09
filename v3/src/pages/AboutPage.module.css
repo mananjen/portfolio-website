@@ -9,7 +9,7 @@
 .artCopy { composes: body from "../foundation/text.module.css"; color: var(--muted); max-width: 730px; }
 .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; margin-block: 28px; }
 .gallery a { display: block; text-decoration: none; }
-.gallery a:hover .imageLabel { text-decoration: underline; }
+@media (width >= 64rem) and (hover: hover) { .gallery a:hover .imageLabel { text-decoration: underline; } }
 .gallery img { width: 100%; height: auto; }
 .imageLabel { composes: meta from "../foundation/text.module.css"; display: block; margin-top: var(--flow-tight); color: var(--accent); }
 .interests { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--line); }
@@ -17,7 +17,7 @@
 .interests p, .interests li { color: var(--muted); }
 .interests p + p, .interests li + li { margin-top: var(--flow-tight); }
 .interests ul { margin: 0; padding-left: 20px; }
-@media (max-width: 700px) {
+@media (width < 48rem) {
   .gallery, .interests { grid-template-columns: 1fr; }
   .interests { gap: 28px; }
 }

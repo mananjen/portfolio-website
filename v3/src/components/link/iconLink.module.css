@@ -1,0 +1,64 @@
+/* IconLink and IconButton: icon-only controls. 44px targets touch-first, 32px mouse-first. */
+/* The control carries the caption style so its tooltip inherits it; the icon itself has no text. */
+.control {
+  composes: caption from "../../foundation/text.module.css";
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .15s, transform .2s, background-color .15s;
+}
+/* Brand marks are never dimmed or recoloured. */
+.brand { color: var(--brand-mark); }
+
+@media (width < 64rem) {
+  .control:active { background-color: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--text); }
+  .brand:active { color: var(--brand-mark); }
+}
+
+@media (width >= 64rem) {
+  .control { width: 32px; height: 32px; }
+  /* The label doubles as a tooltip on mouse-first screens. */
+  .control[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    translate: -50% 4px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s, translate .15s;
+  }
+  .control[data-tip]:focus-visible::after { opacity: 1; translate: -50% 0; }
+}
+
+@media (width >= 64rem) and (hover: hover) {
+  .control:hover { color: var(--text); transform: translateY(-2px); }
+  .brand:hover { color: var(--brand-mark); }
+  .control[data-tip]:hover::after { opacity: 1; translate: -50% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) { .control, .control::after { transition: none; } }
+
+/* With visible text (the résumé link). The owner picks text or icon: see "Links" in docs/design-system.md. */
+.withText { width: auto; height: auto; min-width: 44px; min-height: 44px; border-radius: 22px; }
+.textPart { composes: ui from "../../foundation/text.module.css"; display: var(--icon-link-text, none); }
+.textPart, .withText [data-arrow] { color: var(--accent); }
+.withText [data-arrow] { display: var(--icon-link-text, none); }
+.iconPart { display: var(--icon-link-icon, inline-grid); }
+/* Brand marks keep --brand-mark (from .brand). */
+.withText:not(.brand) .iconPart { color: var(--text); }
+@media (width >= 64rem) { .withText { min-width: 32px; min-height: 32px; } }

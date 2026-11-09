@@ -1,0 +1,16 @@
+/* Shared by every link look: icons and the drawn arrows. */
+.icon { display: inline-grid; place-items: center; flex: none; }
+.icon img, .icon svg { display: block; }
+
+/* The drawn arrows scale with the link's text and sit like a raised glyph. */
+.arrowExternal, .arrowDownload { display: inline-block; vertical-align: .35em; transition: transform .2s ease; }
+.arrowExternal { width: .45em; height: .45em; margin-left: .12em; }
+.arrowDownload { width: .5em; height: .5em; margin-left: .15em; vertical-align: .12em; }
+.arrowExternal svg, .arrowDownload svg { width: 100%; height: 100%; }
+@media (width >= 64rem) and (hover: hover) {
+  /* 2px, or 3px on the CTA (--arrow-nudge). */
+  [data-destination]:hover > .arrowExternal { transform: translate(var(--arrow-nudge, 2px), calc(-1 * var(--arrow-nudge, 2px))); }
+  [data-destination]:hover > .arrowDownload { transform: translateY(2px); }
+}
+
+@media (prefers-reduced-motion: reduce) { .arrowExternal, .arrowDownload { transition: none; } }
