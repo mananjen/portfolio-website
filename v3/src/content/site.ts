@@ -43,7 +43,7 @@ export const site = {
     ] satisfies LinkContent[],
     resume: {
       /** The public résumé PDF. While empty, the footer shows no résumé link. */
-      href: undefined as string | undefined,
+      href: "https://mananjen.github.io/resume-public/resume.pdf" as string | undefined,
       label: "Download résumé (PDF)",
       text: "Résumé",
       download: true,

@@ -134,7 +134,7 @@ describe("the v3 project reading journey", () => {
       expect(link?.getAttribute("target")).toBe("_blank")
       expect(link?.getAttribute("aria-label")).toBe(`${name} (opens in a new tab)`)
     }
-    expect(footer?.querySelector("a[download]")).toBeNull() // no public résumé yet
+    expect(footer?.querySelector("a[download]")?.getAttribute("href")).toBe("https://mananjen.github.io/resume-public/resume.pdf")
     expect(footer?.textContent).toContain(`© ${new Date().getFullYear()}`)
 
     const copyButton = footer?.querySelector<HTMLButtonElement>('button[aria-label="Copy email address"]') ?? null
@@ -196,6 +196,7 @@ describe("the v3 project reading journey", () => {
   })
 
   it("shows the résumé download once its URL is set", async () => {
+    const originalResumeHref = site.footer.resume.href
     site.footer.resume.href = "/resume.pdf"
     try {
       await renderAt("/")
@@ -208,7 +209,7 @@ describe("the v3 project reading journey", () => {
       expect(link?.querySelectorAll("svg")).toHaveLength(2)
       expect(link?.hasAttribute("target")).toBe(false)
     } finally {
-      site.footer.resume.href = undefined
+      site.footer.resume.href = originalResumeHref
     }
   })
 
