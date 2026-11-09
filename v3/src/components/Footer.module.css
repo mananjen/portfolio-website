@@ -7,7 +7,7 @@
   grid-template-columns: 1fr auto;
   grid-template-areas: "invite email" "invite social" "meta meta";
   column-gap: 24px;
-  padding-block: clamp(44px, 7vw, 88px) 20px;
+  padding-block: clamp(44px, 7cqi, 88px) 20px;
 }
 .invite { grid-area: invite; align-self: end; }
 .eyebrow { composes: label from "../foundation/text.module.css"; color: var(--accent); }
@@ -28,11 +28,19 @@
 .copied { color: var(--accent); }
 .failed { composes: meta from "../foundation/text.module.css"; flex-basis: 100%; text-align: end; color: var(--muted); }
 
-.social { grid-area: social; justify-self: end; align-self: end; display: flex; align-items: center; gap: 10px; margin-top: 10px; }
-
-/* Résumé: a download link, "Résumé ↓" in the wide footer. */
-.resume { composes: ui from "../foundation/text.module.css"; margin-left: 6px; color: var(--accent); text-decoration: none; }
-.resumeBadge { display: none; }
+.social {
+  grid-area: social;
+  justify-self: end;
+  align-self: end;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  /* The résumé IconLink shows "Résumé ↓" in the wide footer (see "Links" in docs/design-system.md). */
+  --icon-link-text: inline-block;
+  --icon-link-icon: none;
+}
+.resume { margin-left: 6px; }
 
 .smallPrint {
   composes: meta from "../foundation/text.module.css";
@@ -42,7 +50,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px 24px;
-  margin-top: clamp(36px, 6vw, 64px);
+  margin-top: clamp(36px, 6cqi, 64px);
   padding-top: 20px;
   border-top: 1px solid var(--line);
   color: var(--muted);
@@ -51,7 +59,8 @@
 /* Input: mouse-first shows the address as text plus a copy button; touch-first makes the address the button. */
 .mouseOnly { display: inline-flex; align-items: center; gap: 6px; }
 .touchOnly { display: none; }
-.tap { --link-rule: transparent; justify-items: start; gap: 2px; text-align: start; }
+/* The address and its hint are one button (TextButton shape="box"). */
+.tap { justify-items: start; gap: 2px; text-align: start; }
 .hint { composes: caption from "../foundation/text.module.css"; color: var(--muted); }
 .hint[data-copied] { color: var(--accent); }
 
@@ -82,24 +91,28 @@
   .floating[data-hidden] { opacity: 0; visibility: hidden; translate: 0 8px; }
 }
 
-/* Wide footer, touch: the hint hangs below the address, out of the flow, so the right column stays aligned. */
+/* Wide footer, touch: the address and hint line up with the right column; the hint stays in the layout. */
 @container (width >= 36rem) {
-  .tap { position: relative; justify-items: end; text-align: end; }
-  .hint { position: absolute; top: calc(100% - 2px); right: 0; white-space: nowrap; }
+  .tap { justify-items: end; text-align: end; }
 }
 
 /* Narrow footer (phones): the icons stay beside "Let's talk"; the address takes its own row. */
 @container (width < 36rem) {
   .inner { grid-template-areas: "invite social" "email email" "meta meta"; }
-  .cta { font-size: var(--size-heading); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); }
-  .email { justify-self: start; justify-content: start; margin-top: clamp(28px, 6vw, 40px); }
+  /* The one allowed hand-set style ("Using a style" in docs/design-system.md): composes can't sit inside a
+     container query, so the narrow size takes every heading token. */
+  .cta {
+    font-family: var(--font-display);
+    font-size: var(--size-heading);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    font-weight: var(--weight-heading);
+  }
+  .email { justify-self: start; justify-content: start; margin-top: clamp(28px, 6cqi, 40px); }
   .failed { text-align: start; }
-  .social { margin-top: 0; }
   /* The résumé link becomes the CV badge, a 44px icon target. */
-  .resume { display: inline-grid; place-items: center; width: 44px; height: 44px; margin: 0; color: var(--text); }
-  .resumeText, .resume [data-arrow] { display: none; }
-  .resumeBadge { display: inline-grid; }
+  .social { margin-top: 0; --icon-link-text: none; --icon-link-icon: inline-grid; }
+  .resume { margin-left: 0; }
 }
-
 
 @media (prefers-reduced-motion: reduce) { .floating { transition: none; } }

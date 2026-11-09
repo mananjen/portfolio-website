@@ -75,6 +75,10 @@ Compose a style, then tweak only layout, weight, or which token you use:
 - When a tag already matches its role (a plain `h2` that should look like
   `heading`), the base default is enough. Compose explicitly when they differ,
   e.g. Experience's `h2` section labels compose `label`.
+- **The one exception: a style that must change inside a container query.**
+  `composes` can't sit inside `@container`, so set every token of the target
+  style there (font, size, leading, tracking, weight) and say why in a comment.
+  Today only the footer's narrow "Let's talk" does this (title → heading).
 
 ### Promotion rule
 
@@ -205,8 +209,9 @@ Screen width decides how a component is used, not just how it is laid out
 
 ## Links
 
-Every link and link-like button is built from the link family in
-`v3/src/components/link/`. Background:
+Every link and link-like button is built from `v3/src/components/link/`: the
+link family below, plus `ImageLink` for image links (see "Not in the family").
+Background:
 [Choose the V3 link styles](https://github.com/mananjen/portfolio-website/issues/36)
 and [Design the V3 Link component](https://github.com/mananjen/portfolio-website/issues/37).
 
@@ -215,7 +220,7 @@ and [Design the V3 Link component](https://github.com/mananjen/portfolio-website
 | `TextLink` | Inline and standalone text links | `tone="text"`: accent, UI size. `tone="plain"`: the surrounding colour and type |
 | `CtaLink` | The one large call to action ("Let's talk") | Title size, always ↗, no rule |
 | `IconLink` | Icon links (GitHub, LinkedIn, résumé) | Muted icon that lifts on hover; brand marks stay white. Optional `text` shows instead of the icon where the owner allows it |
-| `TextButton` | Buttons that read as links (Copy BibTeX) | Same as `TextLink`, never an arrow |
+| `TextButton` | Buttons that read as links (Copy BibTeX), or a block of text that is one button (`shape="box"`: the footer's tap-to-copy address) | Same as `TextLink`, never an arrow. `box`: a tight rounded box that tints in the accent when pressed, no rule |
 | `IconButton` | Icon-only buttons (copy, back to top) | Same as `IconLink` |
 
 `BaseLink` sits under all three link looks and holds the behaviour only. A new
@@ -265,8 +270,9 @@ keyboard focus stays put): repeat presses are ignored, and `busy` sets
 `aria-busy`. `CopyCitation` and the footer's email copy are
 built on it with `TextButton` and `IconButton`.
 
-**Not in the family:** the skip link, image links (plain `<a>` that follow the
-new-tab rule), and the header nav until the header redesign adds `NavLink`.
+**Not in the family:** the skip link, image links (`ImageLink`: a plain `<a>` that
+opens the full-size file in a new tab, with no look of its own until image links
+are redesigned), and the header nav until the header redesign adds `NavLink`.
 
 ## Known follow-ups
 

@@ -54,7 +54,7 @@
 @media (prefers-reduced-motion: reduce) { .control, .control::after { transition: none; } }
 
 /* With visible text (the résumé link). The owner picks text or icon: see "Links" in docs/design-system.md. */
-.withText { width: auto; height: auto; min-width: 44px; min-height: 44px; border-radius: 22px; }
+.withText { display: inline-flex; align-items: center; justify-content: center; width: auto; height: auto; min-width: 44px; min-height: 44px; border-radius: 22px; }
 .textPart { composes: ui from "../../foundation/text.module.css"; display: var(--icon-link-text, none); }
 .textPart, .withText [data-arrow] { color: var(--accent); }
 .withText [data-arrow] { display: var(--icon-link-text, none); }

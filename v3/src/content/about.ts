@@ -9,6 +9,8 @@ type PersonalSection = {
 
 // Personal facts and artwork share their source with the current portfolio.
 // Section and gallery order are editorial and preserved by the page.
+const openArtwork = "Open full-size artwork"
+
 export const aboutPage = {
   intro: { ...aboutPageContent.intro, paragraphs: aboutContent.intro },
   art: {
@@ -16,7 +18,8 @@ export const aboutPage = {
     title: aboutPageContent.artTitle,
     description: aboutContent.artIntro,
     gallery: aboutContent.gallery,
-    imageLabel: "Open full-size artwork",
+    imageLabel: openArtwork,
+    imageLink: (alt: string) => `${openArtwork}: ${alt}`,
     instagram: { label: aboutPageContent.instagramCta, href: aboutContent.instagramUrl },
   },
   sections: [

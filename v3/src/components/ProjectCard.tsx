@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react"
 import type { Project } from "../content/projects"
-import { linkLabels, projectLabels } from "../content/site"
+import { projectLabels } from "../content/site"
 import { ArtifactLinks } from "./ArtifactLinks"
-import { TextButton } from "./link"
+import { ImageLink, TextButton } from "./link"
 import { Tags } from "./Tags"
 import styles from "./ProjectCard.module.css"
 
@@ -41,9 +41,9 @@ export function ProjectCard({ project, expanded, onToggle }: ProjectCardProps) {
         </div>
         {project.image && (
           <figure className={styles.figure}>
-            <a href={project.image} target="_blank" rel="noreferrer" aria-label={`${projectLabels.image}: ${project.title} ${linkLabels.newTab}`}>
+            <ImageLink href={project.image} label={projectLabels.imageLink(project.title)}>
               <img src={project.image} alt={projectLabels.imageAlt(project.title)} loading="lazy" />
-            </a>
+            </ImageLink>
             <figcaption className={styles.figureCaption}>{projectLabels.image}</figcaption>
           </figure>
         )}

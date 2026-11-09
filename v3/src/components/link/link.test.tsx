@@ -2,7 +2,7 @@ import { act, type ReactNode } from "react"
 import { createRoot, type Root } from "react-dom/client"
 import { MemoryRouter } from "react-router-dom"
 import { afterEach, beforeEach, expect, it } from "vitest"
-import { CtaLink, IconButton, IconLink, TextButton, TextLink } from "."
+import { CtaLink, IconButton, IconLink, ImageLink, TextButton, TextLink } from "."
 
 let root: Root
 let container: HTMLDivElement
@@ -68,6 +68,15 @@ it("can show visible text beside the icon while keeping the label as its name", 
   expect(link.getAttribute("aria-label")).toBe("Download résumé (PDF)")
   expect(link.hasAttribute("download")).toBe(true)
   expect(link.querySelectorAll("svg")).toHaveLength(2) // the CV badge and the drawn ↓
+})
+
+it("opens a full-size image in a new tab and names the link by what it does", () => {
+  const link = render(<ImageLink href="/assets/art.jpg" label="Open full-size artwork: Watercolour"><img src="/assets/art.jpg" alt="Watercolour" /></ImageLink>)
+  expect(link.getAttribute("href")).toBe("/assets/art.jpg")
+  expect(link.getAttribute("target")).toBe("_blank")
+  expect(link.getAttribute("rel")).toBe("noreferrer")
+  expect(link.getAttribute("aria-label")).toBe("Open full-size artwork: Watercolour (opens in a new tab)")
+  expect(link.querySelector("svg")).toBeNull() // no drawn arrow on images
 })
 
 it("gives brand marks their own class so they are never dimmed", () => {

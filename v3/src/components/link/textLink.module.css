@@ -32,4 +32,11 @@
   .link:active::before { background-color: color-mix(in srgb, currentColor 18%, transparent); }
 }
 
+/* Box shape: a tight rounded box around a block of text, no rule. Declared after the base rules so it wins. */
+.box { margin: -4px -8px; padding: 4px 8px; border-radius: 8px; background-image: none; }
+@media (width < 64rem) {
+  .box::before { inset: 0; }
+  .box:active::before { background-color: color-mix(in srgb, var(--accent) 18%, transparent); }
+}
+
 @media (prefers-reduced-motion: reduce) { .link, .link::before { transition: none; } }

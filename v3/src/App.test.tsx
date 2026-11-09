@@ -202,6 +202,10 @@ describe("the v3 project reading journey", () => {
       const link = container.querySelector("#contact a[download]")
       expect(link?.getAttribute("href")).toBe("/resume.pdf")
       expect(link?.getAttribute("aria-label")).toBe("Download résumé (PDF)")
+      expect(link?.textContent).toContain("Résumé")
+      // Both parts are there; the footer's width decides which shows: "Résumé ↓" (the drawn arrow) or the CV badge.
+      expect(link?.querySelector("[data-arrow]")).not.toBeNull()
+      expect(link?.querySelectorAll("svg")).toHaveLength(2)
       expect(link?.hasAttribute("target")).toBe(false)
     } finally {
       site.footer.resume.href = undefined

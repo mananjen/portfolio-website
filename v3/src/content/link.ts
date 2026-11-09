@@ -6,4 +6,12 @@ import type { IconName } from "../components/link/Icon"
  * the destination decides new tab and arrows (see "Links" in docs/design-system.md).
  * `href` is a site path ("/about"), a web address, or a mailto: address.
  */
-export type LinkContent = { label: string; href: string; download?: true; icon?: IconName }
+export type LinkContent = {
+  /** What the link says: its visible text, or its accessible name and tooltip when it shows an icon. */
+  label: string
+  href: string
+  download?: true
+  icon?: IconName
+  /** Visible text for an icon link whose accessible name (`label`) is longer, e.g. "Résumé" for "Download résumé (PDF)". */
+  text?: string
+}

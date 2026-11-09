@@ -7,6 +7,7 @@ import type { LinkContent } from "./link"
 
 const email = `mailto:${emailAddress}`
 const location = "Hyderabad, India"
+const copyEmailLabel = "Copy email address"
 
 export const site = {
   name: siteName,
@@ -26,7 +27,7 @@ export const site = {
     eyebrow: "Have something in mind?",
     title: "Let’s talk.",
     copy: {
-      label: "Copy email address",
+      label: copyEmailLabel,
       tip: "Copy email",
       copiedTip: "Copied",
       tapHint: "Tap to copy",
@@ -34,6 +35,7 @@ export const site = {
       copied: "Email address copied",
       failed: "Couldn’t copy. Select the address to copy it.",
       failedTouch: "Couldn’t copy. Press and hold to select it.",
+      touchLabel: (address: string) => `${copyEmailLabel} ${address}`,
     },
     social: [
       { label: "GitHub", href: "https://github.com/mananjen", icon: "github" },
@@ -42,9 +44,11 @@ export const site = {
     resume: {
       /** The public résumé PDF. While empty, the footer shows no résumé link. */
       href: undefined as string | undefined,
-      label: "Résumé",
-      name: "Download résumé (PDF)",
-    },
+      label: "Download résumé (PDF)",
+      text: "Résumé",
+      download: true,
+      icon: "cv",
+    } satisfies Omit<LinkContent, "href"> & { href: string | undefined },
     backToTop: "Back to top",
     smallPrint: (year: number) => `© ${year} ${siteName} · ${location}`,
   },
@@ -77,6 +81,8 @@ export const projectPage = {
   additionalLabel: "More projects",
 }
 
+const openImage = "Open full-size image"
+
 export const linkLabels = {
   /** Added to the accessible name of every link that opens a new tab. */
   newTab: "(opens in a new tab)",
@@ -91,8 +97,9 @@ export const projectLabels = {
   read: "Read brief",
   close: "Close brief",
   technologies: "Technologies and methods",
-  image: "Open full-size image",
+  image: openImage,
   imageAlt: (title: string) => `Overview of ${title}`,
+  imageLink: (title: string) => `${openImage}: ${title}`,
   readLabel: (title: string) => `Read brief: ${title}`,
   closeLabel: (title: string) => `Close brief: ${title}`,
   briefLabel: (title: string) => `Inside the project: ${title}`,

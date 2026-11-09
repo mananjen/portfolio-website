@@ -1,6 +1,5 @@
-import { TextLink } from "../components/link"
+import { ImageLink, TextLink } from "../components/link"
 import { aboutPage } from "../content/about"
-import { linkLabels } from "../content/site"
 import styles from "./AboutPage.module.css"
 
 export function AboutPage() {
@@ -20,10 +19,10 @@ export function AboutPage() {
         <p className={styles.artCopy}>{aboutPage.art.description}</p>
         <div className={styles.gallery}>
           {aboutPage.art.gallery.map(image => <figure key={image.src}>
-            <a href={image.src} target="_blank" rel="noreferrer" aria-label={`${aboutPage.art.imageLabel}: ${image.alt} ${linkLabels.newTab}`}>
+            <ImageLink href={image.src} label={aboutPage.art.imageLink(image.alt)}>
               <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" />
               <span className={styles.imageLabel}>{aboutPage.art.imageLabel}</span>
-            </a>
+            </ImageLink>
           </figure>)}
         </div>
         <TextLink href={aboutPage.art.instagram.href}>{aboutPage.art.instagram.label}</TextLink>

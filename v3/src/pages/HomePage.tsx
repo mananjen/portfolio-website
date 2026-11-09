@@ -1,8 +1,8 @@
-import { TextLink } from "../components/link"
+import { ImageLink, TextLink } from "../components/link"
 import { ArtifactLinks } from "../components/ArtifactLinks"
 import { Tags } from "../components/Tags"
 import { homeProjects } from "../content/projects"
-import { home, linkLabels, projectLabels } from "../content/site"
+import { home, projectLabels } from "../content/site"
 import { briefUrl } from "../lib/links"
 import styles from "./HomePage.module.css"
 
@@ -46,7 +46,7 @@ export function HomePage() {
               </div>
               {lead.image && (
                 <figure className={styles.research}>
-                  <a href={lead.image} target="_blank" rel="noreferrer" aria-label={`${projectLabels.image}: ${lead.title} ${linkLabels.newTab}`}><img src={lead.image} alt={projectLabels.imageAlt(lead.title)} /></a>
+                  <ImageLink href={lead.image} label={projectLabels.imageLink(lead.title)}><img src={lead.image} alt={projectLabels.imageAlt(lead.title)} /></ImageLink>
                   <figcaption className={styles.researchCaption}>{projectLabels.image}</figcaption>
                 </figure>
               )}
