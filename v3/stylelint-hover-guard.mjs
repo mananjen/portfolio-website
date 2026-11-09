@@ -17,6 +17,9 @@ function mouseFirstOnly(node) {
     if (parent.type !== "atrule" || parent.name.toLowerCase() !== "media") continue
     // A negated query (`not …`) inverts what it contains, so it never counts as mouse-first.
     if (/\bnot\b/i.test(parent.params)) return false
+    // An alternative branch may match without either requirement. Only credit
+    // positive conjunctions; an enclosing media query can still supply the guards.
+    if (/,|\bor\b/i.test(parent.params)) continue
     hover ||= hoverQuery.test(parent.params)
     width ||= mouseFirstWidth.test(parent.params)
   }

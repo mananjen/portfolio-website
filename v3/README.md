@@ -121,6 +121,9 @@ font sizes, families, line-heights, letter-spacing, and colours in component
 modules (`src/foundation/` is exempt). Everywhere, it rejects media widths
 other than 48rem and 64rem, `container-type: size`, and `:hover` outside
 `@media (width >= 64rem) and (hover: hover)`. `stylelint.test.ts` covers these guards.
+The hover guard only credits positive conjunctions: comma alternatives and `or`
+cannot supply either input requirement. An enclosing conjunction can still guard
+unrelated alternatives inside it.
 The small app-level suite checks Home-to-brief navigation, direct selection,
 one-open behavior, Back/Forward, focus, Skip, and the legacy contact route using
 React Router and an in-memory DOM. It does not measure browser layout.
@@ -136,3 +139,12 @@ In a browser, open a flagship and
 supporting brief from Home, reload, use Back/Forward, open/close another brief,
 and test the toggle and Skip link with the keyboard. Check narrow and wide
 layouts. Build and HTTP/module checks do not replace visual/interaction review.
+
+The [links and footer review](../docs/reviews/links-and-footer-2026-11-09.md)
+records the final code review, browser checks, and local screenshot gallery.
+The repository's `.mcp.json` (Claude Code) and `.codex/config.toml` (Codex)
+register Chrome DevTools MCP 1.12.0 through `npx` on Windows. They launch a
+headless, isolated Chrome with access to this workspace; review the files before
+enabling them and reload the client to discover its tools. Node/npm and Chrome
+must be installed. Screenshots under `docs/reviews/links-and-footer/` are
+gitignored, so gallery links work only on the machine where they were captured.

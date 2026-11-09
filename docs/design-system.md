@@ -200,6 +200,9 @@ Screen width decides how a component is used, not just how it is laid out
   `(hover: hover)` keeps a large touch screen from holding a stuck hover state.
   Stylelint (`portfolio/hover-mouse-first`, in `v3/stylelint-hover-guard.mjs`)
   rejects `:hover` anywhere else, including under a negated (`not`) query.
+  Only positive conjunctions count toward the guard: comma-separated alternatives
+  and `or` expressions cannot supply either requirement. Put both requirements in
+  a containing media query if alternatives are needed inside it.
 - **Focus** is one global ring for every focusable control: 2px dashed in the
   accent colour, 5px offset, set in `foundation/index.css`. Components don't
   restyle it.

@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# Local links and footer review screenshots
+/docs/reviews/links-and-footer/
+
 # production
 /build
 /dist

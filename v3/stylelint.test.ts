@@ -55,6 +55,8 @@ it.each([
   ["@media (width >= 64rem) { .thing:hover { color: var(--accent); } }"],
   ["@media (hover: hover) { .thing:hover { color: var(--accent); } }"],
   ["@media (width < 64rem) and (hover: hover) { .thing:hover { color: var(--accent); } }"],
+  ["@media (width >= 64rem), (hover: hover) { .thing:hover { color: var(--accent); } }"],
+  ["@media (width >= 64rem) or (hover: hover) { .thing:hover { color: var(--accent); } }"],
   ["@media (width >= 64rem) and (not (hover: hover)) { .thing:hover { color: var(--accent); } }"],
   ["@media not all and (hover: hover) { @media (width >= 64rem) { .thing:hover { color: var(--accent); } } }"],
 ])("rejects `%s`", async css => {
@@ -69,6 +71,7 @@ it("allows the 48rem and 64rem page widths, inline-size containers, and hover on
     @media (width >= 64rem) { .thing { display: none; } }
     @container (width < 40rem) { .thing { display: none; } }
     @media (width >= 64rem) and (hover: hover) { .thing:hover { color: var(--accent); } }
+    @media (width >= 64rem) and (hover: hover) { @media (orientation: portrait), (orientation: landscape) { .thing:hover { color: var(--accent); } } }
     @media (width >= 64rem) { @media (hover: hover) { .outer { &:hover { color: var(--accent); } } } }`
   expect(await lint(css)).toEqual([])
 })
