@@ -24,6 +24,7 @@
     "inject-meta": "tsx scripts/inject-meta.ts",
     "deploy": "npm run build && gh-pages -d dist",
     "dev:v3": "npm --prefix v3 run dev",
+    "prototype:header": "npm --prefix v3 run prototype:header",
     "check:v3": "npm --prefix v3 run check",
     "build:v3": "npm --prefix v3 run build",
     "preview:v3": "npm --prefix v3 run preview"

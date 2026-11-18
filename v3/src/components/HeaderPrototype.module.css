@@ -1,0 +1,186 @@
+/* THROWAWAY header study. Typography/colour use the real foundation; spacing is experimental. */
+.root { position: sticky; top: 0; z-index: 1100; display: flow-root; --prototype-bar-height: 88px; --link-rule: transparent; }
+/* Keep fixed panels outside the query container: containment would trap their fixed positioning. */
+.frameContainer { position: relative; z-index: 4; container-type: inline-size; }
+.surface { position: absolute; inset: 0; background: var(--background); border-bottom: 1px solid var(--line); pointer-events: none; }
+.root[data-home]:not([data-scrolled]):not([data-open]) .surface { background: var(--cobalt); border-color: transparent; }
+.frame { position: relative; z-index: 4; display: flex; align-items: center; gap: 22px; width: min(1200px, 100%); min-height: 88px; padding: 12px var(--space); margin-inline: auto; transition: min-height .2s; }
+.root[data-align="wide"] .frame { width: 100%; }
+.wordmark { composes: subheading from "../foundation/text.module.css"; display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; text-decoration: none; white-space: nowrap; margin-right: auto; }
+.desktopNav { composes: ui from "../foundation/text.module.css"; display: flex; align-items: center; gap: 22px; }
+.desktopLink { display: inline-flex; align-items: center; padding-block: 8px; white-space: nowrap; }
+.desktopLink[aria-current] { --link-rule: var(--accent); color: var(--accent); }
+.desktopUtilities { display: flex; align-items: center; gap: 18px; padding-left: 20px; border-left: 2px solid var(--muted); }
+.utilities { composes: ui from "../foundation/text.module.css"; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+.utilities a { display: inline-flex; align-items: center; min-height: 32px; white-space: nowrap; }
+.utilities a:last-child { color: var(--accent); }
+.themePreview { position: relative; display: inline-grid; place-items: center; flex: none; width: 32px; height: 32px; border: 1px dashed var(--muted); border-radius: 50%; color: var(--muted); cursor: default; }
+.themeCaption { composes: caption from "../foundation/text.module.css"; display: none; }
+.mobileTools { display: none; align-items: center; gap: 12px; }
+.menuButton { composes: ui from "../foundation/text.module.css"; display: inline-flex; gap: 10px; align-items: center; justify-content: center; min-height: 44px; border: 0; padding: 8px 0 8px 8px; color: var(--text); background: transparent; cursor: pointer; }
+.menuGlyph { width: 19px; display: grid; gap: 5px; }
+.menuGlyph i { display: block; height: 1px; background: currentColor; transition: transform .2s; }
+.menuGlyph[data-open] i:first-child { transform: translateY(3px) rotate(45deg); }
+.menuGlyph[data-open] i:last-child { transform: translateY(-3px) rotate(-45deg); }
+.root[data-bar="compact"][data-scrolled][data-collapsed="false"] .frame { min-height: 62px; }
+.root[data-bar="island"][data-collapsed="false"] .frame,
+.root[data-idea="island"][data-collapsed="true"] .frame { width: min(1168px, calc(100% - 24px)); margin-block: 12px; min-height: 66px; padding-inline: 24px; border: 1px solid var(--line); border-radius: 18px; background: color-mix(in srgb, var(--background) 96%, transparent); }
+.root[data-bar="island"][data-collapsed="false"] .surface,
+.root[data-idea="island"][data-collapsed="true"] .surface { background: transparent; border: 0; }
+.root[data-bar="island"][data-align="wide"][data-collapsed="false"] .frame { width: calc(100% - 24px); }
+.root[data-idea="island"][data-collapsed="true"] .frame { padding-inline: 12px; gap: 8px; }
+.root[data-idea="island"] .mobileTools { gap: 8px; }
+.shade { position: fixed; inset: var(--prototype-bar-height) 0 0; z-index: 1; background: color-mix(in srgb, var(--background) 70%, transparent); backdrop-filter: blur(5px); }
+.panel { position: relative; z-index: 3; color: var(--text); background: var(--background); padding: 24px var(--space) 32px; max-height: calc(100dvh - var(--prototype-bar-height) - 150px); overflow-y: auto; overscroll-behavior: contain; }
+.panelEyebrow { composes: label from "../foundation/text.module.css"; color: var(--muted); margin-bottom: 20px; }
+.panelTitle { composes: heading from "../foundation/text.module.css"; display: none; }
+.entries { display: grid; }
+.entry { position: relative; }
+.compactEntry { composes: subheading from "../foundation/text.module.css"; }
+.drawerEntry { composes: subheading from "../foundation/text.module.css"; }
+.fullEntry { composes: heading from "../foundation/text.module.css"; }
+.entry > a { display: block; min-height: 44px; }
+.number { composes: caption from "../foundation/text.module.css"; display: none; color: var(--muted); }
+.description { composes: meta from "../foundation/text.module.css"; display: none; color: var(--muted); }
+.panelUtilities { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line); }
+.panelUtilities .themePreview { width: auto; border: 0; border-radius: 0; grid-auto-flow: column; gap: 10px; }
+.panelUtilities .themeCaption { display: inline; }
+.entry a[aria-current] { color: var(--accent); }
+
+/* A: disclosure in the document flow; opening pushes the real page down. */
+.root[data-idea="push"] .panel { border-bottom: 1px solid var(--line); }
+.root[data-idea="push"] .entries { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; }
+.root[data-idea="push"] .entry a { padding-block: 12px; }
+.root[data-idea="push"] .entry a[aria-current] { --link-rule: var(--accent); }
+
+/* B: shallow overlay with accent text links; content keeps its original position. */
+.root[data-idea="overlay"] .panel { position: fixed; inset-inline: 0; top: var(--prototype-bar-height); border-bottom: 1px solid var(--line); }
+.root[data-idea="overlay"] .entry a { padding-block: 12px; }
+.root[data-idea="overlay"] .entry a[aria-current] { --link-rule: var(--accent); font-weight: 600; }
+
+/* C: right-hand drawer, numbered links and a filled active destination. */
+.root[data-idea="drawer"] .panel { position: fixed; top: var(--prototype-bar-height); right: 0; bottom: 0; width: min(390px, calc(100% - 32px)); max-height: none; padding-bottom: 170px; border-left: 1px solid var(--line);  }
+.root[data-idea="drawer"] .entry { display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: 10px; margin-bottom: 8px; }
+.root[data-idea="drawer"] .number { display: block; }
+.root[data-idea="drawer"] .entry a { padding: 12px 16px; border-radius: 10px; }
+.root[data-idea="drawer"] .entry a[aria-current] { background-color: var(--surface); }
+.root[data-idea="drawer"] .panelUtilities { margin-top: 40px; }
+
+/* D: full-screen editorial index, with descriptions and generous typographic hierarchy. */
+.root[data-idea="full"] .panel { position: fixed; inset: var(--prototype-bar-height) 0 0; max-height: none; padding-bottom: 170px;  }
+.root[data-idea="full"] .entry { display: grid; grid-template-columns: 28px 1fr; column-gap: 14px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.root[data-idea="full"] .number { display: block; padding-top: 12px; }
+.root[data-idea="full"] .description { display: block; grid-column: 2; margin-top: 2px; }
+.root[data-idea="full"] .panelEyebrow { margin-top: 8px; }
+
+/* E: a contained top island, opening into a compact two-column index. */
+.root[data-idea="island"] .panel { position: fixed; top: calc(var(--prototype-bar-height) + 8px); left: 12px; right: 12px; padding: 22px; border: 1px solid var(--line); border-radius: 18px;  }
+.root[data-idea="island"] .entries { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.root[data-idea="island"] .entry { border: 1px solid var(--line); border-radius: 10px; }
+.root[data-idea="island"] .entry a { padding: 14px 12px; border-radius: inherit; }
+.root[data-idea="island"] .entry a[aria-current] { background-color: var(--surface); }
+
+@container (width < 58rem) {
+  .desktopNav, .desktopUtilities { display: none; }
+  .mobileTools { display: flex; }
+  .frame { min-height: 74px; gap: 12px; }
+}
+@container (width < 70rem) {
+  .root[data-tablet="menu"] .desktopNav, .root[data-tablet="menu"] .desktopUtilities { display: none; }
+  .root[data-tablet="menu"] .mobileTools { display: flex; }
+}
+@container (width >= 44rem) {
+  .root[data-tablet="links"] .desktopNav, .root[data-tablet="links"] .desktopUtilities { display: flex; }
+  .root[data-tablet="links"] .mobileTools { display: none; }
+  .root[data-tablet="links"] .frame { flex-wrap: wrap; gap: 12px 20px; }
+  .root[data-tablet="links"] .desktopNav { margin-left: auto; }
+}
+@media (width < 64rem) {
+  .themePreview { width: 44px; height: 44px; }
+  .desktopLink, .utilities a { min-height: 44px; }
+  .menuButton:active { color: var(--accent); }
+}
+@media (width >= 64rem) and (hover: hover) {
+  .menuButton:hover { color: var(--accent); }
+}
+
+
+/* The study controls are deliberately separate from the design. */
+.switcher { composes: ui from "../foundation/text.module.css"; position: fixed; z-index: 1400; bottom: max(12px, env(safe-area-inset-bottom)); left: 50%; translate: -50% 0; width: max-content; max-width: calc(100% - 16px); padding: 8px 12px; background: var(--surface); color: var(--text); border: 1px solid var(--accent); border-radius: 14px; box-shadow: 0 6px 24px color-mix(in srgb, var(--background) 30%, transparent); }
+.switchRow { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.switcher button { font: inherit; min-width: 32px; min-height: 32px; border: 1px solid currentColor; border-radius: 50%; color: inherit; background: transparent; cursor: pointer; }
+.currentIdea { display: grid; text-align: center; min-width: 132px; }
+.prototypeEyebrow { composes: caption from "../foundation/text.module.css"; }
+.settings > summary { cursor: pointer; padding: 6px; }
+.settingsPanel { position: absolute; bottom: calc(100% + 8px); right: 0; width: min(360px, calc(100vw - 24px)); max-height: min(70dvh, 580px); overflow-y: auto; padding: 18px; border: 1px solid var(--accent); border-radius: 14px; background: var(--surface); box-shadow: inherit; display: grid; gap: 12px; }
+.settingsPanel > label { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 10px; }
+.settingsPanel select { font: inherit; color: var(--text); background: var(--surface); padding: 6px; min-width: 0; border: 1px solid var(--line); border-radius: 5px; }
+.settingsNote { composes: meta from "../foundation/text.module.css"; }
+.state { composes: caption from "../foundation/text.module.css"; text-align: center; max-width: 470px; margin-top: 4px; }
+@media (width < 48rem) {
+  .switcher { padding: 8px; }
+  .switchRow { gap: 6px; flex-wrap: wrap; }
+  .currentIdea { min-width: 128px; }
+  .settings { flex-basis: 100%; text-align: center; }
+  .settings > summary { padding: 0; }
+  .state { max-width: 290px; }
+  .switcher button { min-width: 44px; min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .root *, .root *::before { transition: none !important; animation: none !important; }
+}
+:global(html[data-header-prototype]) { scroll-padding-top: var(--prototype-scroll-offset, 110px); }
+:global(html[data-header-prototype]) :global(a[href="#main"]) { z-index: 1500; }
+:global(html[data-header-prototype]) :global(body) { padding-bottom: 160px; }
+:global(html[data-header-prototype]) :global(footer + div) { bottom: 170px; }
+
+/* Round 2: the same tinted glass at rest and while scrolling. No 48px colour swap.
+   Opaque background above remains the fallback where backdrop filtering is absent. */
+@supports (backdrop-filter: blur(1px)) {
+  .root:is([data-surface="glass"], [data-surface="frost"]) .surface {
+    background: color-mix(in srgb, var(--background) 72%, transparent);
+    backdrop-filter: blur(18px) saturate(125%);
+    border-color: color-mix(in srgb, var(--muted) 40%, transparent);
+  }
+  .root[data-surface="frost"] .surface { background: color-mix(in srgb, var(--background) 88%, transparent); }
+  .root:is([data-surface="glass"], [data-surface="frost"]):is([data-bar="island"][data-collapsed="false"], [data-idea="island"][data-collapsed="true"]) .surface { background: transparent; backdrop-filter: none; border: 0; }
+  .root:is([data-surface="glass"], [data-surface="frost"]):is([data-bar="island"][data-collapsed="false"], [data-idea="island"][data-collapsed="true"]) .frame { background: color-mix(in srgb, var(--background) 78%, transparent); backdrop-filter: blur(18px); }
+}
+.homeControl { display: inline-grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 50%; color: var(--muted); transition: background-color .16s, color .16s; }
+.homeControl[aria-current] { color: var(--text); border-color: var(--accent); background: var(--surface); }
+.axisHint { composes: caption from "../foundation/text.module.css"; max-width: 470px; text-align: center; margin-top: 6px; color: var(--muted); }
+.root[data-idea="overlay"] .panel { padding-block: 20px 30px; }
+.root[data-idea="overlay"] .entries { max-width: 720px; margin-inline: auto; }
+.root[data-idea="overlay"] .entry { border-bottom: 1px solid var(--line); }
+.root[data-idea="overlay"] .entry a { padding-block: 14px; color: var(--text); }
+.root[data-idea="overlay"] .entry a[aria-current] { color: var(--accent); }
+.root[data-idea="overlay"] .panelEyebrow, .root[data-idea="overlay"] .panelUtilities { max-width: 720px; margin-inline: auto; }
+.root[data-idea="drawer"] .entry a { border-radius: 0; border-bottom: 1px solid var(--line); padding: 16px 8px; }
+.root[data-idea="drawer"] .entry a[aria-current] { background: transparent; border-bottom-color: var(--accent); }
+.root[data-idea="full"] .entry { padding-block: 18px; }
+
+/* Discrete display transitions keep the close motion visible, while hidden/inert
+   immediately removes the navigation from focus and accessibility exposure. */
+.panel, .shade { opacity: 1; transition: opacity .18s ease, translate .22s ease, display .22s allow-discrete; }
+.panel { translate: 0; }
+.panel[hidden], .shade[hidden] { display: none; opacity: 0; }
+.panel[hidden] { translate: 0 -8px; }
+.root[data-idea="drawer"] .panel[hidden] { translate: 100% 0; }
+@starting-style {
+  .panel, .shade { opacity: 0; }
+  .panel { translate: 0 -8px; }
+  .root[data-idea="drawer"] .panel { translate: 100% 0; }
+}
+.root[data-motion="none"] *, .root[data-motion="none"] *::before { transition: none !important; animation: none !important; }
+@media (width < 64rem) {
+  .homeControl { width: 44px; height: 44px; }
+  .homeControl:active { background: var(--surface); }
+}
+@media (width >= 64rem) and (hover: hover) {
+  .homeControl:hover { background: var(--surface); color: var(--text); }
+}
+
+/* Extend the real cobalt hero behind the glass without moving its copy. */
+.root[data-route-home]:is([data-surface="glass"], [data-surface="frost"]) + :global(main) > :first-child { margin-top: calc(-1 * var(--prototype-hero-offset, 88px)); padding-top: var(--prototype-hero-offset, 88px); }
+
+.switcher[data-menu-open] .axisHint { display: none; }

@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
+    "prototype:header": "vite --host 127.0.0.1 --mode header-prototype --port 4324",
     "check": "tsc --noEmit && stylelint \"src/**/*.css\"",
     "build": "npm run check && vite build",
     "preview": "vite preview --host 127.0.0.1",

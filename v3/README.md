@@ -24,6 +24,13 @@ Stop the dev server with Ctrl+C before starting the production preview, since
 both use port 4321. The server reports a port conflict rather than silently
 switching to another port.
 
+For the throwaway header study, run `npm run prototype:header` from the repository
+root, then open `http://127.0.0.1:4324/portfolio-website/#/?variant=overlay&surface=glass`.
+Round 2 shortlists three mobile menus, retains two baselines, and compares translucent
+surfaces, desktop/tablet settings, Home controls and subtle motion on the existing pages.
+The dedicated development mode keeps the experiment out of ordinary development
+and production builds. See the [comparison guide](../docs/prototypes/v3-header.md).
+
 ## Where to edit
 
 | Change | File |
